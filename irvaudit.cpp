@@ -79,6 +79,17 @@ Node CreateNode(const SimpleNode &sn){
 	return newn;
 }
 
+bool Subsumes(const AuditSpec &a1, const AuditSpec &a2){
+    if(!a1.wonly || a2.wonly)
+        return false;
+
+    if(a1.winner == a2.winner && a1.loser == a2.loser)
+        return true;
+    
+    return false;
+}
+
+
 bool AreAuditsEqual(const AuditSpec &a1, const AuditSpec &a2){
 	if(a1.winner != a2.winner || a1.loser != a2.loser)
 		return false;
@@ -878,8 +889,18 @@ int main(int argc, const char * argv[])
 			cout << "AUDITS REQUIRED" << endl;
 			maxasn = 0;
 			for(Audits::const_iterator it = audits.begin(); it != audits.end();++it){
-				PrintAudit(*it, candidates);
-				maxasn = max(maxasn, it->asn);
+                bool subsumed = false;
+                for(Audits::const_iterator jt = audits.begin(); jt != audits.end(); ++jt){
+                    if(jt == it) continue;
+                    if(Subsumes(*jt, *it)){
+                        subsumed = true;
+                        break;
+                    }
+                }
+                if(!subsumed){
+				    PrintAudit(*it, candidates);
+				    maxasn = max(maxasn, it->asn);
+                }
 			}
 			maxasn *= 100;
 			cout << "MAX ASN(%) " << maxasn << endl;
