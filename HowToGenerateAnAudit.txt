@@ -42,7 +42,11 @@ Note that:
 
 -- The current format for accepting 'reported ballots' is a simple one.
 We can look at accepting a different format that is more convenient in
-the context of a pilot.
+the context of a pilot. The current format is structured as follows:
+
+List of integer candidate id's (eg. 1, 2, 3, 4)
+A line separator (-+-+-+-+)
+Ballot ranking : Number of ballots with this ranking (eg. (3, 2, 1) : 50)
 
 -- We may change the test statistic being used, and in this instance 
 the gamma/lambda parameters could be replaced with something different.
