@@ -199,11 +199,12 @@ void PrintNode(const Node &n, const Candidates &cand){
 
 
 void OutputToJSON(const Audits &aconfig, const Candidates &cand, 
-    const char *json_file){
+    const char *json_file, int num_ballots){
     try{
         ptree pt;
         ptree children;
 
+        double maxasn = 0;
         for(int i = 0; i < aconfig.size(); ++i){
             const AuditSpec &spec = aconfig[i];
             ptree child;
@@ -233,7 +234,9 @@ void OutputToJSON(const Audits &aconfig, const Candidates &cand,
             child.put("Winner-Only", spec.wonly);
             child.put("Explanation", ss.str());
             children.push_back(std::make_pair("", child));
+            maxasn = max(maxasn, spec.asn);
         }
+        pt.put("Expected Polls", ceil(num_ballots*min(1.0,maxasn)));
         pt.add_child("Assertions", children);
         write_json(json_file, pt);
     }
@@ -478,7 +481,7 @@ double PerformDive(const Node &toexpand, const Candidates &cands,
  *
  * -r VALUE              Risk limit (e.g., 0.05 represents a risk limit of 5%)
  * -dive                 If present, diving optimisation will be performed during search
- *                           for best configuration of facts to audit. RECOMMEND.
+ *                           for best configuration of facts to audit. RECOMMEND (default).
  *
  * -alglog               If present, log messages designed to indicate how the algorithm is
  *                           progressing will be printed.
@@ -1012,7 +1015,7 @@ int main(int argc, const char * argv[])
 			cout << "MAX ASN(%) " << maxasn << endl;
 			cout << "============================================" << endl;
             if(json_output != NULL){
-                OutputToJSON(final_config, candidates, json_output);
+                OutputToJSON(final_config, candidates, json_output, config.totalvotes);
             }
 		}
 		else{

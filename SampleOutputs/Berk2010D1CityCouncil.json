@@ -1,11 +1,16 @@
 {
+    "Expected Polls": "17",
     "Assertions": [
         {
             "Winner": "380",
             "Loser": "378",
-            "Already-Eliminated": "",
-            "Winner-Only": "true",
-            "Explanation": "Rules out case where 380 is eliminated before 378"
+            "Already-Eliminated": [
+                "379",
+                "381",
+                "79"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 380 378]"
         },
         {
             "Winner": "380",
