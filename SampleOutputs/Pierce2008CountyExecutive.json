@@ -1,0 +1,143 @@
+{
+    "Assertions": [
+        {
+            "Winner": "117",
+            "Loser": "119",
+            "Already-Eliminated": [
+                "35",
+                "116",
+                "118"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 117 119]"
+        },
+        {
+            "Winner": "118",
+            "Loser": "119",
+            "Already-Eliminated": [
+                "35",
+                "116",
+                "117"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 118 119]"
+        },
+        {
+            "Winner": "117",
+            "Loser": "118",
+            "Already-Eliminated": [
+                "35",
+                "116",
+                "119"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 117 118]"
+        },
+        {
+            "Winner": "117",
+            "Loser": "118",
+            "Already-Eliminated": [
+                "35",
+                "116"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 117 119 118]"
+        },
+        {
+            "Winner": "117",
+            "Loser": "116",
+            "Already-Eliminated": [
+                "35",
+                "119"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 117 116 118]"
+        },
+        {
+            "Winner": "119",
+            "Loser": "116",
+            "Already-Eliminated": [
+                "35",
+                "117",
+                "118"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 119 116]"
+        },
+        {
+            "Winner": "117",
+            "Loser": "116",
+            "Already-Eliminated": [
+                "35"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 117 116 119 118]"
+        },
+        {
+            "Winner": "118",
+            "Loser": "116",
+            "Already-Eliminated": [
+                "35",
+                "117",
+                "119"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 118 116]"
+        },
+        {
+            "Winner": "117",
+            "Loser": "116",
+            "Already-Eliminated": [
+                "35",
+                "118",
+                "119"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 117 116]"
+        },
+        {
+            "Winner": "119",
+            "Loser": "116",
+            "Already-Eliminated": [
+                "35",
+                "117"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 119 116 118]"
+        },
+        {
+            "Winner": "118",
+            "Loser": "116",
+            "Already-Eliminated": [
+                "35",
+                "117"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 118 116 119]"
+        },
+        {
+            "Winner": "117",
+            "Loser": "116",
+            "Already-Eliminated": [
+                "35",
+                "118"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 117 116 119]"
+        },
+        {
+            "Winner": "117",
+            "Loser": "35",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 117 is eliminated before 35"
+        },
+        {
+            "Winner": "119",
+            "Loser": "35",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 119 is eliminated before 35"
+        }
+    ]
+}

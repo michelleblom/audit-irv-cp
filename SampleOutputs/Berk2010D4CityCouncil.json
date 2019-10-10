@@ -1,0 +1,36 @@
+{
+    "Assertions": [
+        {
+            "Winner": "385",
+            "Loser": "382",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 385 is eliminated before 382"
+        },
+        {
+            "Winner": "385",
+            "Loser": "383",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 385 is eliminated before 383"
+        },
+        {
+            "Winner": "385",
+            "Loser": "77",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 385 is eliminated before 77"
+        },
+        {
+            "Winner": "385",
+            "Loser": "384",
+            "Already-Eliminated": [
+                "77",
+                "382",
+                "383"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 385 384]"
+        }
+    ]
+}

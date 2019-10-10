@@ -1,0 +1,28 @@
+{
+    "Assertions": [
+        {
+            "Winner": "441",
+            "Loser": "442",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 441 is eliminated before 442"
+        },
+        {
+            "Winner": "441",
+            "Loser": "132",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 441 is eliminated before 132"
+        },
+        {
+            "Winner": "441",
+            "Loser": "440",
+            "Already-Eliminated": [
+                "442",
+                "132"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 441 440]"
+        }
+    ]
+}

@@ -522,7 +522,7 @@ int main(int argc, const char * argv[])
 		const char *audit_spec_file = NULL;
         const char *json_output = NULL;
 
-		double allowed_gap = 0;
+		double allowed_gap = 0.005;
 
 		for(int i = 1; i < argc; ++i){
 			if(strcmp(argv[i], "-rep_ballots") == 0 && i < argc-1){

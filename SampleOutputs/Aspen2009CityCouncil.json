@@ -1,0 +1,2840 @@
+{
+    "Assertions": [
+        {
+            "Winner": "4",
+            "Loser": "2",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 2 5]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "5",
+            "Already-Eliminated": [
+                "1",
+                "4",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 2 5]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "5",
+            "Already-Eliminated": [
+                "1",
+                "4",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 3 5]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "3",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 1 4 5]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "4",
+            "Already-Eliminated": [
+                "1",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 2 4 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "5",
+            "Already-Eliminated": [
+                "1",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 2 3 4 5]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "3",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 3 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "3",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 3 4 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "4",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "3",
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 4]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "3",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "4",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 3]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "3",
+            "Already-Eliminated": [
+                "1",
+                "4",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 5 2 3]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "4",
+            "Already-Eliminated": [
+                "1",
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 4 2 3]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 1 3 4]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "2",
+            "Already-Eliminated": [
+                "1",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 2]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 1 4 2 3]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "6",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 8 is eliminated before 6"
+        },
+        {
+            "Winner": "4",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "3",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 1 2 5]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "2",
+            "Already-Eliminated": [
+                "1",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 2 4]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "3",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 1 2 4]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "9",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 8 is eliminated before 9"
+        },
+        {
+            "Winner": "8",
+            "Loser": "3",
+            "Already-Eliminated": [
+                "1",
+                "4",
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 2 3]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "4",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 1 2 3]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 1 2 3]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 1]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "3",
+                "4",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 1 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "3",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 3 4]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "3",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "4",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 3 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "5",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "3",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 4 5]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "2",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "4",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 2]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "2",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 2 4]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 1 5 2 3]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "3",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 3]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "4",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 1 5]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 1 4]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 1 3 4]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "2",
+            "Already-Eliminated": [
+                "3",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 1 2]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 1 3 4 5]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 1 4]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 1 3]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "3",
+                "4",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 1 2]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 1 4 5]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 2 3 4 5]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "4",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 1 3]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 3 4]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 3 4 5]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 5 2 3]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "5",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "4",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 2 5]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 4 2 3]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "4",
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 3]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "4",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 2 3]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 1 2 4 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "4",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 2 4 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "4",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 3 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "3",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "4",
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 3]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 2 3 4 5]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "4",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 1 3 5]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 1]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 1 2 4]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "4",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 1 2 5]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "4",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 1]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 3 4 5]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 2 4 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 4 2 3]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 1 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "4",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 5 2 3]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 1 4]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 4]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 2 5]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 1 3 5]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 1 3]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 2 4]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 3 4]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "4",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 2]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 3 5]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 1 2]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "4",
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 2 3]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 1 4 2 3]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "4",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 4 5]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "2",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 2]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "2",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 2]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "2",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 2 4]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "4",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 1]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 1 2 3]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "4",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 3]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 1 4 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 4 5]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 1 2 3]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 1 5 2 3]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 1 3 4]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "3",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 2 4 5]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 1 3 4 5]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 5]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 1 2 4]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 1 2]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 2 3 4 5]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 4 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 4]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7 4]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "4",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 5]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 1 2 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 3 4 5]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 4 2 3]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 5 2 3]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 4 2 3]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 1 3 4]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 2 3]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 3 4]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "4",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 1 3]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "4",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 5 2 3]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 3 4]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "3",
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 2 4]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 1 2]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 2 3 4 5]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 1 2 4 5]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 3 4 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "4",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 3]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "3",
+                "4",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 2 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "4",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 3 5]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 1 2 4]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 1 4 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "4",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 2 3]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 2 3]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 1 5]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 2 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 3 4 5]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 2]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 1 4]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 1 3 5]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 7]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "11",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 8 is eliminated before 11"
+        },
+        {
+            "Winner": "8",
+            "Loser": "10",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 8 is eliminated before 10"
+        },
+        {
+            "Winner": "2",
+            "Loser": "11",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 2 is eliminated before 11"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 4 2 3]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "4",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 5 2 3]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 1 4]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 1 5]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 1 2 5]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 2 4 5]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 1 3]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "4",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 1 2]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "4",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 1]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 3 4]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 1 2]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 4 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "4",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 2 3]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 2 4]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 3 4]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 1 3 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "4",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 3 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "4",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 3]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "4",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 3]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 2 4]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 2 5]"
+        },
+        {
+            "Winner": "2",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 2 7 3 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 4 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 2 4 5]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 5]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 1 3]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 4]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 1 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 2 4]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 1]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 2]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "4",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 2 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 2 4 5]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 1]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "4",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7 2]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 4]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "4",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 5]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 3 5]"
+        },
+        {
+            "Winner": "3",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "4",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 3 7]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "3",
+                "4",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1 2]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 1]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 3]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "3",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7 4]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "3",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 4 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "4",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 2 5]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 3]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 2 4]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 5]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "3",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7 5]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "3",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 4]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "3",
+                "4",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7 2]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 7]"
+        },
+        {
+            "Winner": "5",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 5 7]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "7",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "3",
+                "5",
+                "6",
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 7]"
+        },
+        {
+            "Winner": "8",
+            "Loser": "5",
+            "Already-Eliminated": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 8 5]"
+        }
+    ]
+}

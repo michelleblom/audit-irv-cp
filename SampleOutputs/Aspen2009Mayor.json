@@ -1,0 +1,63 @@
+{
+    "Assertions": [
+        {
+            "Winner": "4",
+            "Loser": "3",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 4 is eliminated before 3"
+        },
+        {
+            "Winner": "1",
+            "Loser": "3",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 1 is eliminated before 3"
+        },
+        {
+            "Winner": "1",
+            "Loser": "2",
+            "Already-Eliminated": [
+                "3",
+                "5"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 1 4 2]"
+        },
+        {
+            "Winner": "4",
+            "Loser": "2",
+            "Already-Eliminated": [
+                "3",
+                "5"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 1 2]"
+        },
+        {
+            "Winner": "1",
+            "Loser": "5",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 1 is eliminated before 5"
+        },
+        {
+            "Winner": "4",
+            "Loser": "5",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 4 is eliminated before 5"
+        },
+        {
+            "Winner": "4",
+            "Loser": "1",
+            "Already-Eliminated": [
+                "2",
+                "3",
+                "5"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 4 1]"
+        }
+    ]
+}
