@@ -606,6 +606,9 @@ int main(int argc, const char * argv[])
 		}
 		
 		for(int i = 0; i < rep_ballots.size(); ++i){
+            if(rep_ballots[i].prefs.empty())
+                continue;
+
 			candidates[rep_ballots[i].prefs[0]].ballots.push_back(i);
 		}
 

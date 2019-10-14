@@ -235,7 +235,7 @@ bool ReadReportedBallots(const char *path, Ballots &ballots,
 				prefs.push_back(index);
 			}
 
-			if(prefs.empty()) continue;
+			//if(prefs.empty()) continue;
 
 			for(int j = 0; j < votes; ++j){
 				Ballot b;
@@ -244,7 +244,7 @@ bool ReadReportedBallots(const char *path, Ballots &ballots,
 				b.votes = 1;
 
 				double roll = rand() / ((double)RAND_MAX);
-				if(roll <= errorp){
+				if(!prefs.empty() && roll <= errorp){
 					roll = rand() / ((double)RAND_MAX);
 
 					Ints cands_in(config.ncandidates, 0);
@@ -307,8 +307,10 @@ bool ReadReportedBallots(const char *path, Ballots &ballots,
 
 				ballots.push_back(b);
  
-				Candidate &cand = candidates[b.prefs.front()];
-				cand.sum_votes += 1;
+                if(!b.prefs.empty()){
+				    Candidate &cand = candidates[b.prefs.front()];
+				    cand.sum_votes += 1;
+                }
 				config.totalvotes += 1;
 				
 				++cntr;
@@ -382,7 +384,7 @@ bool ReadActualBallots(const char *path, Ballots &ballots,
 				prefs.push_back(index);
 			}
 
-			if(prefs.empty()) continue;
+			//if(prefs.empty()) continue;
 
 			for(int j = 0; j < votes; ++j){
 				Ballot b;

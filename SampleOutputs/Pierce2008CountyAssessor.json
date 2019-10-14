@@ -1,5 +1,5 @@
 {
-    "Expected Polls": "790",
+    "Expected Polls": "941",
     "Assertions": [
         {
             "Winner": "120",
@@ -203,17 +203,6 @@
             "Explanation": "Rules out outcomes with tail [... 120 125 121]"
         },
         {
-            "Winner": "120",
-            "Loser": "125",
-            "Already-Eliminated": [
-                "40",
-                "123",
-                "124"
-            ],
-            "Winner-Only": "false",
-            "Explanation": "Rules out outcomes with tail [... 120 125 121 122]"
-        },
-        {
             "Winner": "124",
             "Loser": "125",
             "Already-Eliminated": [
@@ -224,6 +213,17 @@
             ],
             "Winner-Only": "false",
             "Explanation": "Rules out outcomes with tail [... 124 125 121]"
+        },
+        {
+            "Winner": "120",
+            "Loser": "125",
+            "Already-Eliminated": [
+                "40",
+                "123",
+                "124"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 120 125 121 122]"
         },
         {
             "Winner": "121",
@@ -332,18 +332,6 @@
             "Explanation": "Rules out outcomes with tail [... 120 125 124 122]"
         },
         {
-            "Winner": "121",
-            "Loser": "125",
-            "Already-Eliminated": [
-                "40",
-                "120",
-                "122",
-                "123"
-            ],
-            "Winner-Only": "false",
-            "Explanation": "Rules out outcomes with tail [... 121 125 124]"
-        },
-        {
             "Winner": "122",
             "Loser": "125",
             "Already-Eliminated": [
@@ -355,6 +343,18 @@
             ],
             "Winner-Only": "false",
             "Explanation": "Rules out outcomes with tail [... 122 125]"
+        },
+        {
+            "Winner": "121",
+            "Loser": "125",
+            "Already-Eliminated": [
+                "40",
+                "120",
+                "122",
+                "123"
+            ],
+            "Winner-Only": "false",
+            "Explanation": "Rules out outcomes with tail [... 121 125 124]"
         },
         {
             "Winner": "122",

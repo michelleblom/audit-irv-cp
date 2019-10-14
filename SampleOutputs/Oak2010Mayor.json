@@ -1,5 +1,5 @@
 {
-    "Expected Polls": "395",
+    "Expected Polls": "404",
     "Assertions": [
         {
             "Winner": "397",
@@ -145,6 +145,13 @@
         },
         {
             "Winner": "397",
+            "Loser": "396",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 397 is eliminated before 396"
+        },
+        {
+            "Winner": "397",
             "Loser": "395",
             "Already-Eliminated": "",
             "Winner-Only": "true",
@@ -156,13 +163,6 @@
             "Already-Eliminated": "",
             "Winner-Only": "true",
             "Explanation": "Rules out case where 397 is eliminated before 398"
-        },
-        {
-            "Winner": "397",
-            "Loser": "396",
-            "Already-Eliminated": "",
-            "Winner-Only": "true",
-            "Explanation": "Rules out case where 397 is eliminated before 396"
         },
         {
             "Winner": "397",
@@ -187,13 +187,6 @@
         },
         {
             "Winner": "393",
-            "Loser": "401",
-            "Already-Eliminated": "",
-            "Winner-Only": "true",
-            "Explanation": "Rules out case where 393 is eliminated before 401"
-        },
-        {
-            "Winner": "393",
             "Loser": "396",
             "Already-Eliminated": "",
             "Winner-Only": "true",
@@ -201,10 +194,10 @@
         },
         {
             "Winner": "393",
-            "Loser": "398",
+            "Loser": "401",
             "Already-Eliminated": "",
             "Winner-Only": "true",
-            "Explanation": "Rules out case where 393 is eliminated before 398"
+            "Explanation": "Rules out case where 393 is eliminated before 401"
         },
         {
             "Winner": "393",
@@ -212,6 +205,13 @@
             "Already-Eliminated": "",
             "Winner-Only": "true",
             "Explanation": "Rules out case where 393 is eliminated before 395"
+        },
+        {
+            "Winner": "393",
+            "Loser": "398",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 393 is eliminated before 398"
         },
         {
             "Winner": "393",

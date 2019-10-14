@@ -24,6 +24,13 @@
         },
         {
             "Winner": "7",
+            "Loser": "2",
+            "Already-Eliminated": "",
+            "Winner-Only": "true",
+            "Explanation": "Rules out case where 7 is eliminated before 2"
+        },
+        {
+            "Winner": "7",
             "Loser": "11",
             "Already-Eliminated": "",
             "Winner-Only": "true",
@@ -91,13 +98,6 @@
             "Already-Eliminated": "",
             "Winner-Only": "true",
             "Explanation": "Rules out case where 7 is eliminated before 3"
-        },
-        {
-            "Winner": "7",
-            "Loser": "2",
-            "Already-Eliminated": "",
-            "Winner-Only": "true",
-            "Explanation": "Rules out case where 7 is eliminated before 2"
         },
         {
             "Winner": "7",
