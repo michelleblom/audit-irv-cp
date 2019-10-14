@@ -177,6 +177,9 @@ void SimIRV(const Ballots &ballots, int &winner, Candidates &cand,
 int NextCandidate(const Ballot &b, int index, const Candidates &cand)
 {
 	try{
+        if(b.prefs.empty())
+            return -1;
+
 		int idx = find(b.prefs.begin(), b.prefs.end(), index)-b.prefs.begin();
 	
 		for(int i = idx+1; i < b.prefs.size(); ++i){

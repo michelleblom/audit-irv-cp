@@ -42,6 +42,11 @@ typedef std::vector<Ints> Ints2d;
 typedef std::vector<SInts> VSInts;
 typedef std::vector<std::string> Strings;
 
+
+template <typename T>
+T ToType(const std::string &s);
+
+
 struct mytimespec
 {
 	double seconds;
@@ -49,8 +54,11 @@ struct mytimespec
 
 void GetTime(struct mytimespec* t);
 
-void Split2Ints(const std::string &line, const boost::char_separator<char> &sep, Ints &r);
-void Split(const std::string &line, const boost::char_separator<char> &sep, std::vector<std::string> &r);
+void Split2Ints(const std::string &line, 
+    const boost::char_separator<char> &sep, Ints &r);
+
+void Split(const std::string &line, const boost::char_separator<char> &sep, 
+    std::vector<std::string> &r);
 
 struct Config
 {
@@ -105,23 +113,34 @@ typedef std::vector<Candidate> Candidates;
 struct Ballot
 {
 	int tag;
-	double votes; // Number of votes present with this signature
+	// Number of votes present with this signature: Note in this 
+    // codebase votes = 1 as we are not grouping ballots together.
+	double votes; 
 	Ints prefs;
 };
 
 typedef std::vector<Ballot> Ballots;
 
-template <typename T>
-T ToType(const std::string &s);
-
 typedef std::map<std::vector<int>,int> I2Map;
+typedef std::map<int,int> ID2IX;
 
-void select_random_ballots(int nballots, long seed, Ints &r);
+struct Contest{
+    int id;
+    Config config;
+    Candidates cands;
+    Ballots rballots;
 
-bool ReadReportedBallots(const char *path, Ballots &ballots,
-	Candidates &candidates, Config &config, double errorp);
+    int num_rballots;
 
-bool ReadActualBallots(const char *path, Ballots &ballots,
-	const Candidates &candidates, const Config &config);
+    Ints outcome;
+    int winner;
+
+    Contest() : id(0), num_rballots(0), winner(-1) {}
+};
+
+typedef std::vector<Contest> Contests;
+
+bool ReadReportedBallots(const char *path, Contests &contests,
+	ID2IX &contest_1d2index, std::set<int> &ballot_ids);
 
 #endif

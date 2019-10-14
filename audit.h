@@ -31,31 +31,17 @@ struct AuditSpec{
     Ints rules_out;
 };
 
-struct Result{
-	int polls;
-	int remaining_hypotheses;
-};
-
 typedef std::vector<AuditSpec> Audits;
 
+
+// The following two functions deal with generating audits
 double EstimateASN_WONLY(const Ballots &rep_ballots, 
 	const Candidates &cand, double rlimit, int winner, 
-	int loser, double gamma, double lambda);
+	int loser, double gamma, double lambda, int tot_auditable_ballots);
 
 double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand, 
 	double rlimit, const Ints &tail, AuditSpec &best_audit,
-	double gamma, double lambda);
+	double gamma, double lambda, int tot_auditable_ballots);
 
-Result RunSingleWinnerLoserAudit(const Ballots &act_ballots, 
-	const Ballots &rep_ballots, const Candidates &cand,
-	double rlimit, int winner, int loser, const Ints &plist,
-	double gamma, double lambda);
-
-Result RunAudit(const Ballots &act_ballots, const Ballots &rep_ballots,
-	const Candidates &cand, double rlimit, const Ints &winners, 
-	const Ints &losers,const Ints &plist, double gamma, double lambda);  
-
-bool LoadAudits(const char *path, Audits &audits,
-	const Candidates &candidates, const Config &config);
 
 #endif

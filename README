@@ -1,40 +1,64 @@
-Find audit specification with the following command (taking NSW 2015 election as an example) to generate an audit specification given a 5% risk limit and a 1% chance of an error being injected into each ballot. You can find some data files for use with this code in NSW2015.tar.gz (also available on github). 
+We have adapted Philip Stark's comparison audits (for first past the 
+post elections) to IRV. The code in this repository is designed to be used for
+generating audit configurations for multiple IRV elections. 
 
-We have adapted Philip Stark's comparison audits (for first past the post elections) to IRV. As we poll a single ballot at a time, we set the lambda parameter to 0. See Stark's paper "Super-Simple Simultaneous Single-Ballot Risk-Limiting Audits" for a description of how risk limiting comparison audits work and how to set the lambda parameter.
+----------------------------------------------------------------------------
+How to use this tool for generating an audit configuration (in JSON format).
+----------------------------------------------------------------------------
 
-./irvaudit -act_ballots Data_NA_Albury.txt_ballots.txt -rep_ballots Data_NA_Albury.txt_ballots.txt -r 0.05 -gamma 1.1 -lambda 0 -agap 0 -dive -s 39284575696785 -eseed 9284896769459 -eprob 0.01
+1. Compile (if using Linux, you can probably use the provided Makefile,
+otherwise you will likely need to write a custom Makefile).
 
-You should get the following output:
+2. To generate an audit with a risk limit of 5%, gamma = 1.1, lambda = 0.01, 
+run the command: 
 
-440 errors added.
-============================================
-AUDITS REQUIRED
-EO,Winner,3,Loser,0,Eliminated,1,2,4
-EO,Winner,0,Loser,1,Eliminated,2,3,4
-EO,Winner,0,Loser,4,Eliminated,1,2,3
-EO,Winner,0,Loser,2,Eliminated,1,3,4
-WO,Winner,3,Loser,4,Eliminated
-WO,Winner,3,Loser,2,Eliminated
-EO,Winner,3,Loser,4,Eliminated,0,1,2
-WO,Winner,3,Loser,1,Eliminated
-EO,Winner,3,Loser,2,Eliminated,0,1,4
-EO,Winner,3,Loser,1,Eliminated,0,2,4
-MAX ASN(%) 0.0582713
-============================================
-TIME,0.117114,Nodes Expanded,0,MAX ASN(%),0.0582713
+./irvaudit -rep_ballots REPORTED_BALLOT_FILE -r 0.05 -gamma 1.1 -lambda 0.01 
+    -agap 0.005 -alglog -simlog -json OUTPUT_AUDIT_SPEC.json
 
+The 'lambda' and 'gamma' parameters are associated with the current test
+statistic being used to compute risk/estimate audit effort (Kaplan-Markov).
+Note that the audit configuration produced can be used in an audit with any
+desired risk limit -- the audit will just involve more/less ballot polls than
+estimated by the software. The 'alglog' and 'simlog' parameters, if provided,
+will simply print the current status of the algorithm as it progresses. They
+are not necessary, but useful. 
 
-This means that the algorithm found a series of facts (one per line) to audit, requiring an estimated 0.06% of total ballots cast to be polled.
+The 'agap' parameter controls the degree of 'suboptimality' you are willing to
+accept in your audit configuration. The software is designed to produce a
+series of assertions that, with the given parameters (risk limit, gamma,
+lambda), requires the least number of estimated ballot polls to audit.
+Depending on the election, the algorithm may take longer than you would like to
+find the optimal set of assertions (it also has to prove that these are
+optimal). With agap = 0.005, we are saying that the configuration found can be
+0.5% away from optimal, or require 0.5% more auditing effort than the 
+optimal audit. Increasing it should make audit generation quicker. The 
+default is 0.005, so you can leave off this flag if you want to keep it at
+this value. 
 
-Let's now take the above audit specification and run it! With the above output in a file called audit.txt, we do this with the command:
+A concrete example you can run:
 
-./irvaudit -act_ballots Data_NA_Albury.txt_ballots.txt -rep_ballots Data_NA_Albury.txt_ballots.txt -r 0.05 -run audit.txt -gamma 1.1 -lambda 0 -s 39284575696785 -eseed 9284896769459 -eprob 0.01
+./irvaudit -rep_ballots USIRV/Aspen_2009.raire -r 0.05 -gamma 1.1 
+    -lambda 0.01 -agap 0.005 -alglog -simlog -json Aspen_2009.json
 
-NOTE that you might beed to replace a line of code in model.cpp (line 65) with a version of python you have (if you don't have python3.6. Yes, I know -- this could have been done better). 
+In the folder SampleOutputs, I have run the above on each of the USIRV
+'reported' ballot data files in USIRV and placed the resulting JSON output. 
+ 
+Note that:
 
-You should see a lot of text logging changes in the statistics being maintained by the audit, with the following at the bottom:
+-- We may change the test statistic being used, and in this instance 
+the gamma/lambda parameters could be replaced with something different.
+This is not a significant change to the way the tool works, it will
+just change how we estimate auditing effort for each assertion that
+needs to be checked.  
 
-TOTAL BALLOTS POLLED = 25 (0.0539549%)
-SUCCESSFUL AUDITS = 10/10
+-- Add the flag -contests N C1 C2 C3 ... to the run command to select which
+contests, mentioned in the input data, you want to generate audits for.
 
+N refers to the number of contests you want to audit.
+C1, C2, ... are the IDs of these contests.
 
+If you do not include the -contests flag, an audit will be generated for
+each contest mentioned in the input data. The output log will indicate
+which contests an audit was generated for, and if any contests require 
+a full recount. For the latter contests, an audit configuration is not
+included in the JSON output.
