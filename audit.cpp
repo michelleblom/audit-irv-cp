@@ -53,13 +53,17 @@ double EstimateASN_WONLY(const Ballots &rep_ballots,
 	const double V = (total_votes_winner - total_votes_loser);
 	if(V <= 0) return -1;
 
-    // TODO: rework estimatation so that it takes into account
+    // Estimatation has been reworked to take into account
     // that we could sample ballots that do not involve this
     // contest (ie. tot_auditable_ballots >= rep_ballots.size()
-	const double total_votes_present=rep_ballots.size();
+	const double total_votes_present=tot_auditable_ballots; //rep_ballots.size();
+    // margin is the 'diluted margin'
 	const double margin = V/total_votes_present;
 	const double od2g = 1.0/(2.0 * gamma);
 	const double row = -log(rlimit)/(od2g+lambda*log(1-od2g));
+
+    // Note: we are returning a proportion of the total number
+    // of ballots involved in the audit (across all contests)
 	return ceil(row/margin)/total_votes_present;
 }
 
@@ -89,10 +93,10 @@ double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand,
 	}
 
 	double smallest = -1;
-    // TODO: rework estimatation so that it takes into account
+    // Estimatation has been reworked to take into account
     // that we could sample ballots that do not involve this
     // contest (ie. tot_auditable_ballots >= rep_ballots.size()
-	double total_votes_present = rep_ballots.size();
+	double total_votes_present = tot_auditable_ballots; //rep_ballots.size();
 	for(int i = 1; i < tsize; ++i){
 		// loser is the "winner" and tail[i] is the "loser"
 		const int taili = tail[i];
@@ -102,10 +106,14 @@ double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand,
 		const double V = (total_votes_winner-total_votes_loser);
 		if(V <= 0) continue;
 
+        // Note this is the diluted margin
 		const double margin = V/total_votes_present;
 
 		const double od2g = 1.0/(2 * gamma);
 		const double row = -log(rlimit)/(od2g+lambda*log(1-od2g));
+
+        // candasn is a proportion of the total number of ballots 
+        //involved in the audit (across all contests)
 		const double candasn = ceil(row/margin)/total_votes_present;
 
 		if(smallest == -1 || candasn < smallest){
