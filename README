@@ -1,3 +1,7 @@
+----------------------------------------------------------------------------
+RAIRE: Risk-limiting Audits for Instant Runoff vote Elections
+----------------------------------------------------------------------------
+
 We have adapted Philip Stark's comparison audits (for first past the 
 post elections) to IRV. The code in this repository is designed to be used for
 generating audit configurations for multiple IRV elections. 
