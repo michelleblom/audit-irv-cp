@@ -53,6 +53,9 @@ double EstimateASN_WONLY(const Ballots &rep_ballots,
 	const double V = (total_votes_winner - total_votes_loser);
 	if(V <= 0) return -1;
 
+    // TODO: rework estimatation so that it takes into account
+    // that we could sample ballots that do not involve this
+    // contest (ie. tot_auditable_ballots >= rep_ballots.size()
 	const double total_votes_present=rep_ballots.size();
 	const double margin = V/total_votes_present;
 	const double od2g = 1.0/(2.0 * gamma);
@@ -86,6 +89,9 @@ double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand,
 	}
 
 	double smallest = -1;
+    // TODO: rework estimatation so that it takes into account
+    // that we could sample ballots that do not involve this
+    // contest (ie. tot_auditable_ballots >= rep_ballots.size()
 	double total_votes_present = rep_ballots.size();
 	for(int i = 1; i < tsize; ++i){
 		// loser is the "winner" and tail[i] is the "loser"

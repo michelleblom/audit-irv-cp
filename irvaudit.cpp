@@ -270,9 +270,11 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
             
             children.push_back(std::make_pair("", caudit));
         }
-        pt.put("Overall Expected Polls (#)", overall_maxasn);
-        pt.put("Ballots involved in audit (#)", tot_auditable_ballots);
-        pt.add_child("Audits", children);
+        if(overall_maxasn != -1){
+            pt.put("Overall Expected Polls (#)", overall_maxasn);
+            pt.put("Ballots involved in audit (#)", tot_auditable_ballots);
+            pt.add_child("Audits", children);
+        }
         write_json(json_file, pt);
     }
     catch(exception &e)
