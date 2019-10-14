@@ -517,9 +517,6 @@ double PerformDive(const Node &toexpand, const Candidates &cands,
  *                           is less than (or equal to) agap. 
  *
  * -r VALUE              Risk limit (e.g., 0.05 represents a risk limit of 5%)
- * -dive                 If present, diving optimisation will be performed 
- *                           during search for best configuration of facts to
- *                           audit. RECOMMEND (default).
  *
  * -alglog               If present, log messages designed to indicate how the
  *                           algorithm is progressing will be printed.
@@ -531,8 +528,45 @@ double PerformDive(const Node &toexpand, const Candidates &cands,
  * -contests N C1 C2 ... Number of contests for which we want to audit/generate
  *                           and audit, followed by the numeric identifiers for
  *                           those contests. IF NOTE PRESENT, ASSUME ALL
- *                           CONTESTS MENTIONED IN INPUT WILL BE AUDITED.       
+ *                           CONTESTS MENTIONED IN INPUT WILL BE AUDITED.  
+ * 
+ * -help                 Print usage instructions.     
  * */
+
+void PrintUsageInstructions(){
+    cout << "============================================" << endl;
+    cout << "USAGE" << endl;
+    cout << "./irvaudit -rep_ballots FILE.raire -gamma GAMMA ";
+    cout << "-lambda LAMBDA -r RISK_LIMIT -json OUTOUT.json" << endl;
+    cout << endl;
+    cout << "Required Arguments" << endl;
+    cout << "------------------" << endl;
+    cout << "-rep_ballots FILE.raire  Reported ballots in RAIRE format"<<endl; 
+    cout << "-gamma GAMMA             Gamma parameter GAMMA >= 1" << endl;   
+    cout << "-lambda LAMBDA           Lambda parameter 0 < LAMBDA <= 1" << endl;
+    cout << "-r RISK_LIMIT            Risk Limit (e.g., 0.05 for 5%)" << endl;
+    cout << "-json FILE               Generated audit will be recorded in "
+        << "JSON format in FILE" << endl; 
+    cout << endl;
+    cout << "Optional Arguments" << endl;
+    cout << "------------------" << endl;
+    cout<<"-contests N C1 C2 ...    Contests to generate an audit for."<<endl;
+    cout<<"                         N  = number of contests to audit" << endl;
+    cout<<"                         Ci = IDs of contests to audit" << endl;
+    cout<<"                         Note that if omitted, all contests in";
+    cout<<" FILE.raire will be audited." << endl;
+    cout << endl;
+    cout<<"-agap ALLOWED_GAP        Degree of suboptimality permitted in" <<
+        " generated audit." << endl;
+    cout<<"                         Default is 0.005 (0.5%)." << endl; 
+    cout << endl;
+    cout<<"-simlog                  Print simulation of election prior to";
+    cout << " generating audit." <<endl;
+    cout<<"-alglog                  Print algorithm progress while";
+    cout << " generating audit." <<endl;
+    cout << "============================================" << endl;
+}
+
 int main(int argc, const char * argv[]) 
 {
 	try
@@ -560,7 +594,11 @@ int main(int argc, const char * argv[])
         // "contests" that each id maps to. 
         ID2IX contest_id2index;
 		for(int i = 1; i < argc; ++i){
-			if(strcmp(argv[i], "-rep_ballots") == 0 && i < argc-1){
+            if(strcmp(argv[i], "-help") == 0){
+                PrintUsageInstructions();
+                return 0;
+            }
+			else if(strcmp(argv[i], "-rep_ballots") == 0 && i < argc-1){
 				rep_blts_file = argv[i+1];
 				++i;
 			}
@@ -582,9 +620,6 @@ int main(int argc, const char * argv[])
 			else if(strcmp(argv[i], "-r") == 0 && i < argc-1){
 				rlimit = atof(argv[i+1]);
 				++i;
-			}
-			else if(strcmp(argv[i], "-dive") == 0){
-				diving = true;
 			}
 			else if(strcmp(argv[i], "-alglog") == 0){
 				alglog = true;
