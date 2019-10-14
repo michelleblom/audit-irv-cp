@@ -1,0 +1,152 @@
+{
+    "Overall Expected Polls (#)": "11",
+    "Ballots involved in audit (#)": "149465",
+    "Audits": [
+        {
+            "Contest": "1",
+            "Winner": "7",
+            "Eliminated": [
+                "15",
+                "14",
+                "13",
+                "16",
+                "12",
+                "17",
+                "5",
+                "0",
+                "3",
+                "1",
+                "8",
+                "10",
+                "2",
+                "4",
+                "6",
+                "9",
+                "11"
+            ],
+            "Expected Polls (#)": "11",
+            "Expected Polls (%)": "1",
+            "Assertions": [
+                {
+                    "Winner": "7",
+                    "Loser": "9",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 9"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "6",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 6"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "4",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 4"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "2",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 2"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "11",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 11"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "16",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 16"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "15",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 15"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "14",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 14"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "13",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 13"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "12",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 12"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "10",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 10"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "8",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 8"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "5",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 5"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "3",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 3"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "1",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 1"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "0",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 0"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "17",
+                    "Already-Eliminated": "",
+                    "Winner-Only": "true",
+                    "Explanation": "Rules out case where 7 is eliminated before 17"
+                }
+            ]
+        }
+    ]
+}
