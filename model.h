@@ -54,9 +54,6 @@ struct mytimespec
 
 void GetTime(struct mytimespec* t);
 
-void Split2Ints(const std::string &line, 
-    const boost::char_separator<char> &sep, Ints &r);
-
 void Split(const std::string &line, const boost::char_separator<char> &sep, 
     std::vector<std::string> &r);
 
@@ -141,6 +138,6 @@ struct Contest{
 typedef std::vector<Contest> Contests;
 
 bool ReadReportedBallots(const char *path, Contests &contests,
-	ID2IX &contest_1d2index, std::set<int> &ballot_ids);
+	ID2IX &contest_1d2index, std::set<std::string> &ballot_ids);
 
 #endif

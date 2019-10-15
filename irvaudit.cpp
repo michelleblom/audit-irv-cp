@@ -646,7 +646,7 @@ int main(int argc, const char * argv[])
             }
 		}
 
-        set<int> ballot_ids;
+        set<string> ballot_ids;
 		if(!ReadReportedBallots(rep_blts_file, contests, contest_id2index,
             ballot_ids)){
 			cout << "Reported ballots read error. Exiting." << endl;

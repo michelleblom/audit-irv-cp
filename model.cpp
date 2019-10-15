@@ -58,36 +58,6 @@ T ToType(const std::string &s)
 	}
 }
 
-void Split2Ints(const string &line, const boostcharsep &sep, Ints &r)
-{
-	try
-	{
-		vector<string> result;
-		boost::tokenizer<boostcharsep> tokens(line, sep);
-		result.assign(tokens.begin(), tokens.end());
-
-		for(int i = 0; i < result.size(); ++i)
-		{
-			boost::algorithm::trim(result[i]);
-			int v  = ToType<int>(result[i]);
-			r.push_back(v);
-		}
-	}
-	catch(exception &e)
-	{
-		stringstream ss;
-		ss << e.what();
-		throw STVException(ss.str());
-	}
-	catch(STVException &e)
-	{
-		throw e;
-	}
-	catch(...)
-	{
-		throw STVException("Error in Split2Ints.");
-	}
-}
 
 void Split(const string &line, const boostcharsep &sep, vector<string> &r)
 {
@@ -119,7 +89,7 @@ void Split(const string &line, const boostcharsep &sep, vector<string> &r)
 
 
 bool ReadReportedBallots(const char *path, Contests &contests, 
-    ID2IX &ct_id2index, set<int> &ballot_ids) 
+    ID2IX &ct_id2index, set<string> &ballot_ids) 
 {
 	try
 	{
@@ -175,11 +145,10 @@ bool ReadReportedBallots(const char *path, Contests &contests,
         // Reading ballots rankings and mapping them to their contest.
         while(getline(infile, line))
         {
-			Ints columns;
-			Split2Ints(line, spcom, columns);
+			vector<string> columns;
+			Split(line, spcom, columns);
 
-            int con_id = columns[0];
-            int bt_id = columns[1];
+            int con_id = ToType<int>(columns[0]);
             ID2IX::const_iterator cit = ct_id2index.find(con_id);
             if(cit == ct_id2index.end())
                 continue;
@@ -193,11 +162,11 @@ bool ReadReportedBallots(const char *path, Contests &contests,
 			b.tag = ctest.num_rballots;
 			b.votes = 1;
 
-            ballot_ids.insert(bt_id);
+            ballot_ids.insert(columns[1]);
 
 			for(int i = 2; i < columns.size(); ++i)
 			{
-				int ccode = columns[i];
+				int ccode = ToType<int>(columns[i]);
 				int index = ctest.config.id2index.find(ccode)->second;
 					
 				if(find(prefs.begin(),prefs.end(), index) != prefs.end())
