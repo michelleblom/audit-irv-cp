@@ -228,7 +228,10 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
                     aelim.push_back(std::make_pair("", c));
                 }
                 child.add_child("Already-Eliminated", aelim);
-                child.put("Winner-Only", spec.wonly);
+                if(spec.wonly)
+                    child.put("assertion_type", "WINNER_ONLY");
+                else
+                    child.put("assertion_type", "IRV_ELIMINATION");
 
                 stringstream ss;
                 if(spec.wonly){
@@ -244,7 +247,6 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
                     }    
                     ss << "]";
                 }
-                child.put("Winner-Only", spec.wonly);
                 child.put("Explanation", ss.str());
                 caudit_children.push_back(std::make_pair("", child));
                 maxasn = max(maxasn, spec.asn);
