@@ -33,9 +33,8 @@ int GetFirstCandidateIn(const Ints &prefs, const Ints &relevant){
 }
 
 double EstimateASN_WONLY(const Ballots &rep_ballots, 
-	const Candidates &cand, double rlimit, int winner, 
-	int loser, double gamma, double lambda, int tot_auditable_ballots){
-
+	const Candidates &cand, const Parameters &params, int winner, int loser)
+{
 	double total_votes_loser = 0;
 	double total_votes_winner = cand[winner].sim_votes;
 
@@ -56,11 +55,11 @@ double EstimateASN_WONLY(const Ballots &rep_ballots,
     // Estimatation has been reworked to take into account
     // that we could sample ballots that do not involve this
     // contest (ie. tot_auditable_ballots >= rep_ballots.size()
-	const double total_votes_present=tot_auditable_ballots; //rep_ballots.size();
+	const double total_votes_present=params.tot_auditable_ballots; 
     // margin is the 'diluted margin'
-	const double margin = V/total_votes_present;
-	const double od2g = 1.0/(2.0 * gamma);
-	const double row = -log(rlimit)/(od2g+lambda*log(1-od2g));
+	const double margin=V/total_votes_present;
+	const double od2g=1.0/(2.0 * params.gamma);
+	const double row=-log(params.risk_limit)/(od2g+params.lambda*log(1-od2g));
 
     // Note: we are returning a proportion of the total number
     // of ballots involved in the audit (across all contests)
@@ -68,8 +67,7 @@ double EstimateASN_WONLY(const Ballots &rep_ballots,
 }
 
 double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand, 
-	double rlimit, const Ints &tail, AuditSpec &best_audit,
-	double gamma, double lambda, int tot_auditable_ballots){
+	const Parameters &params, const Ints &tail, AuditSpec &best_audit){
 	// Compute ASN to show that tail[0] beats one of tail[1..n]
 	const int loser = tail[0];
 	const int tsize = tail.size();
@@ -96,7 +94,7 @@ double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand,
     // Estimatation has been reworked to take into account
     // that we could sample ballots that do not involve this
     // contest (ie. tot_auditable_ballots >= rep_ballots.size()
-	double total_votes_present = tot_auditable_ballots; //rep_ballots.size();
+	double total_votes_present = params.tot_auditable_ballots; 
 	for(int i = 1; i < tsize; ++i){
 		// loser is the "winner" and tail[i] is the "loser"
 		const int taili = tail[i];
@@ -109,8 +107,9 @@ double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand,
         // Note this is the diluted margin
 		const double margin = V/total_votes_present;
 
-		const double od2g = 1.0/(2 * gamma);
-		const double row = -log(rlimit)/(od2g+lambda*log(1-od2g));
+		const double od2g = 1.0/(2 * params.gamma);
+		const double row = -log(params.risk_limit)/
+            (od2g+params.lambda*log(1-od2g));
 
         // candasn is a proportion of the total number of ballots 
         //involved in the audit (across all contests)

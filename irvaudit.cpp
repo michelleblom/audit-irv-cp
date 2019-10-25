@@ -63,6 +63,7 @@ struct OrderFacts{
 
 typedef list<Node> Frontier;
 
+
 SimpleNode CreateSimpleNode(const Node &n){
 	SimpleNode sn;
 	sn.tail = n.tail;
@@ -199,7 +200,7 @@ void PrintNode(const Node &n, const Candidates &cand){
 
 
 void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
-    int tot_auditable_ballots, const char *json_file)
+    const Parameters &params, const char *json_file)
 {
     try{
         ptree pt;
@@ -261,7 +262,7 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
             }
             caudit.add_child("Eliminated", elim);
 
-            int maxasn_ballots = ceil(ctest.config.totalvotes*maxasn);
+            int maxasn_ballots = ceil(params.tot_auditable_ballots*maxasn);
             int maxasn_percent = ceil(maxasn*100);
 
             caudit.put("Expected Polls (#)", maxasn_ballots);
@@ -274,7 +275,15 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
         }
         if(overall_maxasn != -1){
             pt.put("Overall Expected Polls (#)", overall_maxasn);
-            pt.put("Ballots involved in audit (#)", tot_auditable_ballots);
+            pt.put("Ballots involved in audit (#)", 
+                params.tot_auditable_ballots);
+
+            ptree parameters;
+            parameters.put("Risk Limit", params.risk_limit);
+            parameters.put("Lambda", params.lambda);
+            parameters.put("Gamma", params.gamma);
+            pt.add_child("Parameters", parameters);
+
             pt.add_child("Audits", children);
         }
         write_json(json_file, pt);
@@ -320,9 +329,8 @@ void PrintFrontier(const Frontier &front, const Candidates &cand){
 
 
 double FindBestAudit(const Candidates &candidates, const Ballots &rep_ballots,
-    double rlimit,AuditSpec &best_audit, const vector<OrderFacts> &facts, 
-    const Ints &tail, double gamma, double lambda, bool alglog,
-    int tot_auditable_ballots)
+    AuditSpec &best_audit, const vector<OrderFacts> &facts, 
+    const Ints &tail, bool alglog, const Parameters &params)
 {
 	const int i = tail[0];
 	double best_estimate = -1;
@@ -367,7 +375,7 @@ double FindBestAudit(const Candidates &candidates, const Ballots &rep_ballots,
     alternate.rules_out = tail;
 	alternate.wonly = false;
 	alternate.asn = EstimateSampleSize(rep_ballots, candidates,
-		rlimit, tail, alternate, gamma, lambda, tot_auditable_ballots);
+		params, tail, alternate);
 
 	if(alternate.asn != -1 && (best_estimate == -1 || alternate.asn 
         < best_estimate)){
@@ -417,9 +425,8 @@ void ReplaceWithBestAncestor(Frontier &front, const Node &newn,
 
 
 double PerformDive(const Node &toexpand, const Candidates &cands, 
-	const Ballots &rep_ballots, double rlimit, 
-    const vector<OrderFacts> &facts, double gamma, double lambda,
-    int tot_auditable_ballots)
+	const Ballots &rep_ballots, const Parameters &params,  
+    const vector<OrderFacts> &facts)
 {
 	const int ncands = cands.size();
 	for(int i = 0; i < ncands; ++i){
@@ -453,9 +460,8 @@ double PerformDive(const Node &toexpand, const Candidates &cands,
 				newn.best_ancestor = CreateSimpleNode(toexpand); 
 			}
 			newn.has_ancestor = true;
-			newn.estimate = FindBestAudit(cands, rep_ballots, rlimit,
-				newn.best_audit, facts, newn.tail, gamma, lambda, false,
-                tot_auditable_ballots);
+			newn.estimate = FindBestAudit(cands, rep_ballots,  
+				newn.best_audit, facts, newn.tail, false, params);
 
 			if(!newn.expandable){
 				bool replace = false;
@@ -478,8 +484,7 @@ double PerformDive(const Node &toexpand, const Candidates &cands,
 				}
 			}
 			else{
-				return PerformDive(newn, cands, rep_ballots, rlimit, facts,
-					gamma, lambda, tot_auditable_ballots); 
+				return PerformDive(newn, cands, rep_ballots, params, facts); 
 			}
 			break;
 		}
@@ -577,10 +582,12 @@ int main(int argc, const char * argv[])
 
 		bool simlog = false;
 		bool alglog = false;
-		double rlimit = 0.05;
 
-		double gamma = 1.1;
-		double lambda = 0;
+        Parameters params;
+		params.gamma = 1.1;
+		params.lambda = 0;
+		params.risk_limit = 0.05;
+		params.tot_auditable_ballots = 0;
 
 		bool diving = true;
 
@@ -608,11 +615,11 @@ int main(int argc, const char * argv[])
 				simlog = true;
 			}
 			else if(strcmp(argv[i], "-gamma") == 0 && i < argc-1){
-				gamma = atof(argv[i+1]);
+				params.gamma = atof(argv[i+1]);
 				++i;
 			}
 			else if(strcmp(argv[i], "-lambda") == 0 && i < argc-1){
-				lambda = atof(argv[i+1]);
+				params.lambda = atof(argv[i+1]);
 				++i;
 			}
 			else if(strcmp(argv[i], "-agap") == 0 && i < argc-1){
@@ -620,7 +627,7 @@ int main(int argc, const char * argv[])
 				++i;
 			}
 			else if(strcmp(argv[i], "-r") == 0 && i < argc-1){
-				rlimit = atof(argv[i+1]);
+				params.risk_limit = atof(argv[i+1]);
 				++i;
 			}
 			else if(strcmp(argv[i], "-alglog") == 0){
@@ -654,7 +661,7 @@ int main(int argc, const char * argv[])
 			cout << "Reported ballots read error. Exiting." << endl;
 			return 1;
 		}
-        int tot_auditable_ballots = ballot_ids.size();       
+        params.tot_auditable_ballots = ballot_ids.size();       
 		
         for(int i = 0; i < contests.size(); ++i){
             Contest &ctest = contests[i];
@@ -704,7 +711,7 @@ int main(int argc, const char * argv[])
 				    // Can we prove that ci is eliminated before cj. If so,
 				    // add to list of ordering facts (with best audit).
 				    double asn=EstimateASN_WONLY(ctest.rballots,ctest.cands,
-                        rlimit, cj, ci, gamma, lambda, tot_auditable_ballots);
+                        params, cj, ci);
 
 				    if(asn != -1){
 					    AuditSpec aspec;
@@ -754,8 +761,7 @@ int main(int argc, const char * argv[])
 				    }
 
 				    newn.estimate = FindBestAudit(ctest.cands, ctest.rballots,
-                        rlimit, newn.best_audit, facts, newn.tail, gamma, 
-                        lambda, alglog, tot_auditable_ballots);
+                        newn.best_audit, facts, newn.tail, alglog, params);
 
 				    if(alglog){
 					    if(newn.estimate != -1){
@@ -823,8 +829,7 @@ int main(int argc, const char * argv[])
 
 			    if(diving){
 				    double divelb = PerformDive(toexpand, ctest.cands, 
-					    ctest.rballots, rlimit, facts, gamma, lambda,
-                        tot_auditable_ballots);
+					    ctest.rballots, params, facts);
 				    if(divelb == -1){
 					    // Audit not possible
 					    if(alglog){
@@ -912,9 +917,8 @@ int main(int argc, const char * argv[])
 					    }
 					    newn.has_ancestor = true;
 					    newn.estimate = FindBestAudit(ctest.cands, 
-                            ctest.rballots, rlimit, newn.best_audit,
-                            facts,newn.tail, gamma, lambda, alglog,
-                            tot_auditable_ballots);
+                            ctest.rballots, newn.best_audit,
+                            facts, newn.tail, alglog, params);
 
 					    if(!newn.expandable){
 						    bool replace = false;
@@ -1020,7 +1024,7 @@ int main(int argc, const char * argv[])
 				        maxasn = max(maxasn, it->asn);
                     }
 			    }
-                int in_ballots = maxasn*ctest.config.totalvotes;
+                int in_ballots = maxasn*params.tot_auditable_ballots;
 			    maxasn *= 100;
                 
 			    cout << "MAX ASN(%) " << maxasn << endl;
@@ -1069,8 +1073,7 @@ int main(int argc, const char * argv[])
         cout << "============================================" << endl;
 
         if(json_output != NULL){
-            OutputToJSON(contests, audits_to_run, tot_auditable_ballots,
-                json_output);
+            OutputToJSON(contests, audits_to_run, params, json_output);
         }
 	}
 	catch(exception &e)

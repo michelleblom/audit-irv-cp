@@ -34,14 +34,20 @@ struct AuditSpec{
 typedef std::vector<AuditSpec> Audits;
 
 
+struct Parameters{
+    double lambda;
+    double gamma;
+    double risk_limit;
+
+    int tot_auditable_ballots;
+};
+
 // The following two functions deal with generating audits
 double EstimateASN_WONLY(const Ballots &rep_ballots, 
-	const Candidates &cand, double rlimit, int winner, 
-	int loser, double gamma, double lambda, int tot_auditable_ballots);
+	const Candidates &cand, const Parameters &params, int winner, int loser);
 
 double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand, 
-	double rlimit, const Ints &tail, AuditSpec &best_audit,
-	double gamma, double lambda, int tot_auditable_ballots);
+	const Parameters &params, const Ints &tail, AuditSpec &best_audit);
 
 
 #endif
