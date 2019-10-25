@@ -101,6 +101,14 @@ bool AppearsBefore(int winner, int loser, const Ints &tail){
     return false;
 }
 
+bool SameSet(const Ints &l1, const Ints &l2){
+    Ints cl1 = l1;
+    Ints cl2 = l2;
+    sort(cl1.begin(), cl1.end());
+    sort(cl2.begin(), cl2.end());
+    return cl1 == cl2;
+}
+
 bool Subsumes(const AuditSpec &a1, const AuditSpec &a2){
     if(!a1.wonly || a2.wonly)
         return false;
@@ -111,6 +119,11 @@ bool Subsumes(const AuditSpec &a1, const AuditSpec &a2){
     if(a1.wonly && AppearsBefore(a1.winner, a1.loser, a2.rules_out)){
         return true;
     }
+
+    if(!a1.wonly && !a2.wonly && a1.winner == a2.winner && 
+        SameSet(a1.rules_out, a2.rules_out)){
+        return true;
+    } 
     
     return false;
 }
@@ -1007,6 +1020,10 @@ int main(int argc, const char * argv[])
 			    cout << "AUDITS REQUIRED" << endl;
 			    maxasn = 0;
                 Audits final_config;
+
+                // Sort audits from largest to smallest ASN
+                sort(audits.begin(), audits.end(), RevCompareAudit);
+
 			    for(Audits::const_iterator it = audits.begin(); 
                     it != audits.end();++it){
                     bool subsumed = false;

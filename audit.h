@@ -33,6 +33,7 @@ struct AuditSpec{
 
 typedef std::vector<AuditSpec> Audits;
 
+bool RevCompareAudit(const AuditSpec &a1, const AuditSpec &a2); 
 
 struct Parameters{
     double lambda;

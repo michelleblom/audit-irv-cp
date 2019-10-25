@@ -34,13 +34,6 @@
             "Assertions": [
                 {
                     "Winner": "7",
-                    "Loser": "9",
-                    "Already-Eliminated": "",
-                    "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 7 is eliminated before 9"
-                },
-                {
-                    "Winner": "7",
                     "Loser": "6",
                     "Already-Eliminated": "",
                     "assertion_type": "WINNER_ONLY",
@@ -69,73 +62,17 @@
                 },
                 {
                     "Winner": "7",
-                    "Loser": "16",
+                    "Loser": "9",
                     "Already-Eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 7 is eliminated before 16"
+                    "Explanation": "Rules out case where 7 is eliminated before 9"
                 },
                 {
                     "Winner": "7",
-                    "Loser": "15",
+                    "Loser": "17",
                     "Already-Eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 7 is eliminated before 15"
-                },
-                {
-                    "Winner": "7",
-                    "Loser": "14",
-                    "Already-Eliminated": "",
-                    "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 7 is eliminated before 14"
-                },
-                {
-                    "Winner": "7",
-                    "Loser": "13",
-                    "Already-Eliminated": "",
-                    "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 7 is eliminated before 13"
-                },
-                {
-                    "Winner": "7",
-                    "Loser": "12",
-                    "Already-Eliminated": "",
-                    "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 7 is eliminated before 12"
-                },
-                {
-                    "Winner": "7",
-                    "Loser": "10",
-                    "Already-Eliminated": "",
-                    "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 7 is eliminated before 10"
-                },
-                {
-                    "Winner": "7",
-                    "Loser": "8",
-                    "Already-Eliminated": "",
-                    "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 7 is eliminated before 8"
-                },
-                {
-                    "Winner": "7",
-                    "Loser": "5",
-                    "Already-Eliminated": "",
-                    "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 7 is eliminated before 5"
-                },
-                {
-                    "Winner": "7",
-                    "Loser": "3",
-                    "Already-Eliminated": "",
-                    "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 7 is eliminated before 3"
-                },
-                {
-                    "Winner": "7",
-                    "Loser": "1",
-                    "Already-Eliminated": "",
-                    "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 7 is eliminated before 1"
+                    "Explanation": "Rules out case where 7 is eliminated before 17"
                 },
                 {
                     "Winner": "7",
@@ -146,10 +83,73 @@
                 },
                 {
                     "Winner": "7",
-                    "Loser": "17",
+                    "Loser": "1",
                     "Already-Eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 7 is eliminated before 17"
+                    "Explanation": "Rules out case where 7 is eliminated before 1"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "5",
+                    "Already-Eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "Explanation": "Rules out case where 7 is eliminated before 5"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "8",
+                    "Already-Eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "Explanation": "Rules out case where 7 is eliminated before 8"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "10",
+                    "Already-Eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "Explanation": "Rules out case where 7 is eliminated before 10"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "12",
+                    "Already-Eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "Explanation": "Rules out case where 7 is eliminated before 12"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "13",
+                    "Already-Eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "Explanation": "Rules out case where 7 is eliminated before 13"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "14",
+                    "Already-Eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "Explanation": "Rules out case where 7 is eliminated before 14"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "15",
+                    "Already-Eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "Explanation": "Rules out case where 7 is eliminated before 15"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "16",
+                    "Already-Eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "Explanation": "Rules out case where 7 is eliminated before 16"
+                },
+                {
+                    "Winner": "7",
+                    "Loser": "3",
+                    "Already-Eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "Explanation": "Rules out case where 7 is eliminated before 3"
                 }
             ]
         }

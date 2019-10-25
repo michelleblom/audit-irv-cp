@@ -67,6 +67,17 @@
             "Assertions": [
                 {
                     "Winner": "385",
+                    "Loser": "384",
+                    "Already-Eliminated": [
+                        "77",
+                        "382",
+                        "383"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "Explanation": "Rules out outcomes with tail [... 385 384]"
+                },
+                {
+                    "Winner": "385",
                     "Loser": "382",
                     "Already-Eliminated": "",
                     "assertion_type": "WINNER_ONLY",
@@ -85,17 +96,6 @@
                     "Already-Eliminated": "",
                     "assertion_type": "WINNER_ONLY",
                     "Explanation": "Rules out case where 385 is eliminated before 77"
-                },
-                {
-                    "Winner": "385",
-                    "Loser": "384",
-                    "Already-Eliminated": [
-                        "77",
-                        "382",
-                        "383"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "Explanation": "Rules out outcomes with tail [... 385 384]"
                 }
             ]
         },

@@ -23,6 +23,10 @@
 using namespace std;
 typedef boost::char_separator<char> boostcharsep;
 
+bool RevCompareAudit(const AuditSpec &a1, const AuditSpec &a2) {
+    return a1.asn > a2.asn;
+}
+
 int GetFirstCandidateIn(const Ints &prefs, const Ints &relevant){
 	for(int k = 0; k < prefs.size(); ++k){
 		if(find(relevant.begin(), relevant.end(),prefs[k]) != relevant.end()){
