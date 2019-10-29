@@ -233,15 +233,15 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
             for(int i = 0; i < aconfig.size(); ++i){
                 const AuditSpec &spec = aconfig[i];
                 ptree child;
-                child.put("Winner", ctest.cands[spec.winner].id);
-                child.put("Loser", ctest.cands[spec.loser].id);
+                child.put("winner", ctest.cands[spec.winner].id);
+                child.put("loser", ctest.cands[spec.loser].id);
                 ptree aelim;
                 for(int j = 0; j < spec.eliminated.size(); ++j){
                     ptree c;
                     c.put("", ctest.cands[spec.eliminated[j]].id);
                     aelim.push_back(std::make_pair("", c));
                 }
-                child.add_child("Already-Eliminated", aelim);
+                child.add_child("already_eliminated", aelim);
                 if(spec.wonly)
                     child.put("assertion_type", "WINNER_ONLY");
                 else
@@ -261,19 +261,19 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
                     }    
                     ss << "]";
                 }
-                child.put("Explanation", ss.str());
+                child.put("explanation", ss.str());
                 caudit_children.push_back(std::make_pair("", child));
                 maxasn = max(maxasn, spec.asn);
             }
-            caudit.put("Contest", ctest.id);
-            caudit.put("Winner", ctest.cands[ctest.winner].id);
+            caudit.put("contest", ctest.id);
+            caudit.put("winner", ctest.cands[ctest.winner].id);
             ptree elim;
             for(int j = 0; j < ctest.outcome.size()-1; ++j){
                 ptree c;
                 c.put("", ctest.cands[ctest.outcome[j]].id);
                 elim.push_back(std::make_pair("", c));
             }
-            caudit.add_child("Eliminated", elim);
+            caudit.add_child("eliminated", elim);
 
             int maxasn_ballots = ceil(params.tot_auditable_ballots*maxasn);
             int maxasn_percent = ceil(maxasn*100);
@@ -281,7 +281,7 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
             caudit.put("Expected Polls (#)", maxasn_ballots);
             caudit.put("Expected Polls (%)", maxasn_percent);
 
-            caudit.add_child("Assertions", caudit_children);
+            caudit.add_child("assertions", caudit_children);
             overall_maxasn = max(overall_maxasn, maxasn_ballots);
             
             children.push_back(std::make_pair("", caudit));
@@ -292,12 +292,12 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
                 params.tot_auditable_ballots);
 
             ptree parameters;
-            parameters.put("Risk Limit", params.risk_limit);
-            parameters.put("Lambda", params.lambda);
-            parameters.put("Gamma", params.gamma);
-            pt.add_child("Parameters", parameters);
+            parameters.put("risk_limit", params.risk_limit);
+            parameters.put("lambda", params.lambda);
+            parameters.put("gamma", params.gamma);
+            pt.add_child("parameters", parameters);
 
-            pt.add_child("Audits", children);
+            pt.add_child("audits", children);
         }
         write_json(json_file, pt);
     }

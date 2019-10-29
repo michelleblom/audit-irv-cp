@@ -1,16 +1,16 @@
 {
     "Overall Expected Polls (#)": "404",
     "Ballots involved in audit (#)": "122268",
-    "Parameters": {
-        "Risk Limit": "0.050000000000000003",
-        "Lambda": "0.01",
-        "Gamma": "1.1000000000000001"
+    "parameters": {
+        "risk_limit": "0.050000000000000003",
+        "lambda": "0.01",
+        "gamma": "1.1000000000000001"
     },
-    "Audits": [
+    "audits": [
         {
-            "Contest": "1",
-            "Winner": "408",
-            "Eliminated": [
+            "contest": "1",
+            "winner": "408",
+            "eliminated": [
                 "76",
                 "411",
                 "406",
@@ -21,18 +21,18 @@
             ],
             "Expected Polls (#)": "189",
             "Expected Polls (%)": "1",
-            "Assertions": [
+            "assertions": [
                 {
-                    "Winner": "408",
-                    "Loser": "407",
-                    "Already-Eliminated": "",
+                    "winner": "408",
+                    "loser": "407",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 408 is eliminated before 407"
+                    "explanation": "Rules out case where 408 is eliminated before 407"
                 },
                 {
-                    "Winner": "408",
-                    "Loser": "405",
-                    "Already-Eliminated": [
+                    "winner": "408",
+                    "loser": "405",
+                    "already_eliminated": [
                         "76",
                         "406",
                         "407",
@@ -41,86 +41,86 @@
                         "411"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "Explanation": "Rules out outcomes with tail [... 408 405]"
+                    "explanation": "Rules out outcomes with tail [... 408 405]"
                 },
                 {
-                    "Winner": "408",
-                    "Loser": "410",
-                    "Already-Eliminated": "",
+                    "winner": "408",
+                    "loser": "410",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 408 is eliminated before 410"
+                    "explanation": "Rules out case where 408 is eliminated before 410"
                 },
                 {
-                    "Winner": "408",
-                    "Loser": "409",
-                    "Already-Eliminated": "",
+                    "winner": "408",
+                    "loser": "409",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 408 is eliminated before 409"
+                    "explanation": "Rules out case where 408 is eliminated before 409"
                 },
                 {
-                    "Winner": "408",
-                    "Loser": "406",
-                    "Already-Eliminated": "",
+                    "winner": "408",
+                    "loser": "406",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 408 is eliminated before 406"
+                    "explanation": "Rules out case where 408 is eliminated before 406"
                 },
                 {
-                    "Winner": "408",
-                    "Loser": "411",
-                    "Already-Eliminated": "",
+                    "winner": "408",
+                    "loser": "411",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 408 is eliminated before 411"
+                    "explanation": "Rules out case where 408 is eliminated before 411"
                 },
                 {
-                    "Winner": "408",
-                    "Loser": "76",
-                    "Already-Eliminated": "",
+                    "winner": "408",
+                    "loser": "76",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 408 is eliminated before 76"
+                    "explanation": "Rules out case where 408 is eliminated before 76"
                 }
             ]
         },
         {
-            "Contest": "2",
-            "Winner": "412",
-            "Eliminated": [
+            "contest": "2",
+            "winner": "412",
+            "eliminated": [
                 "75",
                 "413",
                 "414"
             ],
             "Expected Polls (#)": "159",
             "Expected Polls (%)": "1",
-            "Assertions": [
+            "assertions": [
                 {
-                    "Winner": "412",
-                    "Loser": "413",
-                    "Already-Eliminated": "",
+                    "winner": "412",
+                    "loser": "413",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 412 is eliminated before 413"
+                    "explanation": "Rules out case where 412 is eliminated before 413"
                 },
                 {
-                    "Winner": "412",
-                    "Loser": "414",
-                    "Already-Eliminated": [
+                    "winner": "412",
+                    "loser": "414",
+                    "already_eliminated": [
                         "75",
                         "413"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "Explanation": "Rules out outcomes with tail [... 412 414]"
+                    "explanation": "Rules out outcomes with tail [... 412 414]"
                 },
                 {
-                    "Winner": "412",
-                    "Loser": "75",
-                    "Already-Eliminated": "",
+                    "winner": "412",
+                    "loser": "75",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 412 is eliminated before 75"
+                    "explanation": "Rules out case where 412 is eliminated before 75"
                 }
             ]
         },
         {
-            "Contest": "3",
-            "Winner": "397",
-            "Eliminated": [
+            "contest": "3",
+            "winner": "397",
+            "eliminated": [
                 "87",
                 "398",
                 "401",
@@ -134,11 +134,11 @@
             ],
             "Expected Polls (#)": "404",
             "Expected Polls (%)": "1",
-            "Assertions": [
+            "assertions": [
                 {
-                    "Winner": "397",
-                    "Loser": "393",
-                    "Already-Eliminated": [
+                    "winner": "397",
+                    "loser": "393",
+                    "already_eliminated": [
                         "394",
                         "395",
                         "396",
@@ -150,12 +150,12 @@
                         "87"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "Explanation": "Rules out outcomes with tail [... 397 393]"
+                    "explanation": "Rules out outcomes with tail [... 397 393]"
                 },
                 {
-                    "Winner": "397",
-                    "Loser": "402",
-                    "Already-Eliminated": [
+                    "winner": "397",
+                    "loser": "402",
+                    "already_eliminated": [
                         "394",
                         "395",
                         "396",
@@ -166,12 +166,12 @@
                         "87"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "Explanation": "Rules out outcomes with tail [... 397 402 393]"
+                    "explanation": "Rules out outcomes with tail [... 397 402 393]"
                 },
                 {
-                    "Winner": "393",
-                    "Loser": "402",
-                    "Already-Eliminated": [
+                    "winner": "393",
+                    "loser": "402",
+                    "already_eliminated": [
                         "394",
                         "395",
                         "396",
@@ -183,19 +183,19 @@
                         "87"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "Explanation": "Rules out outcomes with tail [... 393 402]"
+                    "explanation": "Rules out outcomes with tail [... 393 402]"
                 },
                 {
-                    "Winner": "393",
-                    "Loser": "399",
-                    "Already-Eliminated": "",
+                    "winner": "393",
+                    "loser": "399",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 393 is eliminated before 399"
+                    "explanation": "Rules out case where 393 is eliminated before 399"
                 },
                 {
-                    "Winner": "397",
-                    "Loser": "402",
-                    "Already-Eliminated": [
+                    "winner": "397",
+                    "loser": "402",
+                    "already_eliminated": [
                         "393",
                         "394",
                         "395",
@@ -207,12 +207,12 @@
                         "87"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "Explanation": "Rules out outcomes with tail [... 397 402]"
+                    "explanation": "Rules out outcomes with tail [... 397 402]"
                 },
                 {
-                    "Winner": "397",
-                    "Loser": "399",
-                    "Already-Eliminated": [
+                    "winner": "397",
+                    "loser": "399",
+                    "already_eliminated": [
                         "394",
                         "395",
                         "396",
@@ -222,19 +222,19 @@
                         "87"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "Explanation": "Rules out outcomes with tail [... 397 399 402 393]"
+                    "explanation": "Rules out outcomes with tail [... 397 399 402 393]"
                 },
                 {
-                    "Winner": "397",
-                    "Loser": "400",
-                    "Already-Eliminated": "",
+                    "winner": "397",
+                    "loser": "400",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 397 is eliminated before 400"
+                    "explanation": "Rules out case where 397 is eliminated before 400"
                 },
                 {
-                    "Winner": "402",
-                    "Loser": "399",
-                    "Already-Eliminated": [
+                    "winner": "402",
+                    "loser": "399",
+                    "already_eliminated": [
                         "394",
                         "395",
                         "396",
@@ -245,19 +245,19 @@
                         "87"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "Explanation": "Rules out outcomes with tail [... 402 399 393]"
+                    "explanation": "Rules out outcomes with tail [... 402 399 393]"
                 },
                 {
-                    "Winner": "397",
-                    "Loser": "394",
-                    "Already-Eliminated": "",
+                    "winner": "397",
+                    "loser": "394",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 397 is eliminated before 394"
+                    "explanation": "Rules out case where 397 is eliminated before 394"
                 },
                 {
-                    "Winner": "397",
-                    "Loser": "399",
-                    "Already-Eliminated": [
+                    "winner": "397",
+                    "loser": "399",
+                    "already_eliminated": [
                         "394",
                         "395",
                         "396",
@@ -268,91 +268,91 @@
                         "87"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "Explanation": "Rules out outcomes with tail [... 397 399 393]"
+                    "explanation": "Rules out outcomes with tail [... 397 399 393]"
                 },
                 {
-                    "Winner": "397",
-                    "Loser": "401",
-                    "Already-Eliminated": "",
+                    "winner": "397",
+                    "loser": "401",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 397 is eliminated before 401"
+                    "explanation": "Rules out case where 397 is eliminated before 401"
                 },
                 {
-                    "Winner": "397",
-                    "Loser": "396",
-                    "Already-Eliminated": "",
+                    "winner": "397",
+                    "loser": "396",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 397 is eliminated before 396"
+                    "explanation": "Rules out case where 397 is eliminated before 396"
                 },
                 {
-                    "Winner": "397",
-                    "Loser": "395",
-                    "Already-Eliminated": "",
+                    "winner": "397",
+                    "loser": "395",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 397 is eliminated before 395"
+                    "explanation": "Rules out case where 397 is eliminated before 395"
                 },
                 {
-                    "Winner": "397",
-                    "Loser": "398",
-                    "Already-Eliminated": "",
+                    "winner": "397",
+                    "loser": "398",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 397 is eliminated before 398"
+                    "explanation": "Rules out case where 397 is eliminated before 398"
                 },
                 {
-                    "Winner": "397",
-                    "Loser": "87",
-                    "Already-Eliminated": "",
+                    "winner": "397",
+                    "loser": "87",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 397 is eliminated before 87"
+                    "explanation": "Rules out case where 397 is eliminated before 87"
                 },
                 {
-                    "Winner": "393",
-                    "Loser": "400",
-                    "Already-Eliminated": "",
+                    "winner": "393",
+                    "loser": "400",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 393 is eliminated before 400"
+                    "explanation": "Rules out case where 393 is eliminated before 400"
                 },
                 {
-                    "Winner": "393",
-                    "Loser": "394",
-                    "Already-Eliminated": "",
+                    "winner": "393",
+                    "loser": "394",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 393 is eliminated before 394"
+                    "explanation": "Rules out case where 393 is eliminated before 394"
                 },
                 {
-                    "Winner": "393",
-                    "Loser": "396",
-                    "Already-Eliminated": "",
+                    "winner": "393",
+                    "loser": "396",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 393 is eliminated before 396"
+                    "explanation": "Rules out case where 393 is eliminated before 396"
                 },
                 {
-                    "Winner": "393",
-                    "Loser": "401",
-                    "Already-Eliminated": "",
+                    "winner": "393",
+                    "loser": "401",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 393 is eliminated before 401"
+                    "explanation": "Rules out case where 393 is eliminated before 401"
                 },
                 {
-                    "Winner": "393",
-                    "Loser": "395",
-                    "Already-Eliminated": "",
+                    "winner": "393",
+                    "loser": "395",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 393 is eliminated before 395"
+                    "explanation": "Rules out case where 393 is eliminated before 395"
                 },
                 {
-                    "Winner": "393",
-                    "Loser": "398",
-                    "Already-Eliminated": "",
+                    "winner": "393",
+                    "loser": "398",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 393 is eliminated before 398"
+                    "explanation": "Rules out case where 393 is eliminated before 398"
                 },
                 {
-                    "Winner": "393",
-                    "Loser": "87",
-                    "Already-Eliminated": "",
+                    "winner": "393",
+                    "loser": "87",
+                    "already_eliminated": "",
                     "assertion_type": "WINNER_ONLY",
-                    "Explanation": "Rules out case where 393 is eliminated before 87"
+                    "explanation": "Rules out case where 393 is eliminated before 87"
                 }
             ]
         }
