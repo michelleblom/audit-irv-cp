@@ -43,6 +43,12 @@ A concrete example you can run:
 In the folder SampleOutputs, I have run the above on each of the USIRV
 'reported' ballot data files in USIRV and placed the resulting JSON output. 
  
+A concrete example for the 2019 San Francisco preliminary results is:
+./irvaudit -rep_ballots USIRV/SFDA_2019_Nov8Partial.raire -r 0.05 -agap 0.005 -alglog -simlog -json SFDA_2019_Nov8Partial.json
+
+which should match the equivalent file in USIRV. 
+
+ 
 Note that:
 
 -- Add the flag -contests N C1 C2 C3 ... to the run command to select which
