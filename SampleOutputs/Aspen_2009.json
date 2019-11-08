@@ -1,10 +1,8 @@
 {
-    "Overall Expected Polls (#)": "244",
+    "Overall Expected Polls (#)": "37",
     "Ballots involved in audit (#)": "2544",
     "parameters": {
-        "risk_limit": "0.050000000000000003",
-        "lambda": "0.01",
-        "gamma": "1.1000000000000001"
+        "risk_limit": "0.050000000000000003"
     },
     "audits": [
         {
@@ -22,8 +20,8 @@
                 "3",
                 "2"
             ],
-            "Expected Polls (#)": "244",
-            "Expected Polls (%)": "10",
+            "Expected Polls (#)": "37",
+            "Expected Polls (%)": "2",
             "assertions": [
                 {
                     "winner": "8",
@@ -135,6 +133,23 @@
                     "explanation": "Rules out outcomes with tail [... 4 3 5]"
                 },
                 {
+                    "winner": "8",
+                    "loser": "4",
+                    "already_eliminated": [
+                        "1",
+                        "2",
+                        "3",
+                        "5",
+                        "6",
+                        "7",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 4]"
+                },
+                {
                     "winner": "5",
                     "loser": "3",
                     "already_eliminated": [
@@ -168,23 +183,6 @@
                 },
                 {
                     "winner": "8",
-                    "loser": "4",
-                    "already_eliminated": [
-                        "1",
-                        "2",
-                        "3",
-                        "5",
-                        "6",
-                        "7",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 4]"
-                },
-                {
-                    "winner": "8",
                     "loser": "3",
                     "already_eliminated": [
                         "1",
@@ -197,21 +195,6 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 8 5 2 3]"
-                },
-                {
-                    "winner": "2",
-                    "loser": "1",
-                    "already_eliminated": [
-                        "5",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 2 1 3 4]"
                 },
                 {
                     "winner": "3",
@@ -244,6 +227,21 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 8 4 2 3]"
+                },
+                {
+                    "winner": "2",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 2 1 3 4]"
                 },
                 {
                     "winner": "5",
@@ -282,6 +280,21 @@
                     "explanation": "Rules out outcomes with tail [... 4 1 2 5]"
                 },
                 {
+                    "winner": "5",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "3",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 5 1 2 4]"
+                },
+                {
                     "winner": "3",
                     "loser": "2",
                     "already_eliminated": [
@@ -301,28 +314,6 @@
                     "winner": "5",
                     "loser": "1",
                     "already_eliminated": [
-                        "3",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 1 2 4]"
-                },
-                {
-                    "winner": "8",
-                    "loser": "9",
-                    "already_eliminated": "",
-                    "assertion_type": "WINNER_ONLY",
-                    "explanation": "Rules out case where 8 is eliminated before 9"
-                },
-                {
-                    "winner": "5",
-                    "loser": "1",
-                    "already_eliminated": [
                         "4",
                         "6",
                         "7",
@@ -333,37 +324,6 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 5 1 2 3]"
-                },
-                {
-                    "winner": "8",
-                    "loser": "3",
-                    "already_eliminated": [
-                        "1",
-                        "4",
-                        "5",
-                        "6",
-                        "7",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 2 3]"
-                },
-                {
-                    "winner": "4",
-                    "loser": "1",
-                    "already_eliminated": [
-                        "5",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 4 1 2 3]"
                 },
                 {
                     "winner": "3",
@@ -399,6 +359,44 @@
                     "explanation": "Rules out outcomes with tail [... 2 1 5]"
                 },
                 {
+                    "winner": "4",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 4 1 2 3]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "9",
+                    "already_eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "explanation": "Rules out case where 8 is eliminated before 9"
+                },
+                {
+                    "winner": "8",
+                    "loser": "3",
+                    "already_eliminated": [
+                        "1",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 2 3]"
+                },
+                {
                     "winner": "8",
                     "loser": "3",
                     "already_eliminated": [
@@ -432,22 +430,6 @@
                     "explanation": "Rules out outcomes with tail [... 5 2]"
                 },
                 {
-                    "winner": "5",
-                    "loser": "2",
-                    "already_eliminated": [
-                        "1",
-                        "3",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 2 4]"
-                },
-                {
                     "winner": "8",
                     "loser": "3",
                     "already_eliminated": [
@@ -464,11 +446,11 @@
                     "explanation": "Rules out outcomes with tail [... 8 3 5]"
                 },
                 {
-                    "winner": "3",
-                    "loser": "1",
+                    "winner": "5",
+                    "loser": "2",
                     "already_eliminated": [
-                        "2",
-                        "4",
+                        "1",
+                        "3",
                         "6",
                         "7",
                         "8",
@@ -477,7 +459,7 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 3 1 5]"
+                    "explanation": "Rules out outcomes with tail [... 5 2 4]"
                 },
                 {
                     "winner": "8",
@@ -513,6 +495,21 @@
                     "explanation": "Rules out outcomes with tail [... 4 3]"
                 },
                 {
+                    "winner": "5",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "2",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 5 1 3 4]"
+                },
+                {
                     "winner": "4",
                     "loser": "1",
                     "already_eliminated": [
@@ -543,10 +540,11 @@
                     "explanation": "Rules out outcomes with tail [... 3 1 4]"
                 },
                 {
-                    "winner": "5",
+                    "winner": "3",
                     "loser": "1",
                     "already_eliminated": [
                         "2",
+                        "4",
                         "6",
                         "7",
                         "8",
@@ -555,12 +553,14 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 1 3 4]"
+                    "explanation": "Rules out outcomes with tail [... 3 1 5]"
                 },
                 {
-                    "winner": "2",
+                    "winner": "5",
                     "loser": "1",
                     "already_eliminated": [
+                        "3",
+                        "4",
                         "6",
                         "7",
                         "8",
@@ -569,7 +569,7 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 2 1 3 4 5]"
+                    "explanation": "Rules out outcomes with tail [... 5 1 2]"
                 },
                 {
                     "winner": "5",
@@ -586,6 +586,20 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 5 1 4]"
+                },
+                {
+                    "winner": "2",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 2 1 3 4 5]"
                 },
                 {
                     "winner": "4",
@@ -620,22 +634,6 @@
                     "explanation": "Rules out outcomes with tail [... 2 1 3]"
                 },
                 {
-                    "winner": "5",
-                    "loser": "1",
-                    "already_eliminated": [
-                        "3",
-                        "4",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 1 2]"
-                },
-                {
                     "winner": "3",
                     "loser": "1",
                     "already_eliminated": [
@@ -649,22 +647,6 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 3 1 4 5]"
-                },
-                {
-                    "winner": "5",
-                    "loser": "1",
-                    "already_eliminated": [
-                        "2",
-                        "4",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 1 3]"
                 },
                 {
                     "winner": "1",
@@ -684,6 +666,36 @@
                     "loser": "1",
                     "already_eliminated": [
                         "2",
+                        "6",
+                        "7",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 1 3 4 5]"
+                },
+                {
+                    "winner": "5",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "2",
+                        "4",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 5 1 3]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "2",
                         "5",
                         "6",
                         "7",
@@ -696,9 +708,10 @@
                 },
                 {
                     "winner": "8",
-                    "loser": "1",
+                    "loser": "5",
                     "already_eliminated": [
-                        "2",
+                        "1",
+                        "3",
                         "6",
                         "7",
                         "9",
@@ -706,15 +719,14 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 1 3 4 5]"
+                    "explanation": "Rules out outcomes with tail [... 8 2 5 4]"
                 },
                 {
                     "winner": "8",
-                    "loser": "1",
+                    "loser": "4",
                     "already_eliminated": [
-                        "2",
-                        "4",
-                        "5",
+                        "1",
+                        "3",
                         "6",
                         "7",
                         "9",
@@ -722,7 +734,21 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 1 3]"
+                    "explanation": "Rules out outcomes with tail [... 8 4 2 5]"
+                },
+                {
+                    "winner": "3",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 3 1 4 2 5]"
                 },
                 {
                     "winner": "8",
@@ -744,20 +770,6 @@
                     "winner": "1",
                     "loser": "7",
                     "already_eliminated": [
-                        "4",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 1 7 5 2 3]"
-                },
-                {
-                    "winner": "1",
-                    "loser": "7",
-                    "already_eliminated": [
                         "5",
                         "6",
                         "8",
@@ -767,6 +779,22 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 1 7 4 2 3]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "2",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 1 3]"
                 },
                 {
                     "winner": "1",
@@ -784,18 +812,18 @@
                     "explanation": "Rules out outcomes with tail [... 1 7 2 3]"
                 },
                 {
-                    "winner": "3",
-                    "loser": "1",
+                    "winner": "1",
+                    "loser": "7",
                     "already_eliminated": [
+                        "4",
                         "6",
-                        "7",
                         "8",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 3 1 4 2 5]"
+                    "explanation": "Rules out outcomes with tail [... 1 7 5 2 3]"
                 },
                 {
                     "winner": "8",
@@ -813,26 +841,9 @@
                     "explanation": "Rules out outcomes with tail [... 8 1 3 5]"
                 },
                 {
-                    "winner": "8",
-                    "loser": "4",
-                    "already_eliminated": [
-                        "1",
-                        "3",
-                        "6",
-                        "7",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 4 2 5]"
-                },
-                {
-                    "winner": "4",
+                    "winner": "3",
                     "loser": "1",
                     "already_eliminated": [
-                        "2",
-                        "3",
                         "5",
                         "6",
                         "7",
@@ -842,7 +853,23 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 4 1]"
+                    "explanation": "Rules out outcomes with tail [... 3 1 2 4]"
+                },
+                {
+                    "winner": "4",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 4 1 5]"
                 },
                 {
                     "winner": "8",
@@ -865,59 +892,15 @@
                     "winner": "8",
                     "loser": "1",
                     "already_eliminated": [
-                        "6",
-                        "7",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 1 2 3 4 5]"
-                },
-                {
-                    "winner": "2",
-                    "loser": "1",
-                    "already_eliminated": [
-                        "4",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 2 1 3 5]"
-                },
-                {
-                    "winner": "3",
-                    "loser": "1",
-                    "already_eliminated": [
-                        "4",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 3 1 2 5]"
-                },
-                {
-                    "winner": "3",
-                    "loser": "1",
-                    "already_eliminated": [
                         "5",
                         "6",
                         "7",
-                        "8",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 3 1 2 4]"
+                    "explanation": "Rules out outcomes with tail [... 8 1 4 2 3]"
                 },
                 {
                     "winner": "5",
@@ -937,22 +920,6 @@
                     "explanation": "Rules out outcomes with tail [... 5 1]"
                 },
                 {
-                    "winner": "4",
-                    "loser": "1",
-                    "already_eliminated": [
-                        "2",
-                        "3",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 4 1 5]"
-                },
-                {
                     "winner": "1",
                     "loser": "7",
                     "already_eliminated": [
@@ -970,7 +937,6 @@
                     "winner": "8",
                     "loser": "1",
                     "already_eliminated": [
-                        "5",
                         "6",
                         "7",
                         "9",
@@ -978,50 +944,54 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 1 4 2 3]"
+                    "explanation": "Rules out outcomes with tail [... 8 1 2 3 4 5]"
                 },
                 {
-                    "winner": "1",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "3",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 1 7 4 2 5]"
-                },
-                {
-                    "winner": "8",
+                    "winner": "3",
                     "loser": "1",
                     "already_eliminated": [
                         "4",
                         "6",
                         "7",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 1 5 2 3]"
-                },
-                {
-                    "winner": "2",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "3",
-                        "5",
-                        "6",
                         "8",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 2 7 1 4]"
+                    "explanation": "Rules out outcomes with tail [... 3 1 2 5]"
+                },
+                {
+                    "winner": "2",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "4",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 2 1 3 5]"
+                },
+                {
+                    "winner": "4",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 4 1]"
                 },
                 {
                     "winner": "2",
@@ -1040,26 +1010,25 @@
                     "explanation": "Rules out outcomes with tail [... 2 7 4]"
                 },
                 {
-                    "winner": "4",
-                    "loser": "1",
+                    "winner": "2",
+                    "loser": "7",
                     "already_eliminated": [
-                        "2",
+                        "3",
+                        "5",
                         "6",
-                        "7",
                         "8",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 4 1 3 5]"
+                    "explanation": "Rules out outcomes with tail [... 2 7 1 4]"
                 },
                 {
                     "winner": "1",
                     "loser": "7",
                     "already_eliminated": [
                         "3",
-                        "4",
                         "6",
                         "8",
                         "9",
@@ -1067,7 +1036,7 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 1 7 2 5]"
+                    "explanation": "Rules out outcomes with tail [... 1 7 4 2 5]"
                 },
                 {
                     "winner": "4",
@@ -1090,6 +1059,145 @@
                     "loser": "7",
                     "already_eliminated": [
                         "3",
+                        "4",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 1 7 2 5]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "4",
+                        "6",
+                        "7",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 1 5 2 3]"
+                },
+                {
+                    "winner": "4",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "2",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 4 1 3 5]"
+                },
+                {
+                    "winner": "3",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 3 1 2]"
+                },
+                {
+                    "winner": "1",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 1 7 4 5]"
+                },
+                {
+                    "winner": "1",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "4",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 1 7 3 5]"
+                },
+                {
+                    "winner": "2",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 2 7]"
+                },
+                {
+                    "winner": "4",
+                    "loser": "2",
+                    "already_eliminated": [
+                        "1",
+                        "3",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 4 2]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 1 2 3]"
+                },
+                {
+                    "winner": "1",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "3",
                         "5",
                         "6",
                         "8",
@@ -1099,6 +1207,19 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 1 7 2 4]"
+                },
+                {
+                    "winner": "5",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 5 7 1 4 2 3]"
                 },
                 {
                     "winner": "1",
@@ -1132,147 +1253,6 @@
                     "explanation": "Rules out outcomes with tail [... 1 7 2]"
                 },
                 {
-                    "winner": "8",
-                    "loser": "1",
-                    "already_eliminated": [
-                        "4",
-                        "5",
-                        "6",
-                        "7",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 1 2 3]"
-                },
-                {
-                    "winner": "1",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "2",
-                        "4",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 1 7 3 5]"
-                },
-                {
-                    "winner": "3",
-                    "loser": "1",
-                    "already_eliminated": [
-                        "4",
-                        "5",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 3 1 2]"
-                },
-                {
-                    "winner": "5",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 7 1 4 2 3]"
-                },
-                {
-                    "winner": "2",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "3",
-                        "4",
-                        "5",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 2 7]"
-                },
-                {
-                    "winner": "1",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "2",
-                        "3",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 1 7 4 5]"
-                },
-                {
-                    "winner": "4",
-                    "loser": "2",
-                    "already_eliminated": [
-                        "1",
-                        "3",
-                        "5",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 4 2]"
-                },
-                {
-                    "winner": "8",
-                    "loser": "2",
-                    "already_eliminated": [
-                        "1",
-                        "3",
-                        "5",
-                        "6",
-                        "7",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 2 4]"
-                },
-                {
-                    "winner": "8",
-                    "loser": "2",
-                    "already_eliminated": [
-                        "1",
-                        "3",
-                        "4",
-                        "5",
-                        "6",
-                        "7",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 2]"
-                },
-                {
                     "winner": "2",
                     "loser": "7",
                     "already_eliminated": [
@@ -1285,6 +1265,21 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 2 7 1 4 5]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "6",
+                        "7",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 1 4 5]"
                 },
                 {
                     "winner": "2",
@@ -1303,35 +1298,6 @@
                     "explanation": "Rules out outcomes with tail [... 2 7 1]"
                 },
                 {
-                    "winner": "4",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "5",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 4 7 1 2 3]"
-                },
-                {
-                    "winner": "8",
-                    "loser": "1",
-                    "already_eliminated": [
-                        "2",
-                        "3",
-                        "6",
-                        "7",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 1 4 5]"
-                },
-                {
                     "winner": "5",
                     "loser": "7",
                     "already_eliminated": [
@@ -1344,6 +1310,20 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 5 7 1 2 3]"
+                },
+                {
+                    "winner": "4",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "5",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 4 7 1 2 3]"
                 },
                 {
                     "winner": "4",
@@ -1375,6 +1355,22 @@
                     "explanation": "Rules out outcomes with tail [... 1 7 3]"
                 },
                 {
+                    "winner": "8",
+                    "loser": "2",
+                    "already_eliminated": [
+                        "1",
+                        "3",
+                        "5",
+                        "6",
+                        "7",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 2 4]"
+                },
+                {
                     "winner": "2",
                     "loser": "7",
                     "already_eliminated": [
@@ -1390,9 +1386,12 @@
                 },
                 {
                     "winner": "8",
-                    "loser": "1",
+                    "loser": "2",
                     "already_eliminated": [
+                        "1",
                         "3",
+                        "4",
+                        "5",
                         "6",
                         "7",
                         "9",
@@ -1400,56 +1399,26 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 1 4 2 5]"
+                    "explanation": "Rules out outcomes with tail [... 8 2]"
                 },
                 {
-                    "winner": "5",
+                    "winner": "8",
                     "loser": "7",
                     "already_eliminated": [
-                        "3",
+                        "5",
                         "6",
-                        "8",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 7 1 2 4]"
+                    "explanation": "Rules out outcomes with tail [... 8 7 1 4 2 3]"
                 },
                 {
                     "winner": "2",
                     "loser": "7",
                     "already_eliminated": [
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 2 7 1 3 4 5]"
-                },
-                {
-                    "winner": "1",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "2",
-                        "3",
                         "4",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 1 7 5]"
-                },
-                {
-                    "winner": "4",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "3",
                         "5",
                         "6",
                         "8",
@@ -1458,19 +1427,49 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 4 7 1 2]"
+                    "explanation": "Rules out outcomes with tail [... 2 7 1 3]"
                 },
                 {
                     "winner": "8",
                     "loser": "7",
                     "already_eliminated": [
+                        "2",
+                        "4",
+                        "5",
                         "6",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 1 2 3 4 5]"
+                    "explanation": "Rules out outcomes with tail [... 8 7 1 3]"
+                },
+                {
+                    "winner": "5",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 5 7 4 2 3]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "4",
+                        "6",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 7 1 5 2 3]"
                 },
                 {
                     "winner": "8",
@@ -1487,6 +1486,35 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 8 1 4]"
+                },
+                {
+                    "winner": "5",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 5 7 1 3 4]"
+                },
+                {
+                    "winner": "2",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "5",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 2 7 3 4]"
                 },
                 {
                     "winner": "1",
@@ -1535,87 +1563,33 @@
                     "explanation": "Rules out outcomes with tail [... 4 7 1 2 5]"
                 },
                 {
-                    "winner": "5",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 7 4 2 3]"
-                },
-                {
-                    "winner": "4",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 4 7 5 2 3]"
-                },
-                {
                     "winner": "8",
-                    "loser": "7",
+                    "loser": "1",
                     "already_eliminated": [
-                        "2",
-                        "6",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 1 3 4 5]"
-                },
-                {
-                    "winner": "2",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
                         "3",
+                        "4",
                         "6",
-                        "8",
+                        "7",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 2 7 4 5]"
+                    "explanation": "Rules out outcomes with tail [... 8 1 2 5]"
                 },
                 {
                     "winner": "8",
                     "loser": "7",
                     "already_eliminated": [
-                        "5",
-                        "6",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 1 4 2 3]"
-                },
-                {
-                    "winner": "5",
-                    "loser": "7",
-                    "already_eliminated": [
                         "2",
+                        "4",
                         "6",
-                        "8",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 7 1 3 4]"
+                    "explanation": "Rules out outcomes with tail [... 8 7 1 3 5]"
                 },
                 {
                     "winner": "4",
@@ -1647,11 +1621,12 @@
                     "explanation": "Rules out outcomes with tail [... 8 7 1 3 4]"
                 },
                 {
-                    "winner": "2",
+                    "winner": "1",
                     "loser": "7",
                     "already_eliminated": [
+                        "2",
+                        "3",
                         "4",
-                        "5",
                         "6",
                         "8",
                         "9",
@@ -1659,35 +1634,7 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 2 7 1 3]"
-                },
-                {
-                    "winner": "8",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "4",
-                        "6",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 1 5 2 3]"
-                },
-                {
-                    "winner": "2",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "5",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 2 7 3 4]"
+                    "explanation": "Rules out outcomes with tail [... 1 7 5]"
                 },
                 {
                     "winner": "8",
@@ -1724,6 +1671,34 @@
                     "loser": "1",
                     "already_eliminated": [
                         "3",
+                        "6",
+                        "7",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 1 4 2 5]"
+                },
+                {
+                    "winner": "5",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "3",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 5 7 1 2 4]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "1",
+                    "already_eliminated": [
+                        "3",
                         "5",
                         "6",
                         "7",
@@ -1733,6 +1708,47 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 8 1 2 4]"
+                },
+                {
+                    "winner": "4",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 4 7 5 2 3]"
+                },
+                {
+                    "winner": "4",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "3",
+                        "5",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 4 7 1 2]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "6",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 7 1 2 3 4 5]"
                 },
                 {
                     "winner": "8",
@@ -1746,6 +1762,32 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 8 7 2 3 4 5]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "6",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 7 1 3 4 5]"
+                },
+                {
+                    "winner": "2",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 2 7 1 3 4 5]"
                 },
                 {
                     "winner": "2",
@@ -1762,48 +1804,47 @@
                     "explanation": "Rules out outcomes with tail [... 2 7 3 4 5]"
                 },
                 {
-                    "winner": "8",
+                    "winner": "2",
                     "loser": "7",
                     "already_eliminated": [
-                        "2",
-                        "4",
-                        "5",
-                        "6",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 1 3]"
-                },
-                {
-                    "winner": "8",
-                    "loser": "1",
-                    "already_eliminated": [
+                        "1",
                         "3",
-                        "4",
                         "6",
-                        "7",
+                        "8",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 1 2 5]"
+                    "explanation": "Rules out outcomes with tail [... 2 7 4 5]"
                 },
                 {
                     "winner": "8",
+                    "loser": "11",
+                    "already_eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "explanation": "Rules out case where 8 is eliminated before 11"
+                },
+                {
+                    "winner": "8",
+                    "loser": "10",
+                    "already_eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "explanation": "Rules out case where 8 is eliminated before 10"
+                },
+                {
+                    "winner": "3",
                     "loser": "7",
                     "already_eliminated": [
-                        "2",
-                        "4",
+                        "1",
                         "6",
+                        "8",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 1 3 5]"
+                    "explanation": "Rules out outcomes with tail [... 3 7 4 2 5]"
                 },
                 {
                     "winner": "3",
@@ -1838,277 +1879,6 @@
                     "winner": "3",
                     "loser": "7",
                     "already_eliminated": [
-                        "2",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 3 7 1 4 5]"
-                },
-                {
-                    "winner": "8",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "4",
-                        "5",
-                        "6",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 1 2 3]"
-                },
-                {
-                    "winner": "5",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "4",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 7 2 3]"
-                },
-                {
-                    "winner": "2",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "3",
-                        "4",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 2 7 1 5]"
-                },
-                {
-                    "winner": "4",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "3",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 4 7 2 5]"
-                },
-                {
-                    "winner": "8",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "2",
-                        "6",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 3 4 5]"
-                },
-                {
-                    "winner": "4",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "3",
-                        "5",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 4 7 2]"
-                },
-                {
-                    "winner": "3",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "2",
-                        "5",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 3 7 1 4]"
-                },
-                {
-                    "winner": "2",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "4",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 2 7 1 3 5]"
-                },
-                {
-                    "winner": "1",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "2",
-                        "3",
-                        "4",
-                        "5",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 1 7]"
-                },
-                {
-                    "winner": "8",
-                    "loser": "11",
-                    "already_eliminated": "",
-                    "assertion_type": "WINNER_ONLY",
-                    "explanation": "Rules out case where 8 is eliminated before 11"
-                },
-                {
-                    "winner": "8",
-                    "loser": "10",
-                    "already_eliminated": "",
-                    "assertion_type": "WINNER_ONLY",
-                    "explanation": "Rules out case where 8 is eliminated before 10"
-                },
-                {
-                    "winner": "2",
-                    "loser": "11",
-                    "already_eliminated": "",
-                    "assertion_type": "WINNER_ONLY",
-                    "explanation": "Rules out case where 2 is eliminated before 11"
-                },
-                {
-                    "winner": "8",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "5",
-                        "6",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 4 2 3]"
-                },
-                {
-                    "winner": "8",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "4",
-                        "6",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 5 2 3]"
-                },
-                {
-                    "winner": "5",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "2",
-                        "3",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 7 1 4]"
-                },
-                {
-                    "winner": "3",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "2",
-                        "4",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 3 7 1 5]"
-                },
-                {
-                    "winner": "3",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "4",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 3 7 1 2 5]"
-                },
-                {
-                    "winner": "3",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 3 7 4 2 5]"
-                },
-                {
-                    "winner": "5",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "2",
-                        "4",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 7 1 3]"
-                },
-                {
-                    "winner": "3",
-                    "loser": "7",
-                    "already_eliminated": [
                         "4",
                         "5",
                         "6",
@@ -2119,53 +1889,6 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 3 7 1 2]"
-                },
-                {
-                    "winner": "3",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "2",
-                        "4",
-                        "5",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 3 7 1]"
-                },
-                {
-                    "winner": "5",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "2",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 7 3 4]"
-                },
-                {
-                    "winner": "2",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "3",
-                        "4",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 2 7 5]"
                 },
                 {
                     "winner": "8",
@@ -2182,6 +1905,48 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 8 1 2]"
+                },
+                {
+                    "winner": "2",
+                    "loser": "11",
+                    "already_eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "explanation": "Rules out case where 2 is eliminated before 11"
+                },
+                {
+                    "winner": "2",
+                    "loser": "10",
+                    "already_eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "explanation": "Rules out case where 2 is eliminated before 10"
+                },
+                {
+                    "winner": "3",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 3 7 1 4 5]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "2",
+                        "6",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 7 3 4 5]"
                 },
                 {
                     "winner": "3",
@@ -2203,6 +1968,95 @@
                     "loser": "7",
                     "already_eliminated": [
                         "1",
+                        "5",
+                        "6",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 7 4 2 3]"
+                },
+                {
+                    "winner": "3",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "4",
+                        "5",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 3 7 1]"
+                },
+                {
+                    "winner": "4",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "3",
+                        "5",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 4 7 2]"
+                },
+                {
+                    "winner": "5",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "4",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 5 7 1 3]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "4",
+                        "5",
+                        "6",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 7 1 2 3]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "4",
+                        "6",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 7 5 2 3]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
                         "4",
                         "5",
                         "6",
@@ -2212,6 +2066,67 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 8 7 2 3]"
+                },
+                {
+                    "winner": "5",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "4",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 5 7 2 3]"
+                },
+                {
+                    "winner": "2",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "4",
+                        "5",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 2 7 3]"
+                },
+                {
+                    "winner": "5",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 5 7 1 4]"
+                },
+                {
+                    "winner": "3",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "5",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 3 7 1 4]"
                 },
                 {
                     "winner": "5",
@@ -2244,6 +2159,80 @@
                     "explanation": "Rules out outcomes with tail [... 8 7 3 4]"
                 },
                 {
+                    "winner": "5",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "2",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 5 7 3 4]"
+                },
+                {
+                    "winner": "3",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "4",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 3 7 1 5]"
+                },
+                {
+                    "winner": "2",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "3",
+                        "4",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 2 7 1 5]"
+                },
+                {
+                    "winner": "3",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "4",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 3 7 1 2 5]"
+                },
+                {
+                    "winner": "4",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "3",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 4 7 2 5]"
+                },
+                {
                     "winner": "4",
                     "loser": "7",
                     "already_eliminated": [
@@ -2256,6 +2245,20 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 4 7 1 3 5]"
+                },
+                {
+                    "winner": "2",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "4",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 2 7 1 3 5]"
                 },
                 {
                     "winner": "8",
@@ -2277,6 +2280,23 @@
                     "loser": "7",
                     "already_eliminated": [
                         "1",
+                        "3",
+                        "4",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 2 7 5]"
+                },
+                {
+                    "winner": "1",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "3",
                         "4",
                         "5",
                         "6",
@@ -2286,13 +2306,30 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 2 7 3]"
+                    "explanation": "Rules out outcomes with tail [... 1 7]"
                 },
                 {
                     "winner": "3",
                     "loser": "7",
                     "already_eliminated": [
                         "1",
+                        "4",
+                        "5",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 3 7 2]"
+                },
+                {
+                    "winner": "5",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "3",
                         "4",
                         "6",
                         "8",
@@ -2301,20 +2338,22 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 3 7 2 5]"
+                    "explanation": "Rules out outcomes with tail [... 5 7 2]"
                 },
                 {
-                    "winner": "8",
+                    "winner": "4",
                     "loser": "7",
                     "already_eliminated": [
-                        "3",
+                        "2",
+                        "5",
                         "6",
+                        "8",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 1 4 2 5]"
+                    "explanation": "Rules out outcomes with tail [... 4 7 1 3]"
                 },
                 {
                     "winner": "8",
@@ -2333,6 +2372,21 @@
                     "explanation": "Rules out outcomes with tail [... 8 7 3]"
                 },
                 {
+                    "winner": "8",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "5",
+                        "6",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 7 1 4]"
+                },
+                {
                     "winner": "3",
                     "loser": "7",
                     "already_eliminated": [
@@ -2348,11 +2402,12 @@
                     "explanation": "Rules out outcomes with tail [... 3 7 2 4]"
                 },
                 {
-                    "winner": "2",
+                    "winner": "5",
                     "loser": "7",
                     "already_eliminated": [
                         "1",
-                        "4",
+                        "2",
+                        "3",
                         "6",
                         "8",
                         "9",
@@ -2360,10 +2415,10 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 2 7 3 5]"
+                    "explanation": "Rules out outcomes with tail [... 5 7 4]"
                 },
                 {
-                    "winner": "3",
+                    "winner": "5",
                     "loser": "7",
                     "already_eliminated": [
                         "1",
@@ -2376,7 +2431,7 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 3 7 5]"
+                    "explanation": "Rules out outcomes with tail [... 5 7 3]"
                 },
                 {
                     "winner": "8",
@@ -2384,28 +2439,14 @@
                     "already_eliminated": [
                         "2",
                         "3",
+                        "4",
                         "6",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 1 4 5]"
-                },
-                {
-                    "winner": "4",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "2",
-                        "5",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 4 7 1 3]"
+                    "explanation": "Rules out outcomes with tail [... 8 7 1 5]"
                 },
                 {
                     "winner": "3",
@@ -2439,22 +2480,6 @@
                     "explanation": "Rules out outcomes with tail [... 4 7 1 5]"
                 },
                 {
-                    "winner": "5",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "2",
-                        "3",
-                        "4",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 7 1]"
-                },
-                {
                     "winner": "8",
                     "loser": "7",
                     "already_eliminated": [
@@ -2469,42 +2494,11 @@
                     "explanation": "Rules out outcomes with tail [... 8 7 1 2 5]"
                 },
                 {
-                    "winner": "8",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "3",
-                        "5",
-                        "6",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 1 2 4]"
-                },
-                {
-                    "winner": "5",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "3",
-                        "4",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 7 2]"
-                },
-                {
                     "winner": "3",
                     "loser": "7",
                     "already_eliminated": [
                         "1",
                         "4",
-                        "5",
                         "6",
                         "8",
                         "9",
@@ -2512,37 +2506,7 @@
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 3 7 2]"
-                },
-                {
-                    "winner": "8",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "2",
-                        "3",
-                        "5",
-                        "6",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 1 4]"
-                },
-                {
-                    "winner": "8",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "2",
-                        "3",
-                        "4",
-                        "6",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 1 5]"
+                    "explanation": "Rules out outcomes with tail [... 3 7 2 5]"
                 },
                 {
                     "winner": "4",
@@ -2558,6 +2522,37 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 4 7 3 5]"
+                },
+                {
+                    "winner": "2",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "4",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 2 7 3 5]"
+                },
+                {
+                    "winner": "3",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "2",
+                        "4",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 3 7 5]"
                 },
                 {
                     "winner": "3",
@@ -2580,6 +2575,19 @@
                     "winner": "8",
                     "loser": "7",
                     "already_eliminated": [
+                        "3",
+                        "6",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 7 1 4 2 5]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "7",
+                    "already_eliminated": [
                         "1",
                         "3",
                         "6",
@@ -2591,52 +2599,18 @@
                     "explanation": "Rules out outcomes with tail [... 8 7 4 2 5]"
                 },
                 {
-                    "winner": "4",
+                    "winner": "8",
                     "loser": "7",
                     "already_eliminated": [
-                        "2",
                         "3",
                         "5",
                         "6",
-                        "8",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 4 7 1]"
-                },
-                {
-                    "winner": "5",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "2",
-                        "4",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 7 3]"
-                },
-                {
-                    "winner": "5",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "2",
-                        "3",
-                        "6",
-                        "8",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 5 7 4]"
+                    "explanation": "Rules out outcomes with tail [... 8 7 1 2 4]"
                 },
                 {
                     "winner": "8",
@@ -2652,6 +2626,20 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 8 7 1 2]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "6",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 7 1 4 5]"
                 },
                 {
                     "winner": "8",
@@ -2685,19 +2673,52 @@
                     "explanation": "Rules out outcomes with tail [... 8 7 1]"
                 },
                 {
+                    "winner": "5",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "4",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 5 7 1]"
+                },
+                {
+                    "winner": "4",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "5",
+                        "6",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 4 7 1]"
+                },
+                {
                     "winner": "8",
                     "loser": "7",
                     "already_eliminated": [
                         "1",
                         "3",
                         "4",
+                        "5",
                         "6",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 2 5]"
+                    "explanation": "Rules out outcomes with tail [... 8 7 2]"
                 },
                 {
                     "winner": "4",
@@ -2731,20 +2752,35 @@
                     "explanation": "Rules out outcomes with tail [... 8 7 2 4]"
                 },
                 {
-                    "winner": "4",
+                    "winner": "8",
                     "loser": "7",
                     "already_eliminated": [
                         "1",
                         "2",
                         "3",
+                        "5",
                         "6",
-                        "8",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 4 7 5]"
+                    "explanation": "Rules out outcomes with tail [... 8 7 4]"
+                },
+                {
+                    "winner": "8",
+                    "loser": "7",
+                    "already_eliminated": [
+                        "1",
+                        "3",
+                        "4",
+                        "6",
+                        "9",
+                        "10",
+                        "11"
+                    ],
+                    "assertion_type": "IRV_ELIMINATION",
+                    "explanation": "Rules out outcomes with tail [... 8 7 2 5]"
                 },
                 {
                     "winner": "8",
@@ -2763,36 +2799,20 @@
                     "explanation": "Rules out outcomes with tail [... 8 7 5]"
                 },
                 {
-                    "winner": "8",
-                    "loser": "7",
-                    "already_eliminated": [
-                        "1",
-                        "3",
-                        "4",
-                        "5",
-                        "6",
-                        "9",
-                        "10",
-                        "11"
-                    ],
-                    "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 2]"
-                },
-                {
-                    "winner": "8",
+                    "winner": "4",
                     "loser": "7",
                     "already_eliminated": [
                         "1",
                         "2",
                         "3",
-                        "5",
                         "6",
+                        "8",
                         "9",
                         "10",
                         "11"
                     ],
                     "assertion_type": "IRV_ELIMINATION",
-                    "explanation": "Rules out outcomes with tail [... 8 7 4]"
+                    "explanation": "Rules out outcomes with tail [... 4 7 5]"
                 },
                 {
                     "winner": "8",
@@ -2856,8 +2876,8 @@
                 "2",
                 "1"
             ],
-            "Expected Polls (#)": "97",
-            "Expected Polls (%)": "4",
+            "Expected Polls (#)": "16",
+            "Expected Polls (%)": "1",
             "assertions": [
                 {
                     "winner": "4",
@@ -2895,6 +2915,13 @@
                     "explanation": "Rules out outcomes with tail [... 1 4 2]"
                 },
                 {
+                    "winner": "1",
+                    "loser": "5",
+                    "already_eliminated": "",
+                    "assertion_type": "WINNER_ONLY",
+                    "explanation": "Rules out case where 1 is eliminated before 5"
+                },
+                {
                     "winner": "4",
                     "loser": "2",
                     "already_eliminated": [
@@ -2903,13 +2930,6 @@
                     ],
                     "assertion_type": "IRV_ELIMINATION",
                     "explanation": "Rules out outcomes with tail [... 4 1 2]"
-                },
-                {
-                    "winner": "1",
-                    "loser": "5",
-                    "already_eliminated": "",
-                    "assertion_type": "WINNER_ONLY",
-                    "explanation": "Rules out case where 1 is eliminated before 5"
                 },
                 {
                     "winner": "4",

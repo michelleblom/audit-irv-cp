@@ -293,8 +293,8 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
 
             ptree parameters;
             parameters.put("risk_limit", params.risk_limit);
-            parameters.put("lambda", params.lambda);
-            parameters.put("gamma", params.gamma);
+            //parameters.put("lambda", params.lambda);
+            //parameters.put("gamma", params.gamma);
             pt.add_child("parameters", parameters);
 
             pt.add_child("audits", children);
@@ -524,8 +524,8 @@ double PerformDive(const Node &toexpand, const Candidates &cands,
  *                           initial simulation of election (on basis of 
  *                           reported ballots)
  *
- * -gamma VALUE          Gamma parameter (for comparison audit)
- * -lambda VALUE         Lambda parameter (for comparison audit)
+ * -gamma VALUE          Gamma parameter (for comparison audit) [DEPREC]
+ * -lambda VALUE         Lambda parameter (for comparison audit) [DEPREC]
  *
  * -agap VALUE           This program finds a set of facts that require the 
  *                           least number of anticipated ballot polls to audit
@@ -562,8 +562,8 @@ void PrintUsageInstructions(){
     cout << "Required Arguments" << endl;
     cout << "------------------" << endl;
     cout << "-rep_ballots FILE.raire  Reported ballots in RAIRE format"<<endl; 
-    cout << "-gamma GAMMA             Gamma parameter GAMMA >= 1" << endl;   
-    cout << "-lambda LAMBDA           Lambda parameter 0 < LAMBDA <= 1" << endl;
+//cout << "-gamma GAMMA             Gamma parameter GAMMA >= 1" << endl;   
+//cout << "-lambda LAMBDA           Lambda parameter 0 < LAMBDA <= 1" << endl;
     cout << "-r RISK_LIMIT            Risk Limit (e.g., 0.05 for 5%)" << endl;
     cout << "-json FILE               Generated audit will be recorded in "
         << "JSON format in FILE" << endl; 
@@ -597,8 +597,8 @@ int main(int argc, const char * argv[])
 		bool alglog = false;
 
         Parameters params;
-		params.gamma = 1.1;
-		params.lambda = 0;
+		params.gamma = 0; // DEPRECIATED
+		params.lambda = 0; // DEPRECIATED
 		params.risk_limit = 0.05;
 		params.tot_auditable_ballots = 0;
 
@@ -627,14 +627,14 @@ int main(int argc, const char * argv[])
 			else if(strcmp(argv[i], "-simlog") == 0){
 				simlog = true;
 			}
-			else if(strcmp(argv[i], "-gamma") == 0 && i < argc-1){
+			/*else if(strcmp(argv[i], "-gamma") == 0 && i < argc-1){
 				params.gamma = atof(argv[i+1]);
 				++i;
 			}
 			else if(strcmp(argv[i], "-lambda") == 0 && i < argc-1){
 				params.lambda = atof(argv[i+1]);
 				++i;
-			}
+			}*/
 			else if(strcmp(argv[i], "-agap") == 0 && i < argc-1){
 				allowed_gap = atof(argv[i+1]);
 				++i;

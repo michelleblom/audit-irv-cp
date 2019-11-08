@@ -62,12 +62,17 @@ double EstimateASN_WONLY(const Ballots &rep_ballots,
 	const double total_votes_present=params.tot_auditable_ballots; 
     // margin is the 'diluted margin'
 	const double margin=V/total_votes_present;
-	const double od2g=1.0/(2.0 * params.gamma);
-	const double row=-log(params.risk_limit)/(od2g+params.lambda*log(1-od2g));
+	
+    //const double od2g=1.0/(2.0 * params.gamma);
+	//const double row=-log(params.risk_limit)/(od2g+params.lambda*log(1-od2g));
 
     // Note: we are returning a proportion of the total number
     // of ballots involved in the audit (across all contests)
-	return ceil(row/margin)/total_votes_present;
+	//return ceil(row/margin)/total_votes_present;
+
+    // NOTE THIS HAS BEEN MODIFIED FOR PHILIP's SHARPER ESTIMATION SCHEME
+    // THAT DOES NOT USE LAMBDA/GAMMA PARAMETERS.
+    return ceil(1.0/margin)/total_votes_present;
 }
 
 double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand, 
@@ -111,13 +116,17 @@ double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand,
         // Note this is the diluted margin
 		const double margin = V/total_votes_present;
 
-		const double od2g = 1.0/(2 * params.gamma);
-		const double row = -log(params.risk_limit)/
-            (od2g+params.lambda*log(1-od2g));
+		//const double od2g = 1.0/(2 * params.gamma);
+		//const double row = -log(params.risk_limit)/
+        //    (od2g+params.lambda*log(1-od2g));
 
         // candasn is a proportion of the total number of ballots 
         //involved in the audit (across all contests)
-		const double candasn = ceil(row/margin)/total_votes_present;
+		//const double candasn = ceil(row/margin)/total_votes_present;
+    
+        // NOTE THIS HAS BEEN MODIFIED FOR PHILIP's SHARPER ESTIMATION SCHEME
+        // THAT DOES NOT USE LAMBDA/GAMMA PARAMETERS.
+        const double candasn = ceil(1.0/margin)/total_votes_present;
 
 		if(smallest == -1 || candasn < smallest){
 			best_audit.asn = candasn;
