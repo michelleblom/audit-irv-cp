@@ -13,14 +13,11 @@ How to use this tool for generating an audit configuration (in JSON format).
 1. Compile (if using Linux, you can probably use the provided Makefile,
 otherwise you will likely need to write a custom Makefile).
 
-2. To generate an audit with a risk limit of 5%, gamma = 1.1, lambda = 0.01, 
-run the command: 
+2. To generate an audit with a risk limit of 5%, run the command: 
 
-./irvaudit -rep_ballots REPORTED_BALLOT_FILE -r 0.05 -gamma 1.1 -lambda 0.01 
+./irvaudit -rep_ballots REPORTED_BALLOT_FILE -r 0.05  
     -agap 0.005 -alglog -simlog -json OUTPUT_AUDIT_SPEC.json
 
-The 'lambda' and 'gamma' parameters are associated with the current test
-statistic being used to compute risk/estimate audit effort (Kaplan-Markov).
 Note that the audit configuration produced can be used in an audit with any
 desired risk limit -- the audit will just involve more/less ballot polls than
 estimated by the software. The 'alglog' and 'simlog' parameters, if provided,
@@ -29,31 +26,24 @@ are not necessary, but useful.
 
 The 'agap' parameter controls the degree of 'suboptimality' you are willing to
 accept in your audit configuration. The software is designed to produce a
-series of assertions that, with the given parameters (risk limit, gamma,
-lambda), requires the least number of estimated ballot polls to audit.
-Depending on the election, the algorithm may take longer than you would like to
-find the optimal set of assertions (it also has to prove that these are
-optimal). With agap = 0.005, we are saying that the configuration found can be
-0.5% away from optimal, or require 0.5% more auditing effort than the 
-optimal audit. Increasing it should make audit generation quicker. The 
-default is 0.005, so you can leave off this flag if you want to keep it at
-this value. 
+series of assertions that, with the given parameters (risk limit), requires the
+least number of estimated ballot polls to audit.  Depending on the election,
+the algorithm may take longer than you would like to find the optimal set of
+assertions (it also has to prove that these are optimal). With agap = 0.005, we
+are saying that the configuration found can be 0.5% away from optimal, or
+require 0.5% more auditing effort than the optimal audit. Increasing it should
+make audit generation quicker. The default is 0.005, so you can leave off this
+flag if you want to keep it at this value. 
 
 A concrete example you can run:
 
-./irvaudit -rep_ballots USIRV/Aspen_2009.raire -r 0.05 -gamma 1.1 
-    -lambda 0.01 -agap 0.005 -alglog -simlog -json Aspen_2009.json
+./irvaudit -rep_ballots USIRV/Aspen_2009.raire -r 0.05  
+    -agap 0.005 -alglog -simlog -json Aspen_2009.json
 
 In the folder SampleOutputs, I have run the above on each of the USIRV
 'reported' ballot data files in USIRV and placed the resulting JSON output. 
  
 Note that:
-
--- We may change the test statistic being used, and in this instance 
-the gamma/lambda parameters could be replaced with something different.
-This is not a significant change to the way the tool works, it will
-just change how we estimate auditing effort for each assertion that
-needs to be checked.  
 
 -- Add the flag -contests N C1 C2 C3 ... to the run command to select which
 contests, mentioned in the input data, you want to generate audits for.
