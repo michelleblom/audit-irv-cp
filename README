@@ -1,3 +1,7 @@
+--------------------------------------------------------------------------------------
+!!NOTE!! If you are looking for RAIRE, you want to check out the branch: raire-branch
+--------------------------------------------------------------------------------------
+
 Find audit specification with the following command (taking NSW 2015 election as an example) to generate an audit specification given a 5% risk limit and a 1% chance of an error being injected into each ballot. You can find some data files for use with this code in NSW2015.tar.gz (also available on github). 
 
 We have adapted Philip Stark's comparison audits (for first past the post elections) to IRV. As we poll a single ballot at a time, we set the lambda parameter to 0. See Stark's paper "Super-Simple Simultaneous Single-Ballot Risk-Limiting Audits" for a description of how risk limiting comparison audits work and how to set the lambda parameter.
