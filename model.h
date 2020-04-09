@@ -57,14 +57,6 @@ void GetTime(struct mytimespec* t);
 void Split(const std::string &line, const boost::char_separator<char> &sep, 
     std::vector<std::string> &r);
 
-struct Config
-{
-	int ncandidates;
-	double totalvotes;
-	std::map<int,int> id2index;
-
-	Config() : ncandidates(0), totalvotes(0) {}
-};
 
 class STVException
 {
@@ -82,27 +74,12 @@ struct Candidate
 {
 	int id;
 	int index;
-	double sum_votes;
+	int total_votes;
 
 	Ints ballots;
 	Ints ballots_where_appear;
 
-	// For simulation
-	int sim_votes;
-	Ints sim_ballots;
-
-	int standing;
-
-	Candidate() : id(0), index(0), sum_votes(0), 
-		sim_votes(0), standing(1) {}
-
-	void Reset(){
-		standing = 1;
-		sim_votes = sum_votes;
-		sim_ballots.clear();
-		sim_ballots.insert(sim_ballots.end(), ballots.begin(), 
-			ballots.end());
-	}
+	Candidate() : id(0), index(0), total_votes(0) {}
 };
 
 typedef std::vector<Candidate> Candidates;
@@ -110,9 +87,6 @@ typedef std::vector<Candidate> Candidates;
 struct Ballot
 {
 	int tag;
-	// Number of votes present with this signature: Note in this 
-    // codebase votes = 1 as we are not grouping ballots together.
-	double votes; 
 	Ints prefs;
 };
 
@@ -123,21 +97,28 @@ typedef std::map<int,int> ID2IX;
 
 struct Contest{
     int id;
-    Config config;
     Candidates cands;
     Ballots rballots;
 
+	ID2IX id2index;
+
     int num_rballots;
+    int ncandidates;
+    int threshold;
 
-    Ints outcome;
-    int winner;
+    Ints eliminations;
+    Ints viable_order;
+    SInts winners;
 
-    Contest() : id(0), num_rballots(0), winner(-1) {}
+    Contest() : id(0), num_rballots(0), ncandidates(0) {}
 };
 
 typedef std::vector<Contest> Contests;
 
 bool ReadReportedBallots(const char *path, Contests &contests,
-	ID2IX &contest_1d2index, std::set<std::string> &ballot_ids);
+	ID2IX &contest_id2index, std::set<std::string> &ballot_ids);
+
+bool ReadReportedOutcomes(const char *path, Contests &contests,
+    ID2IX &contest_id2index);
 
 #endif

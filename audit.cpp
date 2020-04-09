@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2018-2019  Michelle Blom
+    Copyright (C) 2018-2020  Michelle Blom
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,7 +23,8 @@
 using namespace std;
 typedef boost::char_separator<char> boostcharsep;
 
-bool RevCompareAudit(const AuditSpec &a1, const AuditSpec &a2) {
+
+bool RevCompareAudit(const AuditSpec &a1, const AuditSpec &a2){
     return a1.asn > a2.asn;
 }
 
@@ -36,77 +37,111 @@ int GetFirstCandidateIn(const Ints &prefs, const Ints &relevant){
 	return -1;
 }
 
-double EstimateASN_WONLY(const Ballots &rep_ballots, 
-	const Candidates &cand, const Parameters &params, int winner, int loser)
+double EstimateASN_VIABLE(const Contest &ctest, int c, const Ints &elim,
+    const Parameters &params)
 {
-	double total_votes_loser = 0;
-	double total_votes_winner = cand[winner].sim_votes;
+    // We are checking that candidate 'c' is viable (tally >= 15%+1) in
+    // the setting where 'elim' are eliminated.
+    const double total_votes_present = params.tot_auditable_ballots; 
+    int total_for_c = 0;
+    for(int i = 0; i < ctest.rballots.size(); ++i){
+        const Ints &prefs = ctest.rballots[i].prefs;
+        for(int j = 0; j < prefs.size(); ++j){
+            int pc = prefs[j];
+            if(pc == c){
+                total_for_c += 1;
+                break;
+            }
+            if(find(elim.begin(), elim.end(), pc) == elim.end()){
+                break;
+            }
+        }
+    }
+    if(total_for_c <= ctest.threshold)
+        return -1;
 
-	Ints relevant;
-	relevant.push_back(winner);
-	relevant.push_back(loser);
-	for(Ballots::const_iterator bt = rep_ballots.begin();
-		bt != rep_ballots.end(); ++bt){
-		int nextcand = GetFirstCandidateIn(bt->prefs, relevant);
-		if(nextcand == loser){
-			total_votes_loser += 1;
-		}
-	}
-
-	const double V = (total_votes_winner - total_votes_loser);
-	if(V <= 0) return -1;
-
-    // Estimatation has been reworked to take into account
-    // that we could sample ballots that do not involve this
-    // contest (ie. tot_auditable_ballots >= rep_ballots.size()
-	const double total_votes_present=params.tot_auditable_ballots; 
-    // margin is the 'diluted margin'
-	const double margin=V/total_votes_present;
-	
-    //const double od2g=1.0/(2.0 * params.gamma);
-	//const double row=-log(params.risk_limit)/(od2g+params.lambda*log(1-od2g));
-
-    // Note: we are returning a proportion of the total number
-    // of ballots involved in the audit (across all contests)
-	//return ceil(row/margin)/total_votes_present;
-
-    // NOTE THIS HAS BEEN MODIFIED FOR PHILIP's SHARPER ESTIMATION SCHEME
-    // THAT DOES NOT USE LAMBDA/GAMMA PARAMETERS.
+    double margin = (total_for_c - ctest.threshold)/total_votes_present;
     return ceil(1.0/margin)/total_votes_present;
 }
 
-double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand, 
-	const Parameters &params, const Ints &tail, AuditSpec &best_audit){
-	// Compute ASN to show that tail[0] beats one of tail[1..n]
+double EstimateASN_NONVIABLE(const Contest &ctest, int c, const Ints &elim,
+    const Parameters &params)
+{
+    // We are checking that candidate 'c' is not viable (tally < 15%+1) in
+    // the setting where 'elim' are eliminated.
+    const double total_votes_present = params.tot_auditable_ballots; 
+    int total_for_c = 0;
+    for(int i = 0; i < ctest.rballots.size(); ++i){
+        const Ints &prefs = ctest.rballots[i].prefs;
+        for(int j = 0; j < prefs.size(); ++j){
+            int pc = prefs[j];
+            if(pc == c){
+                total_for_c += 1;
+                break;
+            }
+            if(find(elim.begin(), elim.end(), pc) == elim.end()){
+                break;
+            }
+        }
+    }
+ 
+    if(total_for_c >= ctest.threshold)
+        return -1;
+
+    double margin = (ctest.threshold - total_for_c)/total_votes_present;
+    return ceil(1.0/margin)/total_votes_present;
+}
+
+double FindBestIRV(const Contest &ctest, const Ints &tail, 
+    const SInts &winners, const Parameters &params, AuditSpec &best_audit)
+{
+	// Compute ASN to show that tail[0] beats one of tail[1..n] or winners. 
 	const int loser = tail[0];
-	const int tsize = tail.size();
-	Doubles total_votes_each(tsize, 0);
-	
-	for(int b = 0; b < rep_ballots.size(); ++b){
-		const Ballot &bt = rep_ballots[b];
-		int nextcand = GetFirstCandidateIn(bt.prefs, tail);
-		for(int k = 0; k < tsize; ++k){
-			if(nextcand == tail[k]){
+
+    // Expand tail with candidates in winners
+    Ints exp_tail(tail);
+    for(SInts::const_iterator cit = winners.begin(); 
+        cit != winners.end(); ++cit){
+        exp_tail.push_back(*cit);
+    }
+
+    const int tailsize = exp_tail.size();
+	Doubles total_votes_each(tailsize, 0);
+
+	for(int b = 0; b < ctest.rballots.size(); ++b){
+		const Ballot &bt = ctest.rballots[b];
+		int nextcand = GetFirstCandidateIn(bt.prefs, exp_tail);
+		for(int k = 0; k < tailsize; ++k){
+			if(nextcand == exp_tail[k]){
 				total_votes_each[k] += 1;
+                break;
 			}
 		}
 	}
 
+    //cout << "FBIRV tail: ";
+    //for(int i = 0; i < exp_tail.size(); ++i){
+    //    cout << ctest.cands[exp_tail[i]].id << "("
+    //        << total_votes_each[i] << ") ";
+   // }
+    //cout << endl;
+
 	best_audit.eliminated.clear();
-	for(int k = 0; k < cand.size(); ++k){
-		if(find(tail.begin(), tail.end(), k) == tail.end()){
+	for(int k = 0; k < ctest.ncandidates; ++k){
+		if(find(exp_tail.begin(), exp_tail.end(), k) == exp_tail.end()){
 			best_audit.eliminated.push_back(k);
 		}
 	}
 
 	double smallest = -1;
-    // Estimatation has been reworked to take into account
+
+    // Estimation has been reworked to take into account
     // that we could sample ballots that do not involve this
     // contest (ie. tot_auditable_ballots >= rep_ballots.size()
 	double total_votes_present = params.tot_auditable_ballots; 
-	for(int i = 1; i < tsize; ++i){
-		// loser is the "winner" and tail[i] is the "loser"
-		const int taili = tail[i];
+	for(int i = 1; i < tailsize; ++i){
+		// loser is the "winner" and exp_tail[i] is the "loser"
+		const int taili = exp_tail[i];
 		double total_votes_winner = total_votes_each[0];
 		double total_votes_loser = total_votes_each[i];
 
@@ -115,23 +150,13 @@ double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand,
 
         // Note this is the diluted margin
 		const double margin = V/total_votes_present;
-
-		//const double od2g = 1.0/(2 * params.gamma);
-		//const double row = -log(params.risk_limit)/
-        //    (od2g+params.lambda*log(1-od2g));
-
-        // candasn is a proportion of the total number of ballots 
-        //involved in the audit (across all contests)
-		//const double candasn = ceil(row/margin)/total_votes_present;
-    
-        // NOTE THIS HAS BEEN MODIFIED FOR PHILIP's SHARPER ESTIMATION SCHEME
-        // THAT DOES NOT USE LAMBDA/GAMMA PARAMETERS.
         const double candasn = ceil(1.0/margin)/total_votes_present;
 
 		if(smallest == -1 || candasn < smallest){
 			best_audit.asn = candasn;
 			best_audit.winner = loser;
 			best_audit.loser = taili;
+
 			smallest = candasn;
 		}
 	}

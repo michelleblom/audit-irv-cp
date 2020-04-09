@@ -23,7 +23,6 @@ RENAME = -o
 
 CXXSOURCES = \
 	irvaudit.cpp \
-	sim_irv.cpp \
 	model.cpp  \
 	audit.cpp 
 	

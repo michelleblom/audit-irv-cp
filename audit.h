@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2018-2019  Michelle Blom
+    Copyright (C) 2018-2020  Michelle Blom
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,35 +20,35 @@
 
 #include "model.h"
 
+enum Assertion { VIABLE, NONVIABLE, IRV };
+
 struct AuditSpec{
+    Assertion type;
 	double asn;
-	int winner;
+	
+    int winner;
 	int loser;
 
 	Ints eliminated;
-	bool wonly;
-
-    Ints rules_out;
 };
 
 typedef std::vector<AuditSpec> Audits;
 
-bool RevCompareAudit(const AuditSpec &a1, const AuditSpec &a2); 
-
 struct Parameters{
-    double lambda;
-    double gamma;
     double risk_limit;
-
     int tot_auditable_ballots;
 };
 
-// The following two functions deal with generating audits
-double EstimateASN_WONLY(const Ballots &rep_ballots, 
-	const Candidates &cand, const Parameters &params, int winner, int loser);
+bool RevCompareAudit(const AuditSpec &a1, const AuditSpec &a2);
 
-double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand, 
-	const Parameters &params, const Ints &tail, AuditSpec &best_audit);
+double EstimateASN_VIABLE(const Contest &ctest, int c, const Ints &elim,
+    const Parameters &params);
 
+double EstimateASN_NONVIABLE(const Contest &ctest, int c, const Ints &elim,
+    const Parameters &params); 
+
+// Compute ASN to show that tail[0] beats one of tail[1..n] or i in winners
+double FindBestIRV(const Contest &ctest, const Ints &tail, 
+    const SInts &winners, const Parameters &params, AuditSpec &audit);
 
 #endif

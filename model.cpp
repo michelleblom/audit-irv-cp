@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2018-2019  Michelle Blom
+    Copyright (C) 2018-2020  Michelle Blom
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -136,10 +136,10 @@ bool ReadReportedBallots(const char *path, Contests &contests,
 			    c.index = j;
 			    c.id = can_id;
 			    ctest.cands.push_back(c);
-			    ctest.config.id2index.insert(pair<int,int>(can_id,j));
+			    ctest.id2index.insert(pair<int,int>(can_id,j));
             }
 
-            ctest.config.ncandidates = numcand;
+            ctest.ncandidates = numcand;
         }
 
         // Reading ballots rankings and mapping them to their contest.
@@ -160,14 +160,13 @@ bool ReadReportedBallots(const char *path, Contests &contests,
 
 			Ballot b;
 			b.tag = ctest.num_rballots;
-			b.votes = 1;
 
             ballot_ids.insert(columns[1]);
 
 			for(int i = 2; i < columns.size(); ++i)
 			{
 				int ccode = ToType<int>(columns[i]);
-				int index = ctest.config.id2index.find(ccode)->second;
+				int index = ctest.id2index.find(ccode)->second;
 					
 				if(find(prefs.begin(),prefs.end(), index) != prefs.end())
 				{
@@ -185,10 +184,8 @@ bool ReadReportedBallots(const char *path, Contests &contests,
             // number of ballots that are present. 
             if(!b.prefs.empty()){
 			    Candidate &cand = ctest.cands[b.prefs.front()];
-			    cand.sum_votes += 1;
+			    cand.total_votes += 1;
             }
-
-			ctest.config.totalvotes += 1;
 			ctest.num_rballots += 1;
 		}
 
@@ -211,3 +208,73 @@ bool ReadReportedBallots(const char *path, Contests &contests,
 	return true;
 }
 
+
+bool ReadReportedOutcomes(const char *path, Contests &contests, 
+    ID2IX &ct_id2index) 
+{
+	try
+	{
+		ifstream infile(path);
+		boostcharsep spcom(",");
+
+        string line;
+        while(getline(infile, line))
+        {
+			vector<string> columns;
+			Split(line, spcom, columns);
+
+            int con_id = ToType<int>(columns[0]);
+            ID2IX::const_iterator cit = ct_id2index.find(con_id);
+            if(cit == ct_id2index.end()){
+                throw STVException("ReadOutcomes: Contest doesn't exist.");
+            }
+
+            Contest &ctest = contests[cit->second];
+            
+            // Winners start at index 2
+            int losers_start = -1;
+            for(int i = 2; i < columns.size(); ++i){
+                if(columns[i] == "losers"){
+                    losers_start = i+1;
+                    break;
+                }
+
+                int winner_id = ToType<int>(columns[i]);
+                ID2IX::const_iterator cnd_it = ctest.id2index.find(winner_id);
+                if(cnd_it == ctest.id2index.end()){
+                    throw STVException("ReadOutcomes: Cand doesn't exist.");
+                }
+
+                int winner_idx = cnd_it->second;
+                ctest.viable_order.push_back(winner_idx);
+                ctest.winners.insert(winner_idx);
+            }
+
+            for(int i = losers_start; i < columns.size(); ++i){
+                int loser_id = ToType<int>(columns[i]);
+                ID2IX::const_iterator cnd_it = ctest.id2index.find(loser_id);
+                if(cnd_it == ctest.id2index.end()){
+                    throw STVException("ReadOutcomes: Cand doesn't exist.");
+                }
+
+                int loser_idx = cnd_it->second;
+                ctest.eliminations.push_back(loser_idx);
+            }
+        }
+	}
+	catch(exception &e)
+	{
+		throw e;
+	}
+	catch(STVException &e)
+	{
+		throw e;
+	}
+	catch(...)
+	{
+		cout << "Unexpected error reading in reported outcomes." << endl;
+		return false;
+	}
+
+	return true;
+}
