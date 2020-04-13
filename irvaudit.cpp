@@ -79,10 +79,42 @@ Node CreateNode(const SimpleNode &sn){
     return newn;
 }
 
-bool Subsumes(const AuditSpec &a1, const AuditSpec &a2){
-    return false;    
+
+bool subset_of(const Ints &l1, const Ints &l2){
+    if(l1.size() > l2.size())
+        return false;
+
+    Ints l1_temp(l1);
+    Ints l2_temp(l2);
+
+    sort(l1_temp.begin(), l1_temp.end());
+    sort(l2_temp.begin(), l2_temp.end());
+
+    for(int i = 0; i < l1_temp.size(); ++i)
+        if(l1_temp[i] != l2_temp[i])
+            return false;
+
+    return true;
 }
 
+
+// Does audit a1 subsume a2
+bool Subsumes(const AuditSpec &a1, const AuditSpec &a2){
+    if(a1.type == VIABLE && a2.type == VIABLE && a1.winner == a2.winner){
+        // If a1's eliminated set is a subset of a2's, return true
+        if(subset_of(a1.eliminated, a2.eliminated)){
+            return true;
+        } 
+    }
+    else if(a1.type == NONVIABLE && a2.type == NONVIABLE && a1.winner == a2.winner){
+        // if a2's eliminated set is a subset of a1's, return true
+        if(subset_of(a2.eliminated, a1.eliminated)){
+            return true;
+        }
+    }
+
+    return false;    
+}
 
 bool AreAuditsEqual(const AuditSpec &a1, const AuditSpec &a2)
 {
@@ -1027,6 +1059,11 @@ int main(int argc, const char * argv[])
                         jt != audits.end(); ++jt){
                         if(jt == it) continue;
                         if(Subsumes(*jt, *it)){
+                            //if(alglog){
+                            //    PrintAudit(*jt, ctest.cands);
+                            //    cout << "   SUBSUMES ";
+                            //    PrintAudit(*it, ctest.cands);
+                            //}
                             subsumed = true;
                             break;
                         }
@@ -1039,7 +1076,8 @@ int main(int argc, const char * argv[])
                 }
                 int in_ballots = maxasn*params.tot_auditable_ballots;
                 maxasn *= 100;
-                
+               
+                cout << final_config.size() << " assertions" << endl; 
                 cout << "MAX ASN(%) " << maxasn << endl;
                 cout << "============================================" << endl;
 
