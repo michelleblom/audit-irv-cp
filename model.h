@@ -99,12 +99,14 @@ struct Contest{
     int id;
     Candidates cands;
     Ballots rballots;
+    Ballots aballots;
 
 	ID2IX id2index;
 
     int num_rballots;
     int ncandidates;
     int threshold;
+    double threshold_fr;
 
     Ints eliminations;
     Ints viable_order;
@@ -115,8 +117,19 @@ struct Contest{
 
 typedef std::vector<Contest> Contests;
 
+struct Parameters{
+    double risk_limit;
+    int tot_auditable_ballots;
+    long seed;
+    long error_seed;
+    double error_prob;
+    bool runlog;
+    bool runAudits;
+};
+
 bool ReadReportedBallots(const char *path, Contests &contests,
-	ID2IX &contest_id2index, std::set<std::string> &ballot_ids);
+	ID2IX &contest_id2index, std::set<std::string> &ballot_ids,
+    const Parameters &params);
 
 bool ReadReportedOutcomes(const char *path, Contests &contests,
     ID2IX &contest_id2index);

@@ -34,6 +34,94 @@ using namespace std;
 
 typedef boost::char_separator<char> boostcharsep;
 
+void Split2Ints(const string &line, const boostcharsep &sep, Ints &r)
+{
+	try
+	{
+		vector<string> result;
+		boost::tokenizer<boostcharsep> tokens(line, sep);
+		result.assign(tokens.begin(), tokens.end());
+
+		for(int i = 0; i < result.size(); ++i)
+		{
+			boost::algorithm::trim(result[i]);
+			int v  = ToType<int>(result[i]);
+			r.push_back(v);
+		}
+	}
+	catch(exception &e)
+	{
+		stringstream ss;
+		ss << e.what();
+		throw STVException(ss.str());
+	}
+	catch(STVException &e)
+	{
+		throw e;
+	}
+	catch(...)
+	{
+		throw STVException("Error in Split Function.");
+	}
+}
+
+
+int RandInRange(int a, int b){
+	if(a == b) return a;
+	if(b + 1 == a){
+		if(rand() <= 0.5)
+			return a;
+		else
+			return b;
+	}
+
+	return a + rand() % ((b + 1) - a);
+}
+void TwoRandInRange(int a, int b, int &first, int &second){
+	first = RandInRange(a, b);
+	if(first == a){
+		second = RandInRange(a+1, b);
+	}
+	else if(first == b){
+		second = RandInRange(a, b-1);
+	}
+	else{
+		int s1 = RandInRange(a, first-1);
+		int s2 = RandInRange(first+1, b);
+
+		if(RandInRange(0,1) == 0)
+			second = s1;
+		else
+			second = s2;
+	}
+}
+
+std::string exec(const char* cmd) {
+    std::array<char, 128> buffer;
+    std::string result;
+    std::shared_ptr<FILE> pipe(popen(cmd, "r"), pclose);
+    if (!pipe) throw std::runtime_error("popen() failed!");
+    while (!feof(pipe.get())) {
+        if (fgets(buffer.data(), 128, pipe.get()) != nullptr)
+            result += buffer.data();
+    }
+    return result;
+}
+
+void select_random_ballots(int nballots, long seed, Ints &r){
+	stringstream ss;
+    // IMPORTANT: replace python3.6 with your python version.
+	ss << "python3.6 Sampler.py " << seed << " " << nballots;
+	auto x = ss.str();
+	cout << ss.str() << endl;
+	string res = exec(x.c_str());
+
+	boostcharsep spcom(",");
+	Split2Ints(res, spcom, r);
+}
+
+
+
 void GetTime(struct mytimespec *t)
 {
 	#ifndef _WIN32
@@ -57,7 +145,6 @@ T ToType(const std::string &s)
 		throw STVException("Lexical cast problem");
 	}
 }
-
 
 void Split(const string &line, const boostcharsep &sep, vector<string> &r)
 {
@@ -89,7 +176,7 @@ void Split(const string &line, const boostcharsep &sep, vector<string> &r)
 
 
 bool ReadReportedBallots(const char *path, Contests &contests, 
-    ID2IX &ct_id2index, set<string> &ballot_ids) 
+    ID2IX &ct_id2index, set<string> &ballot_ids, const Parameters &params) 
 {
 	try
 	{
@@ -142,6 +229,8 @@ bool ReadReportedBallots(const char *path, Contests &contests,
             ctest.ncandidates = numcand;
         }
 
+        int num_errors = 0;
+
         // Reading ballots rankings and mapping them to their contest.
         while(getline(infile, line))
         {
@@ -176,7 +265,72 @@ bool ReadReportedBallots(const char *path, Contests &contests,
 				b.prefs.push_back(index);
 			}
 
-			ctest.rballots.push_back(b);
+			ctest.aballots.push_back(b);
+
+            if(params.error_prob > 0){
+			    double roll = rand() / ((double)RAND_MAX);
+			    if(!prefs.empty() && roll <= params.error_prob){
+				    roll = rand() / ((double)RAND_MAX);
+
+				    Ints cands_in(ctest.ncandidates, 0);
+				    for(int k = 0; k < prefs.size(); ++k){
+					    cands_in[prefs[k]] = 1;
+				    }
+				    Ints cands_out;
+				    for(int k = 0; k < ctest.ncandidates; ++k){
+					    if(cands_in[k] == 0)
+						    cands_out.push_back(k);
+					}
+
+					if(b.prefs.size() == 1){
+					    int idx = RandInRange(0, cands_out.size()-1);
+						if(roll <= 0.50){
+						    // Replace candidate
+							b.prefs[0] = cands_out[idx];
+						}
+						else{	
+						    // Add random candidate
+						    int pos = RandInRange(0, 1);
+						    if(pos == 0){
+							    b.prefs.insert(b.prefs.begin(),cands_out[idx]);
+						    }
+						    else{
+							    b.prefs.push_back(cands_out[idx]);		
+						    }
+						}		
+					}	
+					else{
+					    if(roll <= 0.33){
+						    // Flip two candidates
+						    int f = 0, s = 1;
+						    TwoRandInRange(0, b.prefs.size()-1, f, s);
+						    int fval = b.prefs[f];
+						    b.prefs[f] = b.prefs[s];
+						    b.prefs[s] = fval;
+					    }
+					    else if(roll <= 0.66 && cands_out.size() != 0){
+						    // Add random candidate into random position
+						    int idx = RandInRange(0, cands_out.size()-1);
+						    int pos = RandInRange(0, b.prefs.size()-1);
+						    if(pos == 0)
+							    b.prefs.insert(b.prefs.begin(),cands_out[idx]);
+						    else
+							    b.prefs.insert(b.prefs.begin()+pos,cands_out[idx]);
+					    }
+					    else{
+						    // Subtract candidate from random position
+						    int pos = RandInRange(0, b.prefs.size()-1);
+						    if(pos == 0)
+							    b.prefs.erase(b.prefs.begin());
+						    else
+							    b.prefs.erase(b.prefs.begin()+pos);
+					    }
+					}
+					num_errors += 1;
+                }
+            }
+
+            ctest.rballots.push_back(b);
 
             // Note, normally we would ignore ballots with no preferences.
             // However, we may pull them out during sampling when the audit
@@ -188,6 +342,10 @@ bool ReadReportedBallots(const char *path, Contests &contests,
             }
 			ctest.num_rballots += 1;
 		}
+
+        if(params.error_prob > 0 && params.runlog){
+            cout << num_errors << " errors added to reported ballots." << endl;
+        }
 
 		infile.close();
 	}

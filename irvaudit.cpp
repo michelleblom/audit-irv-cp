@@ -106,7 +106,7 @@ bool Subsumes(const AuditSpec &a1, const AuditSpec &a2){
             return true;
         } 
     }
-    else if(a1.type == NONVIABLE && a2.type == NONVIABLE && a1.winner == a2.winner){
+    else if(a1.type==NONVIABLE && a2.type==NONVIABLE && a1.winner==a2.winner){
         // if a2's eliminated set is a subset of a1's, return true
         if(subset_of(a2.eliminated, a1.eliminated)){
             return true;
@@ -183,7 +183,7 @@ void PrintNode(const Node &n, const Candidates &cand){
         cout << cand[*cit].id << " ";
     }
     cout << ") [";
-    cout << ((n.estimate == -1) ? -1 : n.estimate*100) << "] ";
+    cout << ((n.estimate == -1) ? -1 : n.estimate) << "] ";
 
     if(n.has_ancestor){
         cout << " (Best Ancestor ";
@@ -198,10 +198,10 @@ void PrintNode(const Node &n, const Candidates &cand){
             cit != n.best_ancestor.head.end(); ++cit){
             cout << cand[*cit].id << " ";
         }
-        cout << ") [";
+        cout << ")";
 
         cout << " [" << ((n.best_ancestor.estimate == -1) ? 
-            -1 : n.best_ancestor.estimate*100) << "])";
+            -1 : n.best_ancestor.estimate) << "])";
     }
 }
 
@@ -210,10 +210,10 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
     const Parameters &params, const char *json_file)
 {
     try{
-        /*ptree pt;
+        ptree pt;
         ptree children;
 
-        int overall_maxasn = -1;
+        double overall_maxasn = -1;
         for(int k = 0; k < contests.size(); ++k){
             const Contest &ctest = contests[k];
             const Audits &aconfig = torun[k];
@@ -227,8 +227,13 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
             for(int i = 0; i < aconfig.size(); ++i){
                 const AuditSpec &spec = aconfig[i];
                 ptree child;
+
                 child.put("winner", ctest.cands[spec.winner].id);
-                child.put("loser", ctest.cands[spec.loser].id);
+                if(spec.loser != -1)
+                    child.put("loser", ctest.cands[spec.loser].id);
+                else
+                    child.put("loser", -1);
+
                 ptree aelim;
                 for(int j = 0; j < spec.eliminated.size(); ++j){
                     ptree c;
@@ -236,47 +241,26 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
                     aelim.push_back(std::make_pair("", c));
                 }
                 child.add_child("already_eliminated", aelim);
-                if(spec.wonly)
-                    child.put("assertion_type", "WINNER_ONLY");
-                else
-                    child.put("assertion_type", "IRV_ELIMINATION");
 
-                stringstream ss;
-                if(spec.wonly){
-                    ss << "Rules out case where " << 
-                        ctest.cands[spec.winner].id << 
-                        " is eliminated before " << 
-                        ctest.cands[spec.loser].id;
-                }
-                else{
-                    ss << "Rules out outcomes with tail [...";
-                    for(int j = 0; j < spec.rules_out.size(); ++j){
-                        ss << " " << ctest.cands[spec.rules_out[j]].id;
-                    }    
-                    ss << "]";
-                }
-                child.put("explanation", ss.str());
+                if(spec.type == IRV)
+                    child.put("assertion_type", "IRV_ELIMINATION");
+                else if(spec.type == VIABLE)
+                    child.put("assertion_type", "VIABLE");
+                else
+                    child.put("assertion_type", "NONVIABLE");
+
                 caudit_children.push_back(std::make_pair("", child));
                 maxasn = max(maxasn, spec.asn);
             }
+
             caudit.put("contest", ctest.id);
-            caudit.put("winner", ctest.cands[ctest.winner].id);
-            ptree elim;
-            for(int j = 0; j < ctest.outcome.size()-1; ++j){
-                ptree c;
-                c.put("", ctest.cands[ctest.outcome[j]].id);
-                elim.push_back(std::make_pair("", c));
-            }
-            caudit.add_child("eliminated", elim);
+            int maxasn_pc=ceil(100*(maxasn/params.tot_auditable_ballots));
 
-            int maxasn_ballots = ceil(params.tot_auditable_ballots*maxasn);
-            int maxasn_percent = ceil(maxasn*100);
-
-            caudit.put("Expected Polls (#)", maxasn_ballots);
-            caudit.put("Expected Polls (%)", maxasn_percent);
+            caudit.put("Expected Polls (#)", maxasn);
+            caudit.put("Expected Polls (%)", maxasn_pc);
 
             caudit.add_child("assertions", caudit_children);
-            overall_maxasn = max(overall_maxasn, maxasn_ballots);
+            overall_maxasn = max(overall_maxasn, maxasn);
             
             children.push_back(std::make_pair("", caudit));
         }
@@ -287,13 +271,11 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
 
             ptree parameters;
             parameters.put("risk_limit", params.risk_limit);
-            //parameters.put("lambda", params.lambda);
-            //parameters.put("gamma", params.gamma);
             pt.add_child("parameters", parameters);
 
             pt.add_child("audits", children);
         }
-        write_json(json_file, pt);*/
+        write_json(json_file, pt);
     }
     catch(exception &e)
     {
@@ -333,6 +315,25 @@ void PrintFrontier(const Frontier &front, const Candidates &cand){
     }
 }
 
+void ComputeTallies(const Contest &ctest,const Ints &eliminated,Ints &tallies){
+    Ints elim(ctest.ncandidates, 0);
+    for(int i = 0; i < eliminated.size(); ++i){
+        elim[eliminated[i]] = 1;
+    }
+
+    for(int i = 0; i < ctest.rballots.size(); ++i){
+        const Ints &prefs = ctest.rballots[i].prefs;
+        for(int j = 0; j < prefs.size(); ++j){
+            int pc = prefs[j];
+            if(elim[pc])
+                continue;
+
+            tallies[pc] += 1;
+            break;
+        }
+    } 
+}
+
 
 double FindBestAudit(const Contest &ctest, const Parameters &params,
     Node &node, const map<int,AuditSpec> &initial_viables,
@@ -357,9 +358,14 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
     // -------------------------------------------------------------------
     Ints eliminated;
     Ints unmentioned;
+    Ints tallies1(ctest.ncandidates, 0);
+    Ints tallies2(ctest.ncandidates, 0);
+
+    bool empty = node.tail.empty();
 
     // Checking: one of the candidates not in the winners set is viable 
-    //    given no one has been eliminated.
+    //    given no one has been eliminated. V(c, emptyset)
+    // Also: define eliminated & unmentioned sets
     for(int i = 0; i < ctest.ncandidates; ++i){
         if(node.head.find(i) != node.head.end())
             continue;
@@ -368,7 +374,7 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
             unmentioned.push_back(i);
 
         eliminated.push_back(i);
-        if(has_init_viable[i] == 1){
+        if(empty && has_init_viable[i] == 1){
             const AuditSpec &as = initial_viables.find(i)->second;
             if(best_estimate == -1 || as.asn < best_estimate){
                 best_estimate = as.asn;
@@ -377,10 +383,37 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
         }
     }
 
+    // Compute tallies of candidates assuming candidates c with 
+    // eliminated[c] = 1 are eliminated (tallies 1) or candidate c with
+    // unmentioned[c] = 1 are eliminated (tallies 2).
+    ComputeTallies(ctest, eliminated, tallies1);
+    ComputeTallies(ctest, unmentioned, tallies2);
+
+    if(empty){
+        // Checking: one of the winners is not viable if we treat everyone 
+        //    outside of the winners set as eliminated. NV(c, C \setminus V)
+        for(SInts::iterator cit = node.head.begin();
+            cit != node.head.end(); ++cit)
+        {
+            double asn = EstimateASN_NONVIABLE(ctest, *cit, tallies1, params);
+            if((best_estimate == -1 && asn != -1) || (asn != -1 &&
+                asn < best_estimate)){
+                best_estimate = asn;
+                node.best_audit.asn = asn;
+                node.best_audit.type = NONVIABLE;
+                node.best_audit.winner = *cit;
+                node.best_audit.loser = -1;
+
+                node.best_audit.eliminated = eliminated;
+            }
+        }
+    }
+
     // Checking: node.tail[0] is viable given all non-mentioned candidates
-    //    have been eliminated.
-    if(node.tail.size() > 0){
-        double asn = EstimateASN_VIABLE(ctest,node.tail[0],unmentioned,params);
+    //    have been eliminated. V(c, unmentioned \setminus {c})
+    if(!empty){
+        double asn = EstimateASN_VIABLE(ctest, node.tail[0], tallies2, params);
+
         if((best_estimate == -1 && asn != -1) || (asn != -1 && 
             asn < best_estimate)){
             best_estimate = asn;
@@ -390,31 +423,15 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
             node.best_audit.loser = -1;
             node.best_audit.eliminated = unmentioned;
         } 
-    }
 
-    // Checking: one of the winners is not viable if we treat everyone 
-    //    outside of the winners set as eliminated.
-    for(SInts::iterator cit = node.head.begin();
-        cit != node.head.end(); ++cit)
-    {
-        double asn = EstimateASN_NONVIABLE(ctest, *cit, eliminated, params);
-        if((best_estimate == -1 && asn != -1) || (asn != -1 &&
-             asn < best_estimate)){
-            best_estimate = asn;
-            node.best_audit.asn = asn;
-            node.best_audit.type = NONVIABLE;
-            node.best_audit.winner = *cit;
-            node.best_audit.loser = -1;
-
-            node.best_audit.eliminated = eliminated;
-        }
-    }
-
-    // Checking: IRV assertions! 
-    if(node.tail.size() > 0){
+        // Checking: IRV assertions! 
         AuditSpec bia;
         bia.type = IRV;
-        double bia_asn = FindBestIRV(ctest, node.tail, node.head, params, bia);
+        bia.eliminated = unmentioned;
+        bia.winner = node.tail[0];
+
+        double bia_asn = FindBestIRV(ctest, node.tail, node.head, 
+            params, tallies2, bia);
 
         if((best_estimate == -1 && bia_asn != -1) || (bia_asn != -1 && 
             bia_asn < best_estimate)){
@@ -652,16 +669,20 @@ int main(int argc, const char * argv[])
 
         set<string> ballot_ids;
         if(!ReadReportedBallots(rep_blts_file, contests, contest_id2index,
-            ballot_ids)){
+            ballot_ids, params)){
             cout << "Reported ballots read error. Exiting." << endl;
             return 1;
         }
+
         if(!ReadReportedOutcomes(rep_outc_file, contests, contest_id2index)){
             cout << "Reported outcomes read error. Exiting." << endl;
             return 1;
         }
 
-        params.tot_auditable_ballots = ballot_ids.size();       
+        params.tot_auditable_ballots = ballot_ids.size();
+
+        // Express allowed gap in ballots rather than as a fraction of ballots
+        allowed_gap *= params.tot_auditable_ballots;       
         
         for(int i = 0; i < contests.size(); ++i){
             Contest &ctest = contests[i];
@@ -672,6 +693,7 @@ int main(int argc, const char * argv[])
                 ctest.cands[bt.prefs[0]].ballots.push_back(j);
             }
             ctest.threshold = floor(threshold_pc*ctest.rballots.size() + 1);
+            ctest.threshold_fr = threshold_pc;
             if(alglog){
                 cout << "Threshold (contest " << ctest.id << "): " 
                     << ctest.threshold << " ballots" << endl;
@@ -681,7 +703,8 @@ int main(int argc, const char * argv[])
         Ints successes;
         Ints full_recounts;
 
-        int overall_asn_ballots = -1;
+        // NOTE: asn's are defined in ballots, not proportions/percentages
+        double overall_asn_ballots = -1;
         for(int k = 0; k < contests.size(); ++k){
             const Contest &ctest = contests[k];
             if(alglog){
@@ -703,7 +726,7 @@ int main(int argc, const char * argv[])
 
             // Identify if there is a V-{} check that is feasible for
             // each reportedly viable candidate. This check is an assertion
-            // that says "candidate i is viable even when no other candidates
+            // that says "candidate i is viable even when no other cands
             // have been eliminated".
             map<int,AuditSpec> initial_viables;
             Ints has_init_viable(ctest.ncandidates, 0);
@@ -712,9 +735,13 @@ int main(int argc, const char * argv[])
                 cit != ctest.winners.end(); ++cit){
                 // Can we assert that candidate *cit is viable given that 
                 // no other candidates Ints() have been eliminated?
-                double asn1 = EstimateASN_VIABLE(ctest, *cit, Ints(), params);
-                double asn2 = EstimateASN_VIABLE(ctest, *cit, 
-                    ctest.eliminations, params);
+                Ints tallies1(ctest.ncandidates, 0);
+                ComputeTallies(ctest, Ints(), tallies1);
+                Ints tallies2(ctest.ncandidates, 0);
+                ComputeTallies(ctest, ctest.eliminations, tallies2);
+ 
+                double asn1 = EstimateASN_VIABLE(ctest,*cit,tallies1,params);
+                double asn2 = EstimateASN_VIABLE(ctest,*cit,tallies2,params);
 
                 if(asn1 == -1 && asn2 == -1){
                     cout << "Audit for contest " << ctest.id << " is not "
@@ -737,7 +764,6 @@ int main(int argc, const char * argv[])
                     if(asn2 == -1 || asn1 <= asn2){
                         audits.push_back(aspec);
                         lowerbound = max(lowerbound, asn1);
-
                         if(alglog){
                             cout << "Added audit: ";
                             PrintAudit(aspec, ctest.cands);
@@ -761,7 +787,7 @@ int main(int argc, const char * argv[])
                         PrintAudit(aspec, ctest.cands);
                     }
                 }
-            }  
+            }    
             if(auditfailed){
                 audits_to_run.push_back(Audits());
                 full_recounts.push_back(ctest.id);
@@ -770,7 +796,9 @@ int main(int argc, const char * argv[])
 
             if(alglog){
                 cout << "Starting lower bound on ASN: " <<
-                    lowerbound*100 << "%" << endl;
+                    lowerbound << " ballots (" <<
+                    100*(lowerbound/params.tot_auditable_ballots)
+                     << "%)" << endl;
             }
 
             Frontier front;
@@ -780,7 +808,7 @@ int main(int argc, const char * argv[])
             // possible "viable sets".
             if(alglog){
                 cout << "Constructing initial frontier" << endl;
-            } 
+            }    
 
             const int NSETS = pow(2, ctest.ncandidates);
 
@@ -804,21 +832,30 @@ int main(int argc, const char * argv[])
                 newn.expandable = true;
                 newn.has_ancestor = false;
 
-                // Find best audit to rule out outcome   
+                // Find best audit to rule out outcome 
+                mytimespec t1;
+                GetTime(&t1);
+  
                 newn.estimate = FindBestAudit(ctest, params, newn, 
                     initial_viables, has_init_viable, alglog);
 
+                mytimespec t2;
+                GetTime(&t2);
+
+                if(alglog){
+                    cout << "Added node with estimate " << newn.estimate
+                        << ", " << t2.seconds - t1.seconds << "s" << endl;
+                }
                 InsertNode(front, newn);
             }
-
 
             int nodesexpanded = 0;
 
             if(alglog){
-                cout << "============================================" << endl;
+                cout << "========================================" << endl;
                 cout << "Initial Frontier:" << endl;
                 PrintFrontier(front, ctest.cands);
-                cout << "============================================" << endl;
+                cout << "========================================" << endl;
             }
 
             while(true && !auditfailed){
@@ -831,7 +868,8 @@ int main(int argc, const char * argv[])
                             break;
                         }
                         else{
-                            max_on_frontier=max(it->estimate,max_on_frontier);
+                            max_on_frontier = max(it->estimate,
+                                max_on_frontier);
                         }
                     }
                     if(max_on_frontier != -1 && max_on_frontier - 
@@ -851,17 +889,18 @@ int main(int argc, const char * argv[])
                 if((toexpand.has_ancestor && 
                     toexpand.best_ancestor.estimate != -1 &&
                     toexpand.best_ancestor.estimate <= lowerbound)){
-                    // Replace all descendents of best ancestor with ancestor.
-                    ReplaceWithBestAncestor(front,toexpand,ctest.cands,alglog);
+                    // Replace descendents of best ancestor with ancestor.
+                    ReplaceWithBestAncestor(front, toexpand, 
+                        ctest.cands, alglog);
                     continue;
                 }
                 else if(toexpand.estimate != -1 && 
                     toexpand.estimate <= lowerbound){
-                    // Don't expand, make "unexpandable",move to back of list.
+                    // Don't expand, make "unexpandable", move to back.
                     toexpand.expandable = false;
                     front.insert(front.end(), toexpand);
                     continue;
-                } 
+                }    
 
                 if(diving){
                     double divelb = PerformDive(toexpand, ctest, 
@@ -888,8 +927,8 @@ int main(int argc, const char * argv[])
                         toexpand.best_ancestor.estimate <= lowerbound)){
                         // Replace all descendents of best ancestor 
                         // with ancestor.
-                        ReplaceWithBestAncestor(front, toexpand, ctest.cands, 
-                            alglog);
+                        ReplaceWithBestAncestor(front, toexpand, 
+                            ctest.cands, alglog);
                         continue;
                     }
                     else if(toexpand.estimate != -1 && 
@@ -909,10 +948,11 @@ int main(int argc, const char * argv[])
                     cout << endl;
                 }
 
-                // For each candidate 'c' not in toexpand.tail or toexpand.head,
-                // create a new node with node.tail = [c] ++ toexpand.tail
+                // For each candidate 'c' not in toexpand.tail or 
+                // toexpand.head, create a new node with 
+                // node.tail = [c] ++ toexpand.tail
                 for(int i = 0; i < ctest.ncandidates; ++i){
-                    if(find(toexpand.tail.begin(), toexpand.tail.end(), i) ==
+                    if(find(toexpand.tail.begin(),toexpand.tail.end(),i) ==
                         toexpand.tail.end() && toexpand.head.find(i) == 
                         toexpand.head.end()){
                     
@@ -925,7 +965,7 @@ int main(int argc, const char * argv[])
 
                         newn.estimate = -1;
                         newn.best_audit.asn = -1;
-                        newn.expandable = (newn.tail.size() + newn.head.size() 
+                        newn.expandable=(newn.tail.size()+newn.head.size() 
                             == ctest.ncandidates) ? false : true;
                 
                         if(alglog){
@@ -935,7 +975,7 @@ int main(int argc, const char * argv[])
                                 cout << ctest.cands[newn.tail[i]].id << " ";
                             }
                             cout << "( ";
-                            for(SInts::const_iterator cit = newn.head.begin();
+                            for(SInts::const_iterator cit=newn.head.begin();
                                 cit != newn.head.end(); ++cit){
                                 cout << ctest.cands[*cit].id << " ";
                             }
@@ -951,7 +991,8 @@ int main(int argc, const char * argv[])
                                 newn.best_ancestor = toexpand.best_ancestor;
                             }
                             else{
-                                newn.best_ancestor = CreateSimpleNode(toexpand); 
+                                newn.best_ancestor = 
+                                    CreateSimpleNode(toexpand); 
                             }
                         } 
                         else{
@@ -961,7 +1002,10 @@ int main(int argc, const char * argv[])
                         newn.has_ancestor = true;
                         newn.estimate = FindBestAudit(ctest, params, newn, 
                             initial_viables, has_init_viable, alglog);
-                        cout << newn.estimate << endl;
+
+                        if(alglog){
+                            cout << newn.estimate << endl;
+                        }
 
                         if(!newn.expandable){
                             bool replace = false;
@@ -990,23 +1034,23 @@ int main(int argc, const char * argv[])
                             else{
                                 if(alglog){
                                     cout << "   Best audit ";
-                                    PrintAudit(newn.best_audit, ctest.cands);
+                                    PrintAudit(newn.best_audit,ctest.cands);
                                     cout << endl;
                                 }
 
                                 InsertNode(front, newn);
                                 lowerbound = max(lowerbound, newn.estimate);
-                            } 
+                            }    
                         }
                         else{
                             if(alglog){
                                 if(newn.estimate != -1){
                                     cout << "   Best audit ";
-                                    PrintAudit(newn.best_audit, ctest.cands);
+                                    PrintAudit(newn.best_audit,ctest.cands);
                                     cout << endl;
                                 }
                                 else{
-                                    cout << "   Cannot be disproved." << endl;
+                                    cout <<"   Cannot be disproved."<< endl;
                                 }
                             }
 
@@ -1020,10 +1064,12 @@ int main(int argc, const char * argv[])
                 if(alglog){
                     cout << endl << "Size of frontier " << front.size() << 
                         ", Nodes expanded " << nodesexpanded << 
-                        ", Current threshold " << lowerbound <<  endl << endl;
+                        ", Current threshold " << lowerbound << 
+                        " ballots (" << 100*(lowerbound/
+                        params.tot_auditable_ballots) << "%)" <<endl<<endl;
                 }
             }
-
+            
             mytimespec tend;
             GetTime(&tend);
 
@@ -1044,7 +1090,7 @@ int main(int argc, const char * argv[])
                     }
                 }
 
-                cout << "============================================" << endl;
+                cout << "=========================================" << endl;
                 cout << "AUDITS REQUIRED" << endl;
                 maxasn = 0;
                 Audits final_config;
@@ -1059,11 +1105,6 @@ int main(int argc, const char * argv[])
                         jt != audits.end(); ++jt){
                         if(jt == it) continue;
                         if(Subsumes(*jt, *it)){
-                            //if(alglog){
-                            //    PrintAudit(*jt, ctest.cands);
-                            //    cout << "   SUBSUMES ";
-                            //    PrintAudit(*it, ctest.cands);
-                            //}
                             subsumed = true;
                             break;
                         }
@@ -1074,21 +1115,20 @@ int main(int argc, const char * argv[])
                         maxasn = max(maxasn, it->asn);
                     }
                 }
-                int in_ballots = maxasn*params.tot_auditable_ballots;
-                maxasn *= 100;
+                double in_pc = (maxasn/params.tot_auditable_ballots)*100;
                
                 cout << final_config.size() << " assertions" << endl; 
-                cout << "MAX ASN(%) " << maxasn << endl;
-                cout << "============================================" << endl;
+                cout << "MAX ASN(%) " << in_pc << endl;
+                cout << "=========================================" << endl;
 
-                if(maxasn >= 100){
+                if(maxasn >= params.tot_auditable_ballots){
                     full_recounts.push_back(ctest.id);
                     audits_to_run.push_back(Audits());
                 }
                 else{
                     audits_to_run.push_back(final_config);
                     successes.push_back(ctest.id);
-                    overall_asn_ballots = max(overall_asn_ballots,in_ballots);
+                    overall_asn_ballots = max(overall_asn_ballots,maxasn);
                 }
             }
             else{
@@ -1099,9 +1139,10 @@ int main(int argc, const char * argv[])
                 audits_to_run.push_back(Audits());
                 full_recounts.push_back(ctest.id);
             }
+            double in_pc = (maxasn/params.tot_auditable_ballots)*100;
             cout << "TIME," << tend.seconds - tstart.seconds << 
                 ",Nodes Expanded," << nodesexpanded
-                << ",MAX ASN(%)," << maxasn << endl;
+                << ",MAX ASN(%)," << in_pc << endl;
         }
 
         cout << "============================================" << endl;

@@ -34,21 +34,17 @@ struct AuditSpec{
 
 typedef std::vector<AuditSpec> Audits;
 
-struct Parameters{
-    double risk_limit;
-    int tot_auditable_ballots;
-};
-
 bool RevCompareAudit(const AuditSpec &a1, const AuditSpec &a2);
 
-double EstimateASN_VIABLE(const Contest &ctest, int c, const Ints &elim,
-    const Parameters &params);
+double EstimateASN_VIABLE(const Contest &ctest, int c, 
+    const Ints &tallies, const Parameters &params);
 
-double EstimateASN_NONVIABLE(const Contest &ctest, int c, const Ints &elim,
-    const Parameters &params); 
+double EstimateASN_NONVIABLE(const Contest &ctest, int c, 
+    const Ints &tallies, const Parameters &params); 
 
 // Compute ASN to show that tail[0] beats one of tail[1..n] or i in winners
 double FindBestIRV(const Contest &ctest, const Ints &tail, 
-    const SInts &winners, const Parameters &params, AuditSpec &audit);
+    const SInts &winners, const Parameters &params, 
+    const Ints &tallies, AuditSpec &audit);
 
 #endif
