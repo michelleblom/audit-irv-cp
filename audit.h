@@ -20,7 +20,7 @@
 
 #include "model.h"
 
-enum Assertion { VIABLE, NONVIABLE, IRV };
+enum Assertion { VIABLE, NONVIABLE, IRV, NEB };
 
 struct AuditSpec{
     Assertion type;
@@ -33,18 +33,23 @@ struct AuditSpec{
 };
 
 typedef std::vector<AuditSpec> Audits;
+typedef std::vector<Audits> Audits2d;
 
 bool RevCompareAudit(const AuditSpec &a1, const AuditSpec &a2);
 
 double EstimateASN_VIABLE(const Contest &ctest, int c, 
     const Ints &tallies, const Parameters &params);
 
+int estimate_sample_size(double margin, int max_ballots, double rlimit,
+    double error_rate);
+
 double EstimateASN_NONVIABLE(const Contest &ctest, int c, 
-    const Ints &tallies, const Parameters &params); 
+    const Ints &tallies, int exhausted, const Parameters &params); 
 
 // Compute ASN to show that tail[0] beats one of tail[1..n] or i in winners
-double FindBestIRV(const Contest &ctest, const Ints &tail, 
+double FindBestIRV_NEB(const Contest &ctest, const Ints &tail, 
     const SInts &winners, const Parameters &params, 
-    const Ints &tallies, AuditSpec &audit);
+    const Ints &tallies, const Audits2d &nebs, const Bools2d &has_neb,
+    AuditSpec &audit);
 
 #endif

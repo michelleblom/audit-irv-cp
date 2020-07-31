@@ -94,7 +94,7 @@ double EstimateASN_VIABLE(const Contest &ctest, int c, const Ints &tallies,
 }
 
 double EstimateASN_NONVIABLE(const Contest &ctest, int c, const Ints &tallies,
-    const Parameters &params)
+    int exhausted, const Parameters &params)
 {
     // We are checking that candidate 'c' is not viable (tally < 15%+1) in
     // the setting where 'elim' are eliminated. We frame this assertion as
@@ -105,7 +105,7 @@ double EstimateASN_NONVIABLE(const Contest &ctest, int c, const Ints &tallies,
 
     const double share = 1.0/(2*(1 - ctest.threshold_fr));
     double assorter_total = 0;
-    double total_tally = 0;
+    double total_tally = exhausted;
     for(int i = 0; i < tallies.size() && i < c; ++i){
         assorter_total += tallies[i] * share;
         total_tally += tallies[i];
@@ -124,8 +124,9 @@ double EstimateASN_NONVIABLE(const Contest &ctest, int c, const Ints &tallies,
         params.risk_limit, 0);
 }
 
-double FindBestIRV(const Contest &ctest, const Ints &tail, 
-    const SInts &winners, const Parameters &params, const Ints &tallies, 
+double FindBestIRV_NEB(const Contest &ctest, const Ints &tail, 
+    const SInts &winners, const Parameters &params, 
+    const Ints &tallies, const Audits2d &nebs, const Bools2d &has_neb,
     AuditSpec &best_audit)
 {
 	// Compute ASN to show that tail[0] beats one of tail[1..n] or winners. 
@@ -146,14 +147,37 @@ double FindBestIRV(const Contest &ctest, const Ints &tail,
 	for(int i = 1; i < exp_tail.size(); ++i){
 		// exp_tail[i] is the "loser"
 		const int taili = exp_tail[i];
-		const double V = (tallies[winner] - tallies[taili]);
-		if(V <= 0) continue;
 
-        // Note this is the diluted margin
-		double margin = V/params.tot_auditable_ballots;
+        // Check NEB
+        if(has_neb[winner][taili]){
+            const AuditSpec &neb_wi = nebs[winner][taili];
+            if(neb_wi.asn != -1 && ((smallest == -1) |
+                (neb_wi.asn < smallest))){
+                best_audit = neb_wi;
+                smallest = neb_wi.asn;
+            }
+        }
+
+        // Check IRV assertion.
+        if(tallies[winner] <= tallies[taili])
+            continue;
+
+        int neither = params.tot_auditable_ballots - tallies[winner]
+            - tallies[taili];
+
+        // The assorter margin is 2 times the mean of 
+        // ((winner - loser) + 1)/2 across all CVRs - 1. 
+        // For each CVR, an assorter will return 1 if
+        // its a vote for the winner, 0 if its a vote for the loser, and
+        // 0.5 if its a vote for neither.
+        double amean = (tallies[winner] + 0.5*neither)/
+            params.tot_auditable_ballots;
+		double margin = 2*amean - 1;
         double candasn = estimate_sample_size(margin, 
             params.tot_auditable_ballots, params.risk_limit, 0);
 
+        cout << "IRV cand " << tallies[winner] << " " << tallies[taili]
+            << " " << neither << " " << margin << " " << candasn << endl;
 		if(smallest == -1 || candasn < smallest){
 			best_audit.asn = candasn;
 			best_audit.loser = taili;

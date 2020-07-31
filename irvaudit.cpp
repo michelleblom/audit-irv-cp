@@ -246,8 +246,10 @@ void OutputToJSON(const Contests &contests, const vector<Audits> &torun,
                     child.put("assertion_type", "IRV_ELIMINATION");
                 else if(spec.type == VIABLE)
                     child.put("assertion_type", "VIABLE");
-                else
+                else if(spec.type == NONVIABLE)
                     child.put("assertion_type", "NONVIABLE");
+                else 
+                    child.put("assertion_type", "NEB");
 
                 caudit_children.push_back(std::make_pair("", child));
                 maxasn = max(maxasn, spec.asn);
@@ -296,8 +298,12 @@ void PrintAudit(const AuditSpec &audit, const Candidates &cand){
         cout << "V," << cand[audit.winner].id << ",Eliminated";
     else if(audit.type == NONVIABLE)
         cout << "NV," << cand[audit.winner].id << ",Eliminated";
-    else{
+    else if(audit.type == IRV){
         cout << "IRV," << cand[audit.winner].id << "," << 
+            cand[audit.loser].id << ",Eliminated";
+    }
+    else{
+        cout << "NEB," << cand[audit.winner].id << "," << 
             cand[audit.loser].id << ",Eliminated";
     }
 
@@ -315,29 +321,56 @@ void PrintFrontier(const Frontier &front, const Candidates &cand){
     }
 }
 
-void ComputeTallies(const Contest &ctest,const Ints &eliminated,Ints &tallies){
+int ComputeTallies(const Contest &ctest,const Ints &eliminated,Ints &tallies){
     Ints elim(ctest.ncandidates, 0);
+    int exhausted = 0;
     for(int i = 0; i < eliminated.size(); ++i){
         elim[eliminated[i]] = 1;
     }
 
     for(int i = 0; i < ctest.rballots.size(); ++i){
         const Ints &prefs = ctest.rballots[i].prefs;
+        bool ex = true;
         for(int j = 0; j < prefs.size(); ++j){
             int pc = prefs[j];
             if(elim[pc])
                 continue;
 
             tallies[pc] += 1;
+            ex = false;
             break;
         }
+        if(ex) exhausted += 1;
     } 
+    return exhausted;
 }
 
+int ComputeNEBTally(const Contest &ctest, int loser, int winner){
+
+    int loser_tally = 0;
+
+    for(int i = 0; i < ctest.rballots.size(); ++i){
+        const Ints &prefs = ctest.rballots[i].prefs;
+
+        // If loser appears before winner, then increment loser_tally
+        for(int j = 0; j < prefs.size(); ++j){
+            if(prefs[j] == loser){
+                loser_tally += 1;
+                break;
+            }
+
+            if(prefs[j] == winner){
+                break;
+            }
+        }
+    } 
+    return loser_tally;
+}
 
 double FindBestAudit(const Contest &ctest, const Parameters &params,
     Node &node, const map<int,AuditSpec> &initial_viables,
-    const Ints &has_init_viable, bool alglog) 
+    const Ints &has_init_viable, const Audits2d &nebs, 
+    const Bools2d &has_neb, bool alglog) 
 {
     double best_estimate = -1;
 
@@ -355,6 +388,9 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
     //
     // -- IRV assertions: node.tail[0] beats a candidate still standing
     //    at that stage. 
+    //  
+    // -- NEB(c1, c2) c1 cannot be eliminated before c2 as firstpref(c1)
+    //    is greater than all_mentions_before_c1(c2)
     // -------------------------------------------------------------------
     Ints eliminated;
     Ints unmentioned;
@@ -386,16 +422,15 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
     // Compute tallies of candidates assuming candidates c with 
     // eliminated[c] = 1 are eliminated (tallies 1) or candidate c with
     // unmentioned[c] = 1 are eliminated (tallies 2).
-    ComputeTallies(ctest, eliminated, tallies1);
-    ComputeTallies(ctest, unmentioned, tallies2);
-
     if(empty){
+        int ex1 = ComputeTallies(ctest, eliminated, tallies1);
+
         // Checking: one of the winners is not viable if we treat everyone 
         //    outside of the winners set as eliminated. NV(c, C \setminus V)
         for(SInts::iterator cit = node.head.begin();
             cit != node.head.end(); ++cit)
         {
-            double asn = EstimateASN_NONVIABLE(ctest, *cit, tallies1, params);
+            double asn = EstimateASN_NONVIABLE(ctest,*cit,tallies1,ex1,params);
             if((best_estimate == -1 && asn != -1) || (asn != -1 &&
                 asn < best_estimate)){
                 best_estimate = asn;
@@ -407,11 +442,31 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
                 node.best_audit.eliminated = eliminated;
             }
         }
+
+        // Checking: that whether one of the unmentioned candidates, not in 
+        // the viable set, could *not* have been eliminated before one of
+        // the reportedly viable candidates. 
+        for(int i = 0; i < unmentioned.size(); ++i){
+            for(SInts::iterator cit = node.head.begin();
+                cit != node.head.end(); ++cit)
+            {
+                if(has_neb[i][*cit]){
+                    const AuditSpec &neb_icit = nebs[i][*cit];
+                    if((best_estimate == -1 && neb_icit.asn != -1) ||
+                        (neb_icit.asn != -1 && neb_icit.asn < best_estimate))
+                    {
+                        best_estimate = neb_icit.asn;
+                        node.best_audit = neb_icit;
+                    }
+                }
+            }
+        }
     }
 
     // Checking: node.tail[0] is viable given all non-mentioned candidates
     //    have been eliminated. V(c, unmentioned \setminus {c})
     if(!empty){
+        ComputeTallies(ctest, unmentioned, tallies2);
         double asn = EstimateASN_VIABLE(ctest, node.tail[0], tallies2, params);
 
         if((best_estimate == -1 && asn != -1) || (asn != -1 && 
@@ -430,8 +485,8 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
         bia.eliminated = unmentioned;
         bia.winner = node.tail[0];
 
-        double bia_asn = FindBestIRV(ctest, node.tail, node.head, 
-            params, tallies2, bia);
+        double bia_asn = FindBestIRV_NEB(ctest, node.tail, node.head, 
+            params, tallies2, nebs, has_neb, bia);
 
         if((best_estimate == -1 && bia_asn != -1) || (bia_asn != -1 && 
             bia_asn < best_estimate)){
@@ -482,7 +537,7 @@ void ReplaceWithBestAncestor(Frontier &front, const Node &newn,
 
 double PerformDive(const Node &toexpand, const Contest &ctest, 
     const map<int,AuditSpec> &initial_viables, const Ints &has_init_viable,
-    const Parameters &params)
+    const Audits2d &nebs, const Bools2d &has_neb, const Parameters &params)
 {
     for(int i = 0; i < ctest.ncandidates; ++i){
         if(find(toexpand.tail.begin(), toexpand.tail.end(), i) ==
@@ -518,7 +573,7 @@ double PerformDive(const Node &toexpand, const Contest &ctest,
 
             newn.has_ancestor = true;
             newn.estimate = FindBestAudit(ctest, params, newn,
-                initial_viables, has_init_viable, false);
+                initial_viables, has_init_viable, nebs, has_neb, false);
 
             if(!newn.expandable){
                 bool replace = false;
@@ -542,7 +597,7 @@ double PerformDive(const Node &toexpand, const Contest &ctest,
             }
             else{
                 return PerformDive(newn, ctest, initial_viables, 
-                    has_init_viable, params); 
+                    has_init_viable, nebs, has_neb, params); 
             }
             break;
         }
@@ -794,6 +849,59 @@ int main(int argc, const char * argv[])
                 continue;
             }
 
+            // Create a matrix of NEB assertions that could be used to rule
+            // out an outcome.
+            if(alglog){
+                cout << "Finding NEB assertions" << endl;
+            }
+            Bools2d has_neb;
+            Audits2d nebs;
+            for(int i = 0; i < ctest.ncandidates; ++i){
+                Bools has_neb_i(ctest.ncandidates, false);
+                Audits nebs_i(ctest.ncandidates, AuditSpec());
+
+                // i's first preferences is equal to cand.total_votes
+                const Candidate &c1 = ctest.cands[i];
+                for(int j = 0; j < ctest.ncandidates; ++j){
+                    if(i == j) continue;
+
+                    // Compute j's tally including all ballots that 
+                    // preference j before i
+                    int c2_neb = ComputeNEBTally(ctest, j, i);
+                    int neither = params.tot_auditable_ballots - c2_neb -
+                        c1.total_votes;
+
+                    if(c1.total_votes > c2_neb){
+                        // Margin is 2*assorter_mean - 1
+                        // assorter mean is average of (winner-loser+1)/2
+                        // for each CVR where winner = 1 if vote is for 'i',
+                        // loser = 1 if vote is for 'j', and result is 0.5
+                        // if the vote is for neither.
+                        double amean = (c1.total_votes + 0.5*neither)/
+                            params.tot_auditable_ballots;
+
+                        double margin = 2*amean - 1;
+                        int ssize = estimate_sample_size(margin,
+                            params.tot_auditable_ballots,params.risk_limit,0);
+                        cout << i << "," << j <<"," << c1.total_votes <<
+                            " " << c2_neb << " " << neither << ", "
+                            << margin  << ", " << ssize << endl;
+                        if(ssize < params.tot_auditable_ballots && 
+                            ssize != -1){
+                            AuditSpec &spec = nebs_i[j];
+                            spec.winner = i;
+                            spec.loser = j;
+                            spec.type = NEB;
+                            spec.asn = ssize;
+
+                            has_neb_i[j] = true;
+                        }
+                    }
+                }
+                has_neb.push_back(has_neb_i);
+                nebs.push_back(nebs_i);
+            }
+
             if(alglog){
                 cout << "Starting lower bound on ASN: " <<
                     lowerbound << " ballots (" <<
@@ -837,7 +945,7 @@ int main(int argc, const char * argv[])
                 GetTime(&t1);
   
                 newn.estimate = FindBestAudit(ctest, params, newn, 
-                    initial_viables, has_init_viable, alglog);
+                    initial_viables, has_init_viable, nebs, has_neb, alglog);
 
                 mytimespec t2;
                 GetTime(&t2);
@@ -904,7 +1012,7 @@ int main(int argc, const char * argv[])
 
                 if(diving){
                     double divelb = PerformDive(toexpand, ctest, 
-                        initial_viables, has_init_viable, params);
+                        initial_viables,has_init_viable,nebs,has_neb,params);
                     if(divelb == -1){
                         // Audit not possible
                         if(alglog){
@@ -1001,7 +1109,8 @@ int main(int argc, const char * argv[])
 
                         newn.has_ancestor = true;
                         newn.estimate = FindBestAudit(ctest, params, newn, 
-                            initial_viables, has_init_viable, alglog);
+                            initial_viables, has_init_viable, nebs, 
+                            has_neb, alglog);
 
                         if(alglog){
                             cout << newn.estimate << endl;

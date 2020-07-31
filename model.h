@@ -42,6 +42,9 @@ typedef std::vector<Ints> Ints2d;
 typedef std::vector<SInts> VSInts;
 typedef std::vector<std::string> Strings;
 
+typedef std::vector<bool> Bools;
+typedef std::vector<Bools> Bools2d;
+
 
 template <typename T>
 T ToType(const std::string &s);
