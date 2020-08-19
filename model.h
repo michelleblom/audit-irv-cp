@@ -97,6 +97,7 @@ typedef std::vector<Ballot> Ballots;
 
 typedef std::map<std::vector<int>,int> I2Map;
 typedef std::map<int,int> ID2IX;
+typedef std::map<double,int> d2Int;
 
 struct Contest{
     int id;
@@ -109,13 +110,12 @@ struct Contest{
     int num_rballots;
     int ncandidates;
     int threshold;
+    int ndelegates;
     double threshold_fr;
 
     Ints eliminations;
     Ints viable_order;
     SInts winners;
-
-    Contest() : id(0), num_rballots(0), ncandidates(0) {}
 };
 
 typedef std::vector<Contest> Contests;
@@ -123,11 +123,11 @@ typedef std::vector<Contest> Contests;
 struct Parameters{
     double risk_limit;
     int tot_auditable_ballots;
-    long seed;
-    long error_seed;
-    double error_prob;
-    bool runlog;
-    bool runAudits;
+
+    double t;
+    double g;
+
+    d2Int margin2asn;
 };
 
 bool ReadReportedBallots(const char *path, Contests &contests,

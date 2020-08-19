@@ -25,6 +25,7 @@
 #include<cmath>
 #include<boost/property_tree/ptree.hpp>
 #include<boost/property_tree/json_parser.hpp>
+#include <boost/math/special_functions/binomial.hpp>
 
 #include "model.h"
 #include "audit.h"
@@ -302,9 +303,13 @@ void PrintAudit(const AuditSpec &audit, const Candidates &cand){
         cout << "IRV," << cand[audit.winner].id << "," << 
             cand[audit.loser].id << ",Eliminated";
     }
-    else{
+    else if(audit.type == NEB){
         cout << "NEB," << cand[audit.winner].id << "," << 
             cand[audit.loser].id << ",Eliminated";
+    }
+    else{
+        cout << "QSMAJ," << cand[audit.winner].id << "," << 
+            audit.thresh << ",Eliminated";
     }
 
     for(int i = 0; i < audit.eliminated.size(); ++i){
@@ -430,7 +435,9 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
         for(SInts::iterator cit = node.head.begin();
             cit != node.head.end(); ++cit)
         {
-            double asn = EstimateASN_NONVIABLE(ctest,*cit,tallies1,ex1,params);
+            double asn = EstimateASN_NONVIABLE(ctest, *cit, tallies1,
+                ex1, params);
+
             if((best_estimate == -1 && asn != -1) || (asn != -1 &&
                 asn < best_estimate)){
                 best_estimate = asn;
@@ -447,11 +454,12 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
         // the viable set, could *not* have been eliminated before one of
         // the reportedly viable candidates. 
         for(int i = 0; i < unmentioned.size(); ++i){
+            int uc = unmentioned[i];
             for(SInts::iterator cit = node.head.begin();
                 cit != node.head.end(); ++cit)
             {
-                if(has_neb[i][*cit]){
-                    const AuditSpec &neb_icit = nebs[i][*cit];
+                if(has_neb[uc][*cit]){
+                    const AuditSpec &neb_icit = nebs[uc][*cit];
                     if((best_estimate == -1 && neb_icit.asn != -1) ||
                         (neb_icit.asn != -1 && neb_icit.asn < best_estimate))
                     {
@@ -466,8 +474,9 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
     // Checking: node.tail[0] is viable given all non-mentioned candidates
     //    have been eliminated. V(c, unmentioned \setminus {c})
     if(!empty){
-        ComputeTallies(ctest, unmentioned, tallies2);
-        double asn = EstimateASN_VIABLE(ctest, node.tail[0], tallies2, params);
+        int ex2 = ComputeTallies(ctest, unmentioned, tallies2);
+        double asn = EstimateASN_VIABLE(ctest, node.tail[0], tallies2, 
+            ex2, params);
 
         if((best_estimate == -1 && asn != -1) || (asn != -1 && 
             asn < best_estimate)){
@@ -605,6 +614,15 @@ double PerformDive(const Node &toexpand, const Contest &ctest,
     return -2; 
 }
 
+bool AuditExists(const AuditSpec &a, const Audits &audits){
+    for(int i = 0; i < audits.size(); ++i){
+        if(AreAuditsEqual(a, audits[i])){
+            return true;
+        }
+    }
+    return false;
+}
+
 /**
  * Summary of command line options:
  *
@@ -651,6 +669,8 @@ int main(int argc, const char * argv[])
         Parameters params;
         params.risk_limit = 0.05;
         params.tot_auditable_ballots = 0;
+        params.t = 0.5;
+        params.g = 0;
 
         bool diving = true;
 
@@ -785,18 +805,34 @@ int main(int argc, const char * argv[])
             // have been eliminated".
             map<int,AuditSpec> initial_viables;
             Ints has_init_viable(ctest.ncandidates, 0);
-  
+             
+            Ints tallies1(ctest.ncandidates, 0);
+            ComputeTallies(ctest, Ints(), tallies1);
+            
+            Ints tallies2(ctest.ncandidates, 0);
+            int ex2 = ComputeTallies(ctest, ctest.eliminations, tallies2);
+            double rem_vote = ctest.rballots.size() - ex2;
+
+            // Form assertions to test the delegate counts
+            // tallies2 -> tallies of viable candidates at the point
+            // where everyone has > 15% of the vote.
+            // We have divided tallies by the number of delegates to get 
+            // "delegate quotas". Now we compute the reported number
+            // delegates given to each candidate.
+            vector<pair<double,int> > remainders;
+            Ints delegates_awarded = Ints(ctest.ncandidates, 0);
+            int total_delegates = ctest.ndelegates; 
+
             for(SInts::const_iterator cit = ctest.winners.begin(); 
                 cit != ctest.winners.end(); ++cit){
                 // Can we assert that candidate *cit is viable given that 
                 // no other candidates Ints() have been eliminated?
-                Ints tallies1(ctest.ncandidates, 0);
-                ComputeTallies(ctest, Ints(), tallies1);
-                Ints tallies2(ctest.ncandidates, 0);
-                ComputeTallies(ctest, ctest.eliminations, tallies2);
  
-                double asn1 = EstimateASN_VIABLE(ctest,*cit,tallies1,params);
-                double asn2 = EstimateASN_VIABLE(ctest,*cit,tallies2,params);
+                double asn1=EstimateASN_VIABLE(ctest, *cit, tallies1, 0,
+                    params);
+
+                double asn2=EstimateASN_VIABLE(ctest, *cit, tallies2, ex2,
+                    params);
 
                 if(asn1 == -1 && asn2 == -1){
                     cout << "Audit for contest " << ctest.id << " is not "
@@ -842,13 +878,107 @@ int main(int argc, const char * argv[])
                         PrintAudit(aspec, ctest.cands);
                     }
                 }
-            }    
+                double quota = (tallies2[*cit]/rem_vote)*ctest.ndelegates;
+               
+                delegates_awarded[*cit] = floor(quota);
+                remainders.push_back(
+                    pair<double,int>(quota-floor(quota),*cit)
+                );
+
+                total_delegates -= delegates_awarded[*cit];
+            }
+    
             if(auditfailed){
                 audits_to_run.push_back(Audits());
                 full_recounts.push_back(ctest.id);
                 continue;
             }
 
+            if(total_delegates > 0){
+                // Sort remainders
+                sort(remainders.begin(), remainders.end());
+                reverse(remainders.begin(), remainders.end());
+
+                // Award one delegate each to the candidates with the
+                // highest remainder, until there are no delegates left.
+                for(int i = 0; i < remainders.size(); ++i){
+                    int c = remainders[i].second;
+                    delegates_awarded[c] += 1;
+                    total_delegates -= 1;
+
+                    if(total_delegates == 0)
+                        break;
+                }
+            }
+
+            if(alglog){
+                cout << "========================================" << endl;
+                for(SInts::const_iterator cit = ctest.winners.begin(); 
+                    cit != ctest.winners.end(); ++cit){
+                    cout << delegates_awarded[*cit] << " delegates "
+                        << "awarded to candidate " << ctest.cands[*cit].id
+                        << endl;
+                }
+                cout << "========================================" << endl;
+            }
+
+            // To check the delegate counts we need to assert that 
+            // each winning candidate n got (a_n - 1) delegate quotas
+            double delunit = rem_vote / ctest.ndelegates;
+
+            if(alglog){
+                cout << "Delegate unit: " << delunit << " votes." << endl;
+            }
+
+            for(SInts::const_iterator cit = ctest.winners.begin(); 
+                cit != ctest.winners.end(); ++cit){
+                int dels = delegates_awarded[*cit];
+                if(alglog){
+                    cout << dels << " delegates awarded to candidate " <<
+                        ctest.cands[*cit].id << "." << endl;
+                }
+                if(dels > 1){
+                    // Add assertion indicating that candidate *cit got
+                    // more than a (delunit*(dels-1))/rem_vote fraction of the
+                    // the qualified vote.
+                    double thresh = (delunit*(dels-1))/rem_vote;
+
+                    double asn = EstimateASN_smajority(tallies2[*cit], 
+                        ex2, thresh, params);
+                    
+                    if(asn == -1){
+                        cout << "Audit for contest " << ctest.id << " is not "
+                            "possible. Could not check that a " << 
+                            "candidate had enough of the qualified vote " <<
+                            "to receive 1 - their delegate count." << endl;
+                        auditfailed = true;
+                        break;
+                    }
+    
+                    AuditSpec aspec;
+                    aspec.type = QSMAJ;
+                    aspec.winner = *cit;
+                    aspec.loser = -1;
+                    aspec.eliminated = ctest.eliminations;
+                    aspec.asn = asn;
+                    aspec.thresh = thresh;
+
+                    audits.push_back(aspec);
+                    lowerbound = max(lowerbound, asn);
+
+                    if(alglog){
+                        cout << "Added audit: ";
+                        PrintAudit(aspec, ctest.cands);
+                    }
+                }
+            } 
+
+            if(auditfailed){
+                audits_to_run.push_back(Audits());
+                full_recounts.push_back(ctest.id);
+                continue;
+            }
+            
             // Create a matrix of NEB assertions that could be used to rule
             // out an outcome.
             if(alglog){
@@ -881,11 +1011,8 @@ int main(int argc, const char * argv[])
                             params.tot_auditable_ballots;
 
                         double margin = 2*amean - 1;
-                        int ssize = estimate_sample_size(margin,
-                            params.tot_auditable_ballots,params.risk_limit,0);
-                        cout << i << "," << j <<"," << c1.total_votes <<
-                            " " << c2_neb << " " << neither << ", "
-                            << margin  << ", " << ssize << endl;
+                        int ssize = estimate_sample_size(margin, params);
+
                         if(ssize < params.tot_auditable_ballots && 
                             ssize != -1){
                             AuditSpec &spec = nebs_i[j];
@@ -918,9 +1045,17 @@ int main(int argc, const char * argv[])
                 cout << "Constructing initial frontier" << endl;
             }    
 
-            const int NSETS = pow(2, ctest.ncandidates);
+            int NSETS = 0;
+            int maxsize = min((int)floor(1.0/ctest.threshold_fr), 
+                ctest.ncandidates);
 
-            if(alglog) cout<<NSETS<<" nodes to be added to frontier"<<endl;
+            for(int i = 1; i <= maxsize; ++i){
+                NSETS += boost::math::binomial_coefficient<double>(
+                    ctest.ncandidates, i);
+            }
+ 
+            if(alglog) cout<<NSETS-2<<" nodes to be added to frontier"<<endl;
+            int pruned = 0;
 
             for(int i = 0; i < NSETS; i++){
                 Node newn;
@@ -928,6 +1063,9 @@ int main(int argc, const char * argv[])
                     if(i & (1 << j)){
                         newn.head.insert(j);
                     }
+
+                    if(newn.head.size() == maxsize)
+                        break;
                 }
                 if(newn.head.empty())
                     continue;
@@ -950,8 +1088,32 @@ int main(int argc, const char * argv[])
                 mytimespec t2;
                 GetTime(&t2);
 
+                if(newn.estimate != -1 && newn.estimate <= lowerbound){
+                    // No need to add node to frontier, we can rule it 
+                    // out with its current audit spec.
+                    if(!AuditExists(newn.best_audit, audits)){
+                        audits.push_back(newn.best_audit);
+                    }
+
+                    pruned += 1;
+                    if(alglog){
+                        cout << "Node [ ";
+                        for(SInts::const_iterator it = newn.head.begin();
+                            it != newn.head.end(); ++it){
+                            cout << ctest.cands[*it].id << " ";
+                        }
+                        cout << "] can be pruned immediately with an "
+                            << "audit with ASN " << newn.best_audit.asn<<endl;
+                    }
+                    continue;
+                }
+
                 if(alglog){
-                    cout << "Added node with estimate " << newn.estimate
+                    cout << "Added node [ ";
+                    for(SInts::const_iterator it = newn.head.begin();
+                        it != newn.head.end(); ++it)
+                        cout << ctest.cands[*it].id << " ";
+                    cout << "] with estimate " << newn.estimate
                         << ", " << t2.seconds - t1.seconds << "s" << endl;
                 }
                 InsertNode(front, newn);
@@ -963,6 +1125,8 @@ int main(int argc, const char * argv[])
                 cout << "========================================" << endl;
                 cout << "Initial Frontier:" << endl;
                 PrintFrontier(front, ctest.cands);
+                cout << front.size() << " nodes, " << pruned << 
+                    " pruned immediately" << endl;
                 cout << "========================================" << endl;
             }
 
@@ -1012,7 +1176,8 @@ int main(int argc, const char * argv[])
 
                 if(diving){
                     double divelb = PerformDive(toexpand, ctest, 
-                        initial_viables,has_init_viable,nebs,has_neb,params);
+                        initial_viables, has_init_viable, nebs,
+                        has_neb, params);
                     if(divelb == -1){
                         // Audit not possible
                         if(alglog){
@@ -1186,16 +1351,16 @@ int main(int argc, const char * argv[])
             if(!auditfailed){
                 for(Frontier::const_iterator it = front.begin(); 
                     it != front.end(); ++it){
-                    bool pruneaudit = false;
-                    for(Audits::const_iterator at = audits.begin(); 
-                        at != audits.end(); ++at){
-                        if(AreAuditsEqual(*at, it->best_audit)){
-                            pruneaudit = true;
-                            break;
-                        }
-                    }   
-                    if(!pruneaudit){
+                    if(!AuditExists(it->best_audit, audits)){
                         audits.push_back(it->best_audit);
+                    }
+                }
+
+                if(alglog){
+                    cout << "Audits before applying subsumption rules:"<<endl;
+                    for(Audits::const_iterator it = audits.begin(); 
+                        it != audits.end();++it){
+                        PrintAudit(*it, ctest.cands);
                     }
                 }
 
@@ -1215,6 +1380,11 @@ int main(int argc, const char * argv[])
                         if(jt == it) continue;
                         if(Subsumes(*jt, *it)){
                             subsumed = true;
+                            //cout << "PRUNING audit ";
+                            //PrintAudit(*it, ctest.cands);
+                            //cout << "   subsumed by: ";
+                            //PrintAudit(*jt, ctest.cands);
+                        
                             break;
                         }
                     }
