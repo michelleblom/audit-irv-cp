@@ -127,7 +127,8 @@ struct Parameters{
     double t;
     double g;
 
-    d2Int margin2asn;
+    double allowed_gap;
+    bool diving;
 };
 
 bool ReadReportedBallots(const char *path, Contests &contests,

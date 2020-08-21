@@ -88,7 +88,9 @@ double EstimateASN_cdiff(double tallyA, double tallyB, double d,
     double share2 = 1.0/(2.0 + 2.0*d);
 
     double assorter_total = tallyA*share1 + share2*(tvotes-tallyA-tallyB);
+    cout << assorter_total << " " << tvotes << endl;
     double margin = 2*(assorter_total/tvotes) - 1;
+    cout << margin << endl;
     return estimate_sample_size(margin, params);
 }
 

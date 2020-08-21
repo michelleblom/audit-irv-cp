@@ -20,7 +20,7 @@
 
 #include "model.h"
 
-enum Assertion { VIABLE, NONVIABLE, IRV, NEB, QSMAJ };
+enum Assertion { VIABLE, NONVIABLE, IRV, NEB, QSMAJ, CDIFF };
 
 struct AuditSpec{
     Assertion type;
