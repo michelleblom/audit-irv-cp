@@ -139,7 +139,6 @@ bool ReadReportedBallots(const char *path, Contests &contests,
         for(int i = 0; i < ncontests; ++i)
         {
             getline(infile, line);
-
 		    vector<string> columns;
 		    Split(line, spcom, columns);
              
@@ -262,10 +261,15 @@ bool ReadReportedOutcomes(const char *path, Contests &contests,
             }
 
             Contest &ctest = contests[cit->second];
-            ctest.ndelegates = ToType<int>(columns[2]);
-            // Winners start at index 4
+            if(!ctest.ndelegates.empty()){
+                ctest.ndelegates.push_back(ToType<int>(columns[3]));
+                continue;
+            }
+            
+            ctest.ndelegates.push_back(ToType<int>(columns[3]));
+            // Winners start at index 5
             int losers_start = -1;
-            for(int i = 4; i < columns.size(); ++i){
+            for(int i = 5; i < columns.size(); ++i){
                 if(columns[i] == "losers"){
                     losers_start = i+1;
                     break;

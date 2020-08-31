@@ -25,7 +25,8 @@
 #include<cmath>
 #include<boost/property_tree/ptree.hpp>
 #include<boost/property_tree/json_parser.hpp>
-#include <boost/math/special_functions/binomial.hpp>
+#include<boost/math/special_functions/binomial.hpp>
+#include<random>
 
 #include "model.h"
 #include "audit.h"
@@ -320,7 +321,7 @@ void PrintAudit(const AuditSpec &audit, const Candidates &cand){
     for(int i = 0; i < audit.eliminated.size(); ++i){
         cout << "," << cand[audit.eliminated[i]].id;
     }
-    cout << endl;
+    cout << ",MARGIN," << audit.margin << endl;
 }
 
 void PrintFrontier(const Frontier &front, const Candidates &cand){
@@ -440,8 +441,9 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
         for(SInts::iterator cit = node.head.begin();
             cit != node.head.end(); ++cit)
         {
+            double margin = 0;
             double asn = EstimateASN_NONVIABLE(ctest, *cit, tallies1,
-                ex1, params);
+                ex1, params, margin);
 
             if((best_estimate == -1 && asn != -1) || (asn != -1 &&
                 asn < best_estimate)){
@@ -450,6 +452,7 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
                 node.best_audit.type = NONVIABLE;
                 node.best_audit.winner = *cit;
                 node.best_audit.loser = -1;
+                node.best_audit.margin = margin;
 
                 node.best_audit.eliminated = eliminated;
             }
@@ -480,8 +483,9 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
     //    have been eliminated. V(c, unmentioned \setminus {c})
     if(!empty){
         int ex2 = ComputeTallies(ctest, unmentioned, tallies2);
+        double margin = 0;
         double asn = EstimateASN_VIABLE(ctest, node.tail[0], tallies2, 
-            ex2, params);
+            ex2, params, margin);
 
         if((best_estimate == -1 && asn != -1) || (asn != -1 && 
             asn < best_estimate)){
@@ -490,6 +494,7 @@ double FindBestAudit(const Contest &ctest, const Parameters &params,
             node.best_audit.type = VIABLE;
             node.best_audit.winner = node.tail[0];
             node.best_audit.loser = -1;
+            node.best_audit.margin = margin;
             node.best_audit.eliminated = unmentioned;
         } 
 
@@ -629,7 +634,7 @@ bool AuditExists(const AuditSpec &a, const Audits &audits){
 }
 
 bool form_audits_plurality(const Contest &ctest, const Parameters &params,
-    bool alglog, Audits &audits)
+    bool alglog, double &lowerbound, int &nodesexpanded, Audits &audits)
 {
     bool auditfailed = false;
 
@@ -640,7 +645,8 @@ bool form_audits_plurality(const Contest &ctest, const Parameters &params,
     for(SInts::const_iterator it = ctest.winners.begin();
         it != ctest.winners.end(); ++it){  
         // Is the candidate actually viable?
-        double asn = EstimateASN_VIABLE(ctest, *it, tallies1, 0, params);
+        double margin = 0;
+        double asn = EstimateASN_VIABLE(ctest,*it,tallies1,0,params,margin);
 
         if(asn == -1){
             cout << "Audit for contest " << ctest.id << " is not "
@@ -656,6 +662,7 @@ bool form_audits_plurality(const Contest &ctest, const Parameters &params,
         aspec.loser = -1;
         aspec.eliminated.clear(); 
         aspec.asn = asn;
+        aspec.margin = margin;
 
         audits.push_back(aspec);
         winner_tally += tallies1[*it];
@@ -669,7 +676,8 @@ bool form_audits_plurality(const Contest &ctest, const Parameters &params,
     for(int i = 0; i < ctest.eliminations.size(); ++i){
         int c = ctest.eliminations[i];
 
-        double asn = EstimateASN_NONVIABLE(ctest, c, tallies1, 0, params);
+        double margin = 0;
+        double asn = EstimateASN_NONVIABLE(ctest,c,tallies1,0,params,margin);
 
         if(asn == -1){
             cout << "Audit for contest " << ctest.id << " is not "
@@ -685,6 +693,7 @@ bool form_audits_plurality(const Contest &ctest, const Parameters &params,
         aspec.loser = -1;
         aspec.eliminated.clear(); 
         aspec.asn = asn;
+        aspec.margin = margin;
 
         audits.push_back(aspec);
     }
@@ -694,48 +703,168 @@ bool form_audits_plurality(const Contest &ctest, const Parameters &params,
         return auditfailed;
     }
 
-    vector<pair<double,int> > remainders;
-    Ints delegates_awarded = Ints(ctest.ncandidates, 0);
-    int total_delegates = ctest.ndelegates; 
+    if(params.level > 0){
+        for(int j = 0; j < ctest.ndelegates.size(); ++j){
+            int ndelegates = ctest.ndelegates[j]; 
 
-    for(SInts::const_iterator it = ctest.winners.begin();
-        it != ctest.winners.end(); ++it){  
-        double quota = (tallies1[*it]/winner_tally)*ctest.ndelegates;       
-        delegates_awarded[*it] = floor(quota);
-        remainders.push_back(pair<double,int>(quota-floor(quota),*it));
-        total_delegates -= delegates_awarded[*it];
-    }
+            vector<pair<double,int> > remainders;
+            Ints delegates_awarded = Ints(ctest.ncandidates, 0);
+            int total_delegates = ndelegates; 
 
-    if(total_delegates > 0){
-        // Sort remainders
-        sort(remainders.begin(), remainders.end());
-        reverse(remainders.begin(), remainders.end());
+            for(SInts::const_iterator it = ctest.winners.begin();
+                it != ctest.winners.end(); ++it){  
+                double quota = (tallies1[*it]/winner_tally)*ndelegates;       
+                delegates_awarded[*it] = floor(quota);
+                remainders.push_back(pair<double,int>(quota-floor(quota),*it));
+                total_delegates -= delegates_awarded[*it];
+            }
 
-        // Award one delegate each to the candidates with the
-        // highest remainder, until there are no delegates left.
-        for(int i = 0; i < remainders.size(); ++i){
-            int c = remainders[i].second;
-            delegates_awarded[c] += 1;
-            total_delegates -= 1;
+            if(total_delegates > 0){
+                // Sort remainders
+                sort(remainders.begin(), remainders.end());
+                reverse(remainders.begin(), remainders.end());
 
-            if(total_delegates == 0)
-                break;
+                // Award one delegate each to the candidates with the
+                // highest remainder, until there are no delegates left.
+                for(int i = 0; i < remainders.size(); ++i){
+                    int c = remainders[i].second;
+                    delegates_awarded[c] += 1;
+                    total_delegates -= 1;
+
+                    if(total_delegates == 0)
+                        break;
+                }
+            }
+
+            if(alglog){
+                cout << "========================================" << endl;
+                for(SInts::const_iterator cit = ctest.winners.begin(); 
+                    cit != ctest.winners.end(); ++cit){
+                    cout << delegates_awarded[*cit] << " delegates "
+                        << "awarded to candidate " << 
+                        ctest.cands[*cit].id << endl;
+                }
+                cout << "========================================" << endl;
+            }
+
+            // To check the delegate counts we need to assert that 
+            // each winning candidate n got (a_n - 1) delegate quotas
+            double delunit = winner_tally / ndelegates;
+
+            if(alglog){
+                cout << "Delegate unit: " << delunit << " votes." << endl;
+            }
+
+            for(SInts::const_iterator cit = ctest.winners.begin(); 
+                cit != ctest.winners.end(); ++cit)
+            {
+                int dels = delegates_awarded[*cit];
+                if(alglog){
+                    cout << dels << " delegates awarded to candidate " <<
+                        ctest.cands[*cit].id << "." << endl;
+                }
+
+                if(dels > 1){
+                    // Add assertion indicating that candidate *cit got
+                    // more than a (delunit*(dels-1))/rem_vote fraction 
+                    // of the qualified vote.
+                    double thresh = (delunit*(dels-1))/winner_tally;
+
+                    double margin = 0;
+                    double asn = EstimateASN_smajority(tallies1[*cit], 
+                        params.tot_auditable_ballots - winner_tally, 
+                        thresh, params, margin);
+                    
+                    if(asn == -1){
+                        cout << "Audit for contest " << ctest.id << 
+                            " is not possible. Could not check that a " << 
+                            "candidate had enough of the qualified vote "<<
+                            "to receive 1 - their delegate count." << endl;
+                        auditfailed = true;
+                        break;
+                    }
+    
+                    AuditSpec aspec;
+                    aspec.type = QSMAJ;
+                    aspec.winner = *cit;
+                    aspec.loser = -1;
+                    aspec.eliminated = ctest.eliminations;
+                    aspec.asn = asn;
+                    aspec.margin = margin;
+                    aspec.thresh = thresh;
+
+                    audits.push_back(aspec);
+                    lowerbound = max(lowerbound, asn);
+
+                    if(alglog){
+                        cout << "Added audit: ";
+                        PrintAudit(aspec, ctest.cands);
+                    }
+                }
+            }    
+
+            if(auditfailed){
+                audits.clear();
+                return auditfailed;
+            }
+
+            if(params.level > 1){
+                // Now create comparative difference assertions to ensure that
+                // all candidates deserved their final delegate.
+                for(SInts::const_iterator cit1 = ctest.winners.begin(); 
+                    cit1 != ctest.winners.end(); ++cit1){
+                    for(SInts::const_iterator cit2 = ctest.winners.begin(); 
+                        cit2 != ctest.winners.end(); ++cit2){
+                        if(*cit1==*cit2) continue;
+
+                        double a1 = delegates_awarded[*cit1];
+                        double a2 = delegates_awarded[*cit2];
+                        double d = ((a1 - a2) + 1.0)/ndelegates;
+                        double tally_a1 = tallies1[*cit1];
+                        double tally_a2 = tallies1[*cit2];
+
+                        double margin = 0;
+                        double asn = EstimateASN_cdiff(tally_a2, tally_a1,
+                            -d, params.tot_auditable_ballots - winner_tally,
+                            params, margin);
+
+                        if(asn == -1){
+                            auditfailed = true;
+
+                            cout << "Audit for contest " <<ctest.id<<" is not "
+                                "possible. Could not create one of the " <<
+                                "comparative difference assertions. " << endl;
+                            break;
+                        }
+
+                        AuditSpec aspec;
+                        aspec.type = CDIFF;
+                        aspec.winner = *cit1;
+                        aspec.loser = *cit2;
+                        aspec.eliminated = ctest.eliminations;
+                        aspec.asn = asn;
+                        aspec.thresh = d;
+                        aspec.margin = margin;
+
+                        audits.push_back(aspec);
+                        lowerbound = max(lowerbound, asn);
+
+                        if(alglog){
+                            cout << "Added audit: ";
+                            PrintAudit(aspec, ctest.cands);
+                        }
+                    }
+                    if(auditfailed)
+                        break;
+                }
+
+                if(auditfailed){
+                    audits.clear();
+                    return auditfailed;
+                }
+            }
         }
     }
-
-    if(alglog){
-        cout << "========================================" << endl;
-        for(SInts::const_iterator cit = ctest.winners.begin(); 
-            cit != ctest.winners.end(); ++cit){
-            cout << delegates_awarded[*cit] << " delegates "
-                 << "awarded to candidate " << ctest.cands[*cit].id << endl;
-        }
-        cout << "========================================" << endl;
-    }
-
-    // To check the delegate counts we need to assert that 
-    // each winning candidate n got (a_n - 1) delegate quotas
-    double delunit = winner_tally / ctest.ndelegates;
 
     return auditfailed;
 }
@@ -768,19 +897,16 @@ bool form_audits_irv(const Contest &ctest, const Parameters &params,
     // Form assertions to test the delegate counts
     // tallies2 -> tallies of viable candidates at the point
     // where everyone has > 15% of the vote.
-    // We have divided tallies by the number of delegates to get 
-    // "delegate quotas". Now we compute the reported number
-    // delegates given to each candidate.
-    vector<pair<double,int> > remainders;
-    Ints delegates_awarded = Ints(ctest.ncandidates, 0);
-    int total_delegates = ctest.ndelegates; 
-
     for(SInts::const_iterator cit = ctest.winners.begin(); 
         cit != ctest.winners.end(); ++cit){
         // Can we assert that candidate *cit is viable given that 
         // no other candidates Ints() have been eliminated?
-        double asn1=EstimateASN_VIABLE(ctest, *cit, tallies1, 0,params);
-        double asn2=EstimateASN_VIABLE(ctest, *cit, tallies2, ex2, params);
+        double margin1 = 0;
+        double margin2 = 0;
+        double asn1=EstimateASN_VIABLE(ctest, *cit, tallies1, 0, params,
+            margin1);
+        double asn2=EstimateASN_VIABLE(ctest, *cit, tallies2, ex2, params,
+            margin2);
 
         if(asn1 == -1 && asn2 == -1){
             cout << "Audit for contest " << ctest.id << " is not "
@@ -797,6 +923,7 @@ bool form_audits_irv(const Contest &ctest, const Parameters &params,
             aspec.loser = -1;
             aspec.eliminated.clear(); 
             aspec.asn = asn1;
+            aspec.margin = margin1;
 
             initial_viables[*cit] = aspec;
             has_init_viable[*cit] = 1;
@@ -817,6 +944,7 @@ bool form_audits_irv(const Contest &ctest, const Parameters &params,
             aspec.loser = -1;
             aspec.eliminated = ctest.eliminations;
             aspec.asn = asn2;
+            aspec.margin = margin2;
 
             audits.push_back(aspec);
             lowerbound = max(lowerbound, asn2);
@@ -826,11 +954,6 @@ bool form_audits_irv(const Contest &ctest, const Parameters &params,
                 PrintAudit(aspec, ctest.cands);
             }
         }
-                    
-        double quota = (tallies2[*cit]/rem_vote)*ctest.ndelegates;       
-        delegates_awarded[*cit] = floor(quota);
-        remainders.push_back(pair<double,int>(quota-floor(quota),*cit));
-        total_delegates -= delegates_awarded[*cit];
     }
     
     if(auditfailed){
@@ -838,134 +961,169 @@ bool form_audits_irv(const Contest &ctest, const Parameters &params,
         return auditfailed;
     }
 
-    if(total_delegates > 0){
-        // Sort remainders
-        sort(remainders.begin(), remainders.end());
-        reverse(remainders.begin(), remainders.end());
+    // We have divided tallies by the number of delegates to get 
+    // "delegate quotas". Now we compute the reported number
+    // delegates given to each candidate.
+    if(params.level > 0){
+        // Audit delegate allocation.
+        for(int j = 0; j < ctest.ndelegates.size(); ++j){
+            int ndelegates = ctest.ndelegates[j];
+            vector<pair<double,int> > remainders;
+            Ints delegates_awarded = Ints(ctest.ncandidates, 0);
+            int total_delegates = ndelegates; 
 
-        // Award one delegate each to the candidates with the
-        // highest remainder, until there are no delegates left.
-        for(int i = 0; i < remainders.size(); ++i){
-            int c = remainders[i].second;
-            delegates_awarded[c] += 1;
-            total_delegates -= 1;
-
-            if(total_delegates == 0)
-                break;
-        }
-    }
-
-    if(alglog){
-        cout << "========================================" << endl;
-        for(SInts::const_iterator cit = ctest.winners.begin(); 
-            cit != ctest.winners.end(); ++cit){
-            cout << delegates_awarded[*cit] << " delegates "
-                 << "awarded to candidate " << ctest.cands[*cit].id << endl;
-        }
-        cout << "========================================" << endl;
-    }
-
-    // To check the delegate counts we need to assert that 
-    // each winning candidate n got (a_n - 1) delegate quotas
-    double delunit = rem_vote / ctest.ndelegates;
-
-    if(alglog){
-        cout << "Delegate unit: " << delunit << " votes." << endl;
-    }
-
-    for(SInts::const_iterator cit = ctest.winners.begin(); 
-        cit != ctest.winners.end(); ++cit)
-    {
-        int dels = delegates_awarded[*cit];
-        if(alglog){
-            cout << dels << " delegates awarded to candidate " <<
-                ctest.cands[*cit].id << "." << endl;
-        }
-        if(dels > 1){
-            // Add assertion indicating that candidate *cit got
-            // more than a (delunit*(dels-1))/rem_vote fraction 
-            // of the qualified vote.
-            double thresh = (delunit*(dels-1))/rem_vote;
-            double asn = EstimateASN_smajority(tallies2[*cit], ex2, 
-                thresh, params);
+            for(SInts::const_iterator cit = ctest.winners.begin(); 
+                cit != ctest.winners.end(); ++cit){
                     
-            if(asn == -1){
-                cout << "Audit for contest " << ctest.id << 
-                    " is not possible. Could not check that a " << 
-                    "candidate had enough of the qualified vote "<<
-                    "to receive 1 - their delegate count." << endl;
-                auditfailed = true;
-                break;
+                double quota = (tallies2[*cit]/rem_vote)*ndelegates;       
+                delegates_awarded[*cit] = floor(quota);
+                remainders.push_back(pair<double,int>(quota-floor(quota),*cit));
+                total_delegates -= delegates_awarded[*cit];
             }
+
+            if(total_delegates > 0){
+                // Sort remainders
+                sort(remainders.begin(), remainders.end());
+                reverse(remainders.begin(), remainders.end());
+
+                // Award one delegate each to the candidates with the
+                // highest remainder, until there are no delegates left.
+                for(int i = 0; i < remainders.size(); ++i){
+                    int c = remainders[i].second;
+                    delegates_awarded[c] += 1;
+                    total_delegates -= 1;
+
+                    if(total_delegates == 0)
+                        break;
+                }
+            }
+
+            if(alglog){
+                cout << "========================================" << endl;
+                for(SInts::const_iterator cit = ctest.winners.begin(); 
+                    cit != ctest.winners.end(); ++cit){
+                    cout << delegates_awarded[*cit] << " delegates "
+                        << "awarded to candidate " << 
+                        ctest.cands[*cit].id << endl;
+                }
+                cout << "========================================" << endl;
+            }
+
+            // To check the delegate counts we need to assert that 
+            // each winning candidate n got (a_n - 1) delegate quotas
+            double delunit = rem_vote / ndelegates;
+
+            if(alglog){
+                cout << "Delegate unit: " << delunit << " votes." << endl;
+            }
+
+            for(SInts::const_iterator cit = ctest.winners.begin(); 
+                cit != ctest.winners.end(); ++cit)
+            {
+                int dels = delegates_awarded[*cit];
+                if(alglog){
+                    cout << dels << " delegates awarded to candidate " <<
+                        ctest.cands[*cit].id << "." << endl;
+                }
+                if(dels > 1){
+                    // Add assertion indicating that candidate *cit got
+                    // more than a (delunit*(dels-1))/rem_vote fraction 
+                    // of the qualified vote.
+                    double thresh = (delunit*(dels-1))/rem_vote;
+                    double margin = 0;
+                    double asn = EstimateASN_smajority(tallies2[*cit], ex2, 
+                        thresh, params, margin);
+                    
+                    if(asn == -1){
+                        cout << "Audit for contest " << ctest.id << 
+                            " is not possible. Could not check that a " << 
+                            "candidate had enough of the qualified vote "<<
+                            "to receive 1 - their delegate count." << endl;
+                        auditfailed = true;
+                        break;
+                    }
     
-            AuditSpec aspec;
-            aspec.type = QSMAJ;
-            aspec.winner = *cit;
-            aspec.loser = -1;
-            aspec.eliminated = ctest.eliminations;
-            aspec.asn = asn;
-            aspec.thresh = thresh;
+                    AuditSpec aspec;
+                    aspec.type = QSMAJ;
+                    aspec.winner = *cit;
+                    aspec.loser = -1;
+                    aspec.eliminated = ctest.eliminations;
+                    aspec.asn = asn;
+                    aspec.margin = margin;
+                    aspec.thresh = thresh;
 
-            audits.push_back(aspec);
-            lowerbound = max(lowerbound, asn);
+                    audits.push_back(aspec);
+                    lowerbound = max(lowerbound, asn);
 
-            if(alglog){
-                cout << "Added audit: ";
-                PrintAudit(aspec, ctest.cands);
+                    if(alglog){
+                        cout << "Added audit: ";
+                        PrintAudit(aspec, ctest.cands);
+                    }
+                }
+            }        
+
+            if(auditfailed){
+                audits.clear();
+                return auditfailed;
+            }
+
+            if(params.level > 1){
+                // Now create comparative difference assertions to ensure that
+                // all candidates deserved their final delegate.
+                for(SInts::const_iterator cit1 = ctest.winners.begin(); 
+                    cit1 != ctest.winners.end(); ++cit1){
+                    for(SInts::const_iterator cit2 = ctest.winners.begin(); 
+                        cit2 != ctest.winners.end(); ++cit2){
+                        if(*cit1==*cit2) continue;
+
+                        double a1 = delegates_awarded[*cit1];
+                        double a2 = delegates_awarded[*cit2];
+                        double d = ((a1 - a2) + 1.0)/ndelegates;
+                        double tally_a1 = tallies2[*cit1];
+                        double tally_a2 = tallies2[*cit2];
+
+                        double margin = 0;
+                        double asn = EstimateASN_cdiff(tally_a2, tally_a1,
+                            -d, ex2, params, margin);
+
+                        if(asn == -1){
+                            cout << a1 << "," << a2 << "," << tally_a1 << ","
+                                << tally_a2 << "," << margin << "," << d << endl;
+
+                            auditfailed = true;
+                            cout << "Audit for contest " <<ctest.id<<" is not "
+                                "possible. Could not create one of the " <<
+                                "comparative difference assertions. " << endl;
+                            break;
+                        }
+
+                        AuditSpec aspec;
+                        aspec.type = CDIFF;
+                        aspec.winner = *cit1;
+                        aspec.loser = *cit2;
+                        aspec.eliminated = ctest.eliminations;
+                        aspec.asn = asn;
+                        aspec.thresh = d;
+                        aspec.margin = margin;
+
+                        audits.push_back(aspec);
+                        lowerbound = max(lowerbound, asn);
+
+                        if(alglog){
+                            cout << "Added audit: ";
+                            PrintAudit(aspec, ctest.cands);
+                        }
+                    }
+                    if(auditfailed)
+                        break;
+                }
+
+                if(auditfailed){
+                    audits.clear();
+                    return auditfailed;
+                }
             }
         }
-    }    
-
-    if(auditfailed){
-        audits.clear();
-        return auditfailed;
-    }
-
-    // Now create comparative difference assertions to ensure that
-    // all candidates deserved their final delegate.
-    for(SInts::const_iterator cit1 = ctest.winners.begin(); 
-        cit1 != ctest.winners.end(); ++cit1){
-        for(SInts::const_iterator cit2 = next(cit1); 
-            cit2 != ctest.winners.end(); ++cit2){
-
-            double a1 = delegates_awarded[*cit1];
-            double a2 = delegates_awarded[*cit2];
-            double d = -(a1 - a2 + 1.0)/ctest.ndelegates;
-            double tally_a1 = tallies2[*cit1];
-            double tally_a2 = tallies2[*cit2];
-            double asn = EstimateASN_cdiff(tally_a1, tally_a2, d, params);
-
-            if(asn == -1){
-                auditfailed = true;
-                cout << "Audit for contest " <<ctest.id<<" is not "
-                    "possible. Could not create one of the " <<
-                    "comparative difference assertions. " << endl;
-                break;
-            }
-
-            AuditSpec aspec;
-            aspec.type = CDIFF;
-            aspec.winner = *cit1;
-            aspec.loser = *cit2;
-            aspec.eliminated = ctest.eliminations;
-            aspec.asn = asn;
-            aspec.thresh = d;
-
-            audits.push_back(aspec);
-            lowerbound = max(lowerbound, asn);
-
-            if(alglog){
-                cout << "Added audit: ";
-                PrintAudit(aspec, ctest.cands);
-            }
-        }
-        if(auditfailed)
-            break;
-    }
-
-    if(auditfailed){
-        audits.clear();
-        return auditfailed;
     }
 
     // Create a matrix of NEB assertions that could be used to rule
@@ -1010,6 +1168,7 @@ bool form_audits_irv(const Contest &ctest, const Parameters &params,
                     spec.loser = j;
                     spec.type = NEB;
                     spec.asn = ssize;
+                    spec.margin = margin;
 
                     has_neb_i[j] = true;
                 }
@@ -1109,6 +1268,10 @@ bool form_audits_irv(const Contest &ctest, const Parameters &params,
         cout << front.size() << " nodes, " << pruned << 
             " pruned immediately" << endl;
         cout << "========================================" << endl;
+    }
+
+    if(front.empty()){
+        return auditfailed;     
     }
 
     while(true && !auditfailed){
@@ -1347,27 +1510,27 @@ bool form_audits_irv(const Contest &ctest, const Parameters &params,
  * -rep_ballots FILE     File containing reported ballots (electronic records)
  *
  * -agap VALUE           This program finds a set of facts that require the 
- *                           least number of anticipated ballot polls to audit
- *                           (via a comparison audit). The implemented algorithm
- *                           is based on branch-and-bound, and will terminate 
- *                           once the difference between largest valued node on 
- *                           the frontier and a running lower bound on required
- *                           effort (ballot polls) to audit the given election
- *                           is less than (or equal to) agap. 
+ *                          least number of anticipated ballot polls to audit
+ *                          (via a comparison audit). The implemented algorithm
+ *                          is based on branch-and-bound, and will terminate 
+ *                          once the difference between largest valued node on 
+ *                          the frontier and a running lower bound on required
+ *                          effort (ballot polls) to audit the given election
+ *                          is less than (or equal to) agap. 
  *
  * -r VALUE              Risk limit (e.g., 0.05 represents a risk limit of 5%)
  *
  * -alglog               If present, log messages designed to indicate how the
- *                           algorithm is progressing will be printed.
+ *                          algorithm is progressing will be printed.
  *
  * -json FILE            When using the program to generate an audit, this 
- *                           option specifies that the audit configuration 
- *                           should be output to a json file. 
+ *                          option specifies that the audit configuration 
+ *                          should be output to a json file. 
  *
  * -contests N C1 C2 ... Number of contests for which we want to audit/generate
- *                           and audit, followed by the numeric identifiers for
- *                           those contests. IF NOT PRESENT, ASSUME ALL
- *                           CONTESTS MENTIONED IN INPUT WILL BE AUDITED.  
+ *                          and audit, followed by the numeric identifiers for
+ *                          those contests. IF NOT PRESENT, ASSUME ALL
+ *                          CONTESTS MENTIONED IN INPUT WILL BE AUDITED.  
  * 
  * -help                 Print usage instructions.     
  * */
@@ -1388,7 +1551,11 @@ int main(int argc, const char * argv[])
         params.risk_limit = 0.05;
         params.tot_auditable_ballots = 0;
         params.t = 0.5;
-        params.g = 0;
+        params.g = 0.1;
+        params.error_rate = 0.002;
+        params.seed = 930803205229070;
+        params.reps = 20;
+        params.level = 0;
 
         params.diving = true;
 
@@ -1428,8 +1595,20 @@ int main(int argc, const char * argv[])
                 threshold_pc = atof(argv[i+1]);
                 ++i;
             }
+            else if(strcmp(argv[i], "-error_rate") == 0 && i < argc-1){
+                params.error_rate = atof(argv[i+1]);
+                ++i;
+            }
             else if(strcmp(argv[i], "-r") == 0 && i < argc-1){
                 params.risk_limit = atof(argv[i+1]);
+                ++i;
+            }
+            else if(strcmp(argv[i], "-reps") == 0 && i < argc-1){
+                params.reps = atoi(argv[i+1]);
+                ++i;
+            }
+            else if(strcmp(argv[i], "-level") == 0 && i < argc-1){
+                params.level = atoi(argv[i+1]);
                 ++i;
             }
             else if(strcmp(argv[i], "-plurality") == 0){
@@ -1493,34 +1672,20 @@ int main(int argc, const char * argv[])
             }
         }
 
-        if(is_plurality){
-            for(int i = 0; i < contests.size(); ++i){
-                Contest &ctest = contests[i];
-                for(int j = 0; j < ctest.ncandidates; ++j){
-                    const Candidate &c = ctest.cands[i];
+        if(!ReadReportedOutcomes(rep_outc_file,contests,contest_id2index)){
+            cout << "Reported outcomes read error. Exiting." << endl;
+            return 1;
+        }
 
-                    if(c.total_votes >= ctest.threshold){
-                        ctest.winners.insert(j);
-                        ctest.viable_order.push_back(j);
-                    }
-                    else{
-                        ctest.eliminations.push_back(j);
-                    }
-                }
-            }
-        }
-        else{
-            if(!ReadReportedOutcomes(rep_outc_file,contests,contest_id2index)){
-                cout << "Reported outcomes read error. Exiting." << endl;
-                return 1;
-            }
-        }
 
         Ints successes;
         Ints full_recounts;
 
         // NOTE: asn's are defined in ballots, not proportions/percentages
         double overall_asn_ballots = -1;
+        double overall_asn_werror = -1;
+    
+        mt19937_64 gen(params.seed);
         for(int k = 0; k < contests.size(); ++k){
             const Contest &ctest = contests[k];
             if(alglog){
@@ -1537,7 +1702,8 @@ int main(int argc, const char * argv[])
             int nodesexpanded = 0;
 
             if(is_plurality){
-                auditfailed=form_audits_plurality(ctest,params,alglog,audits);
+                auditfailed=form_audits_plurality(ctest, params, alglog, 
+                    lowerbound, nodesexpanded, audits);
 
             }
             else{
@@ -1556,15 +1722,8 @@ int main(int argc, const char * argv[])
             GetTime(&tend);
 
             double maxasn = -1;
+            double maxasn_we = -1;
             if(!auditfailed){
-                if(alglog){
-                    cout << "Audits before applying subsumption rules:"<<endl;
-                    for(Audits::const_iterator it = audits.begin(); 
-                        it != audits.end();++it){
-                        PrintAudit(*it, ctest.cands);
-                    }
-                }
-
                 cout << "=========================================" << endl;
                 cout << "AUDITS REQUIRED" << endl;
                 maxasn = 0;
@@ -1589,12 +1748,19 @@ int main(int argc, const char * argv[])
                         final_config.push_back(*it);
                         PrintAudit(*it, ctest.cands);
                         maxasn = max(maxasn, it->asn);
+
+                        double asn_we = estimate_sample_size_x(
+                            it->margin, params, gen);
+
+                        maxasn_we = max(maxasn_we, asn_we);
                     }
                 }
                 double in_pc = (maxasn/params.tot_auditable_ballots)*100;
+                double in_pc_we=(maxasn_we/params.tot_auditable_ballots)*100;
                
                 cout << final_config.size() << " assertions" << endl; 
-                cout << "MAX ASN(%) " << in_pc << endl;
+                cout << "MAX ASN(%) " << in_pc << ", with " << 
+                    params.error_rate << " error," << in_pc_we << endl;
                 cout << "=========================================" << endl;
 
                 if(maxasn >= params.tot_auditable_ballots){
@@ -1605,6 +1771,7 @@ int main(int argc, const char * argv[])
                     audits_to_run.push_back(final_config);
                     successes.push_back(ctest.id);
                     overall_asn_ballots = max(overall_asn_ballots,maxasn);
+                    overall_asn_werror = max(overall_asn_werror,maxasn_we);
                 }
             }
             else{
@@ -1616,9 +1783,11 @@ int main(int argc, const char * argv[])
                 full_recounts.push_back(ctest.id);
             }
             double in_pc = (maxasn/params.tot_auditable_ballots)*100;
+            double in_pc_we = (maxasn_we/params.tot_auditable_ballots)*100;
             cout << "TIME," << tend.seconds - tstart.seconds << 
-                ",Nodes Expanded," << nodesexpanded
-                << ",MAX ASN(%)," << in_pc << endl;
+                ",Nodes Expanded," << nodesexpanded << ",MAX ASN(%)," << 
+                in_pc  << ", with " << params.error_rate << " error," << 
+                in_pc_we << endl;
         }
 
         cout << "============================================" << endl;
@@ -1628,8 +1797,9 @@ int main(int argc, const char * argv[])
             for(int i = 0; i < successes.size(); ++i){
                 cout << successes[i] << " ";
             }
-            cout << "with estimated ballot polls " << overall_asn_ballots
-                << endl;
+            cout << endl;
+            cout << "EST," << overall_asn_ballots << "," 
+                << overall_asn_werror << endl;
         }
         if(full_recounts.size() > 0){
             cout << "Full recounts required for contests: ";

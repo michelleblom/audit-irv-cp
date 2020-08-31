@@ -19,16 +19,81 @@
 #include<fstream>
 #include<iostream>
 #include<cmath>
-#include <boost/property_tree/json_parser.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/foreach.hpp>
-#include <limits>
+#include<boost/property_tree/json_parser.hpp>
+#include<boost/property_tree/ptree.hpp>
+#include<boost/foreach.hpp>
+#include<limits>
+#include<algorithm>
 
 using namespace std;
 
 typedef boost::char_separator<char> boostcharsep;
 
 namespace pt = boost::property_tree;
+
+int median(vector<int> &v)
+{
+    size_t n = v.size() / 2;
+    nth_element(v.begin(), v.begin()+n, v.end());
+    return v[n];
+}
+  
+// Using Kaplan Kolgoromov
+int estimate_sample_size_x(double margin, const Parameters &params, 
+    mt19937_64 &gen)
+{
+    double clean  = 1.0/(2-margin);
+    double one_vote_over = 0.5/(2-margin);
+
+    uniform_real_distribution<> dist(0,1);
+
+    Ints sams(params.reps, 0);
+
+    for(int i = 0; i < params.reps; ++i){
+        Doubles x(params.tot_auditable_ballots, clean);
+
+        for(int k = 0; k < params.tot_auditable_ballots; ++k){
+            double rf = dist(gen);
+            if(rf < params.error_rate){
+                x[k] = one_vote_over;
+            }
+        }
+
+        double p = 1;
+        int j = 0;
+
+        const double t = params.t;
+        const double g = params.g;
+        const double N = params.tot_auditable_ballots;
+        double sample_total = 0;
+        double mart = (t > 0) ? (x[0]+g)/(t+g) : 1;
+    
+        p = min(1.0/mart,1.0);
+        j += 1;
+        for( ; p > params.risk_limit && j < N; ++j)
+        {
+            mart *= (x[j]+g)*(1-j/N)/(t+g - (1/N)*sample_total);
+
+            if(mart < 0){
+                break;
+            }
+            else {
+                sample_total += x[j]+g;
+            }
+            p = min(1.0/mart,1.0);
+        }
+
+        if(p <= params.risk_limit){
+            sams[i] = j;
+        }
+        else{
+            return -1;
+        }
+    }
+
+
+    return median(sams);
+}
 
 // Using Kaplan Kolgoromov
 int estimate_sample_size(double margin, const Parameters &params)
@@ -80,44 +145,45 @@ int GetFirstCandidateIn(const Ints &prefs, const Ints &relevant){
 }
 
 double EstimateASN_cdiff(double tallyA, double tallyB, double d, 
-    const Parameters &params)
+    int exhausted, const Parameters &params, double &margin)
 {
     double tvotes = params.tot_auditable_ballots;
     
     double share1 = 1.0/(1.0 + d);
     double share2 = 1.0/(2.0 + 2.0*d);
+    double share3 = 0.5;
 
-    double assorter_total = tallyA*share1 + share2*(tvotes-tallyA-tallyB);
-    cout << assorter_total << " " << tvotes << endl;
-    double margin = 2*(assorter_total/tvotes) - 1;
-    cout << margin << endl;
+    double other = tvotes - tallyA - tallyB - exhausted;
+
+    double assorter_total = tallyA*share1 + share2*other + share3*exhausted;
+    margin = 2*(assorter_total/tvotes) - 1;
     return estimate_sample_size(margin, params);
 }
 
 double EstimateASN_smajority(double tally, double other, double threshold_fr,
-    const Parameters &params)
+    const Parameters &params, double &margin)
 {
     double tvotes = params.tot_auditable_ballots;
 
     double share = 1.0/(2*threshold_fr);
     double assorter_total = tally*share + 0.5*other;
 
-    double margin = 2*(assorter_total/tvotes) - 1;
+    margin = 2*(assorter_total/tvotes) - 1;
     return estimate_sample_size(margin, params);
 }
 
 double EstimateASN_VIABLE(const Contest &ctest, int c, const Ints &tallies, 
-    int exhausted, const Parameters &params)
+    int exhausted, const Parameters &params, double &margin)
 {
     if(tallies[c] <= ctest.threshold)
         return -1;
 
     return EstimateASN_smajority(tallies[c], exhausted, ctest.threshold_fr,
-        params);
+        params, margin);
 }
 
 double EstimateASN_NONVIABLE(const Contest &ctest, int c, const Ints &tallies,
-    int exhausted, const Parameters &params)
+    int exhausted, const Parameters &params, double &margin)
 {
     // We are checking that candidate 'c' is not viable (tally < 15%+1) in
     // the setting where 'elim' are eliminated. We frame this assertion as
@@ -142,7 +208,7 @@ double EstimateASN_NONVIABLE(const Contest &ctest, int c, const Ints &tallies,
         return -1;
     }
 
-    double margin = 2*(assorter_total/params.tot_auditable_ballots) - 1;
+    margin = 2*(assorter_total/params.tot_auditable_ballots) - 1;
     return estimate_sample_size(margin, params);
 }
 
@@ -201,6 +267,7 @@ double FindBestIRV_NEB(const Contest &ctest, const Ints &tail,
 		if(smallest == -1 || candasn < smallest){
 			best_audit.asn = candasn;
 			best_audit.loser = taili;
+            best_audit.margin = margin;
 
 			smallest = candasn;
 		}
