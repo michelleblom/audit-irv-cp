@@ -1,0 +1,25 @@
+Threshold (contest 1): 28123 ballots
+GENERATING AUDIT FOR CONTEST 1
+=========================================
+AUDITS REQUIRED
+NV,1,Eliminated,MARGIN,0.033442
+NV,2,Eliminated,MARGIN,0.0793946
+NV,3,Eliminated,MARGIN,0.140445
+NV,4,Eliminated,MARGIN,0.150347
+NV,5,Eliminated,MARGIN,0.152882
+NV,6,Eliminated,MARGIN,0.15479
+NV,7,Eliminated,MARGIN,0.157576
+NV,8,Eliminated,MARGIN,0.160218
+NV,9,Eliminated,MARGIN,0.164768
+NV,10,Eliminated,MARGIN,0.168721
+NV,11,Eliminated,MARGIN,0.170936
+V,0,Eliminated,MARGIN,3.35661
+12 assertions
+MAX ASN(%) 0.0874751, with 0.002 error,0.0874751
+=========================================
+TIME,0.00538397,Nodes Expanded,0,MAX ASN(%),0.0874751, with 0.002 error,0.0874751
+============================================
+SUMMARY
+Audit found for contests: 1 
+EST,164,164
+============================================

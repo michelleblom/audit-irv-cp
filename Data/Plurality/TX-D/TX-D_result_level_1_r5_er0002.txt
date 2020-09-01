@@ -1,0 +1,52 @@
+Threshold (contest 1): 314165 ballots
+GENERATING AUDIT FOR CONTEST 1
+========================================
+16 delegates awarded to candidate 0
+14 delegates awarded to candidate 1
+========================================
+Delegate unit: 45063.4 votes.
+16 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.5,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,MARGIN,0.0473747
+14 delegates awarded to candidate 1.
+Added audit: QSMAJ,1,0.433333,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,MARGIN,0.0446407
+========================================
+26 delegates awarded to candidate 0
+23 delegates awarded to candidate 1
+========================================
+Delegate unit: 27589.8 votes.
+26 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.510204,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,MARGIN,0.0335178
+23 delegates awarded to candidate 1.
+Added audit: QSMAJ,1,0.44898,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,MARGIN,0.0205912
+=========================================
+AUDITS REQUIRED
+NV,2,Eliminated,MARGIN,0.00761471
+QSMAJ,1,0.44898,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,MARGIN,0.0205912
+QSMAJ,0,0.510204,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,MARGIN,0.0335178
+NV,3,Eliminated,MARGIN,0.0420877
+QSMAJ,1,0.433333,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,MARGIN,0.0446407
+QSMAJ,0,0.5,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,MARGIN,0.0473747
+NV,4,Eliminated,MARGIN,0.130033
+NV,5,Eliminated,MARGIN,0.152153
+NV,6,Eliminated,MARGIN,0.167097
+NV,7,Eliminated,MARGIN,0.168646
+NV,8,Eliminated,MARGIN,0.170671
+NV,10,Eliminated,MARGIN,0.172722
+NV,14,Eliminated,MARGIN,0.174628
+NV,13,Eliminated,MARGIN,0.17427
+NV,12,Eliminated,MARGIN,0.173695
+NV,11,Eliminated,MARGIN,0.173399
+NV,9,Eliminated,MARGIN,0.17159
+NV,15,Eliminated,MARGIN,0.175625
+NV,16,Eliminated,MARGIN,0.175738
+V,1,Eliminated,MARGIN,0.993668
+V,0,Eliminated,MARGIN,1.3095
+21 assertions
+MAX ASN(%) 0.0450242, with 0.002 error,0.06121
+=========================================
+TIME,0.0885079,Nodes Expanded,0,MAX ASN(%),0.0450242, with 0.002 error,0.06121
+============================================
+SUMMARY
+Audit found for contests: 1 
+EST,943,1282
+============================================

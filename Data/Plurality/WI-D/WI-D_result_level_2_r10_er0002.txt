@@ -1,0 +1,57 @@
+Threshold (contest 1): 138760 ballots
+GENERATING AUDIT FOR CONTEST 1
+========================================
+7 delegates awarded to candidate 0
+3 delegates awarded to candidate 1
+========================================
+Delegate unit: 87490.4 votes.
+7 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.6,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.101832
+3 delegates awarded to candidate 1.
+Added audit: QSMAJ,1,0.2,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.64028
+Added audit: CDIFF,0,1,0.5,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.323069
+Added audit: CDIFF,1,0,-0.3,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.0212466
+========================================
+13 delegates awarded to candidate 0
+6 delegates awarded to candidate 1
+========================================
+Delegate unit: 46047.6 votes.
+13 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.631579,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.0494514
+6 delegates awarded to candidate 1.
+Added audit: QSMAJ,1,0.263158,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.259627
+Added audit: CDIFF,0,1,0.421053,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.150045
+Added audit: CDIFF,1,0,-0.315789,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.00964231
+=========================================
+AUDITS REQUIRED
+CDIFF,1,0,-0.315789,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.00964231
+CDIFF,1,0,-0.3,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.0212466
+QSMAJ,0,0.631579,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.0494514
+QSMAJ,0,0.6,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.101832
+CDIFF,0,1,0.421053,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.150045
+NV,2,Eliminated,MARGIN,0.158589
+NV,3,Eliminated,MARGIN,0.165221
+NV,4,Eliminated,MARGIN,0.168739
+NV,5,Eliminated,MARGIN,0.169393
+NV,6,Eliminated,MARGIN,0.17018
+NV,7,Eliminated,MARGIN,0.171905
+NV,8,Eliminated,MARGIN,0.172211
+NV,9,Eliminated,MARGIN,0.174468
+NV,11,Eliminated,MARGIN,0.175798
+NV,13,Eliminated,MARGIN,0.176075
+NV,12,Eliminated,MARGIN,0.175866
+NV,10,Eliminated,MARGIN,0.175407
+QSMAJ,1,0.263158,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.259627
+CDIFF,0,1,0.5,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.323069
+QSMAJ,1,0.2,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,MARGIN,0.64028
+V,1,Eliminated,MARGIN,1.11474
+V,0,Eliminated,MARGIN,3.19043
+22 assertions
+MAX ASN(%) 0.0618335, with 0.002 error,0.076319
+=========================================
+TIME,0.0505531,Nodes Expanded,0,MAX ASN(%),0.0618335, with 0.002 error,0.076319
+============================================
+SUMMARY
+Audit found for contests: 1 
+EST,572,706
+============================================

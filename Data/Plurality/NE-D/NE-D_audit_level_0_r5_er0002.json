@@ -1,0 +1,40 @@
+{
+    "Overall Expected Polls (#)": "681",
+    "Ballots involved in audit (#)": "164582",
+    "parameters": {
+        "risk_limit": "0.050000000000000003"
+    },
+    "audits": [
+        {
+            "contest": "1",
+            "Expected Polls (#)": "681",
+            "Expected Polls (%)": "1",
+            "assertions": [
+                {
+                    "winner": "1",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "2",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "3",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "0",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "VIABLE"
+                }
+            ]
+        }
+    ]
+}

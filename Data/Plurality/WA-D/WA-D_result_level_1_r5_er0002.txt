@@ -1,0 +1,50 @@
+Threshold (contest 1): 233817 ballots
+GENERATING AUDIT FOR CONTEST 1
+========================================
+6 delegates awarded to candidate 0
+6 delegates awarded to candidate 1
+========================================
+Delegate unit: 96786.8 votes.
+6 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.416667,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.165466
+6 delegates awarded to candidate 1.
+Added audit: QSMAJ,1,0.416667,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.132573
+========================================
+10 delegates awarded to candidate 0
+9 delegates awarded to candidate 1
+========================================
+Delegate unit: 61128.5 votes.
+10 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.473684,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.0558614
+9 delegates awarded to candidate 1.
+Added audit: QSMAJ,1,0.421053,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.123431
+=========================================
+AUDITS REQUIRED
+QSMAJ,0,0.473684,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.0558614
+NV,2,Eliminated,MARGIN,0.0688054
+NV,3,Eliminated,MARGIN,0.0839923
+QSMAJ,1,0.421053,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.123431
+NV,4,Eliminated,MARGIN,0.128662
+QSMAJ,1,0.416667,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.132573
+NV,5,Eliminated,MARGIN,0.151275
+NV,6,Eliminated,MARGIN,0.166509
+QSMAJ,0,0.416667,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.165466
+NV,9,Eliminated,MARGIN,0.173863
+NV,8,Eliminated,MARGIN,0.171638
+NV,7,Eliminated,MARGIN,0.171603
+NV,10,Eliminated,MARGIN,0.174928
+NV,11,Eliminated,MARGIN,0.175354
+NV,12,Eliminated,MARGIN,0.175479
+NV,13,Eliminated,MARGIN,0.176038
+NV,14,Eliminated,MARGIN,0.176087
+V,0,Eliminated,MARGIN,1.52935
+V,1,Eliminated,MARGIN,1.43798
+19 assertions
+MAX ASN(%) 0.00814742, with 0.002 error,0.00814742
+=========================================
+TIME,0.064481,Nodes Expanded,0,MAX ASN(%),0.00814742, with 0.002 error,0.00814742
+============================================
+SUMMARY
+Audit found for contests: 1 
+EST,127,127
+============================================

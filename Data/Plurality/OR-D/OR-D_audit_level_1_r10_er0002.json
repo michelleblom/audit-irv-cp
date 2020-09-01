@@ -1,0 +1,86 @@
+{
+    "Overall Expected Polls (#)": "86",
+    "Ballots involved in audit (#)": "618711",
+    "parameters": {
+        "risk_limit": "0.10000000000000001"
+    },
+    "audits": [
+        {
+            "contest": "1",
+            "Expected Polls (#)": "86",
+            "Expected Polls (%)": "1",
+            "assertions": [
+                {
+                    "winner": "2",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "0",
+                    "loser": "-1",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "4"
+                    ],
+                    "assertion_type": "NEB"
+                },
+                {
+                    "winner": "3",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "4",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "0",
+                    "loser": "-1",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "4"
+                    ],
+                    "assertion_type": "NEB"
+                },
+                {
+                    "winner": "1",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "VIABLE"
+                },
+                {
+                    "winner": "1",
+                    "loser": "-1",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "4"
+                    ],
+                    "assertion_type": "NEB"
+                },
+                {
+                    "winner": "1",
+                    "loser": "-1",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "4"
+                    ],
+                    "assertion_type": "NEB"
+                },
+                {
+                    "winner": "0",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "VIABLE"
+                }
+            ]
+        }
+    ]
+}

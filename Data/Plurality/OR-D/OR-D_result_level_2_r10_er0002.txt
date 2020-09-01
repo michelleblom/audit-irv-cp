@@ -1,0 +1,48 @@
+Threshold (contest 1): 92807 ballots
+GENERATING AUDIT FOR CONTEST 1
+========================================
+5 delegates awarded to candidate 0
+2 delegates awarded to candidate 1
+========================================
+Delegate unit: 76522.9 votes.
+5 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.571429,Eliminated,2,3,4,MARGIN,0.289135
+2 delegates awarded to candidate 1.
+Added audit: QSMAJ,1,0.142857,Eliminated,2,3,4,MARGIN,0.574994
+Added audit: CDIFF,0,1,0.571429,Eliminated,2,3,4,MARGIN,0.09474
+Added audit: CDIFF,1,0,-0.285714,Eliminated,2,3,4,MARGIN,0.160813
+========================================
+10 delegates awarded to candidate 0
+3 delegates awarded to candidate 1
+========================================
+Delegate unit: 41204.6 votes.
+10 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.692308,Eliminated,2,3,4,MARGIN,0.0874856
+3 delegates awarded to candidate 1.
+Added audit: QSMAJ,1,0.153846,Eliminated,2,3,4,MARGIN,0.472082
+Added audit: CDIFF,0,1,0.615385,Eliminated,2,3,4,MARGIN,0.204512
+Added audit: CDIFF,1,0,-0.461538,Eliminated,2,3,4,MARGIN,0.0373144
+=========================================
+AUDITS REQUIRED
+CDIFF,1,0,-0.461538,Eliminated,2,3,4,MARGIN,0.0373144
+NV,2,Eliminated,MARGIN,0.0636079
+QSMAJ,0,0.692308,Eliminated,2,3,4,MARGIN,0.0874856
+CDIFF,0,1,0.571429,Eliminated,2,3,4,MARGIN,0.09474
+NV,3,Eliminated,MARGIN,0.151791
+NV,4,Eliminated,MARGIN,0.156092
+CDIFF,1,0,-0.285714,Eliminated,2,3,4,MARGIN,0.160813
+CDIFF,0,1,0.615385,Eliminated,2,3,4,MARGIN,0.204512
+QSMAJ,0,0.571429,Eliminated,2,3,4,MARGIN,0.289135
+V,1,Eliminated,MARGIN,0.372154
+QSMAJ,1,0.153846,Eliminated,2,3,4,MARGIN,0.472082
+QSMAJ,1,0.142857,Eliminated,2,3,4,MARGIN,0.574994
+V,0,Eliminated,MARGIN,3.39963
+13 assertions
+MAX ASN(%) 0.0237591, with 0.002 error,0.0237591
+=========================================
+TIME,0.024297,Nodes Expanded,0,MAX ASN(%),0.0237591, with 0.002 error,0.0237591
+============================================
+SUMMARY
+Audit found for contests: 1 
+EST,147,147
+============================================

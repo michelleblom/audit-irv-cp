@@ -1,0 +1,59 @@
+Threshold (contest 1): 260883 ballots
+GENERATING AUDIT FOR CONTEST 1
+========================================
+21 delegates awarded to candidate 0
+8 delegates awarded to candidate 1
+========================================
+Delegate unit: 50851.2 votes.
+21 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.689655,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0503145
+8 delegates awarded to candidate 1.
+Added audit: QSMAJ,1,0.241379,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0985024
+Added audit: CDIFF,0,1,0.482759,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0354086
+Added audit: CDIFF,1,0,-0.413793,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0284068
+========================================
+34 delegates awarded to candidate 0
+13 delegates awarded to candidate 1
+========================================
+Delegate unit: 31376.3 votes.
+34 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.702128,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0343587
+13 delegates awarded to candidate 1.
+Added audit: QSMAJ,1,0.255319,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0468308
+Added audit: CDIFF,0,1,0.468085,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0110414
+Added audit: CDIFF,1,0,-0.425532,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0211906
+=========================================
+AUDITS REQUIRED
+CDIFF,0,1,0.468085,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0110414
+CDIFF,1,0,-0.425532,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0211906
+CDIFF,1,0,-0.413793,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0284068
+QSMAJ,0,0.702128,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0343587
+CDIFF,0,1,0.482759,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0354086
+QSMAJ,1,0.255319,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0468308
+QSMAJ,0,0.689655,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0503145
+NV,2,Eliminated,MARGIN,0.0773426
+QSMAJ,1,0.241379,Eliminated,2,3,4,5,6,7,8,9,10,11,12,13,14,15,MARGIN,0.0985024
+NV,3,Eliminated,MARGIN,0.14949
+NV,4,Eliminated,MARGIN,0.154233
+NV,5,Eliminated,MARGIN,0.164784
+NV,6,Eliminated,MARGIN,0.170577
+NV,7,Eliminated,MARGIN,0.172895
+NV,8,Eliminated,MARGIN,0.1736
+NV,12,Eliminated,MARGIN,0.175451
+NV,15,Eliminated,MARGIN,0.176023
+NV,14,Eliminated,MARGIN,0.176021
+NV,13,Eliminated,MARGIN,0.17577
+NV,11,Eliminated,MARGIN,0.1754
+NV,10,Eliminated,MARGIN,0.175291
+NV,9,Eliminated,MARGIN,0.174773
+V,1,Eliminated,MARGIN,0.522952
+V,0,Eliminated,MARGIN,3.12974
+24 assertions
+MAX ASN(%) 0.0286911, with 0.002 error,0.0354183
+=========================================
+TIME,0.0721788,Nodes Expanded,0,MAX ASN(%),0.0286911, with 0.002 error,0.0354183
+============================================
+SUMMARY
+Audit found for contests: 1 
+EST,499,616
+============================================

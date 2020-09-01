@@ -1,0 +1,246 @@
+{
+    "Overall Expected Polls (#)": "628",
+    "Ballots involved in audit (#)": "5784364",
+    "parameters": {
+        "risk_limit": "0.10000000000000001"
+    },
+    "audits": [
+        {
+            "contest": "1",
+            "Expected Polls (#)": "628",
+            "Expected Polls (%)": "1",
+            "assertions": [
+                {
+                    "winner": "0",
+                    "loser": "-1",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11",
+                        "12",
+                        "13",
+                        "14",
+                        "15",
+                        "16",
+                        "17",
+                        "18",
+                        "19",
+                        "20"
+                    ],
+                    "assertion_type": "NEB"
+                },
+                {
+                    "winner": "1",
+                    "loser": "-1",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11",
+                        "12",
+                        "13",
+                        "14",
+                        "15",
+                        "16",
+                        "17",
+                        "18",
+                        "19",
+                        "20"
+                    ],
+                    "assertion_type": "NEB"
+                },
+                {
+                    "winner": "2",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "1",
+                    "loser": "-1",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11",
+                        "12",
+                        "13",
+                        "14",
+                        "15",
+                        "16",
+                        "17",
+                        "18",
+                        "19",
+                        "20"
+                    ],
+                    "assertion_type": "NEB"
+                },
+                {
+                    "winner": "0",
+                    "loser": "-1",
+                    "already_eliminated": [
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11",
+                        "12",
+                        "13",
+                        "14",
+                        "15",
+                        "16",
+                        "17",
+                        "18",
+                        "19",
+                        "20"
+                    ],
+                    "assertion_type": "NEB"
+                },
+                {
+                    "winner": "3",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "4",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "5",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "6",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "7",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "8",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "9",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "12",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "20",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "19",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "18",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "17",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "16",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "15",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "14",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "13",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "11",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "10",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "NONVIABLE"
+                },
+                {
+                    "winner": "1",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "VIABLE"
+                },
+                {
+                    "winner": "0",
+                    "loser": "-1",
+                    "already_eliminated": "",
+                    "assertion_type": "VIABLE"
+                }
+            ]
+        }
+    ]
+}

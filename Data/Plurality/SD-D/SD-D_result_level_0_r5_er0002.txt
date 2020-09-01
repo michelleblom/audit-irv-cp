@@ -1,0 +1,7 @@
+Threshold (contest 1): 7900 ballots
+GENERATING AUDIT FOR CONTEST 1
+Audit for contest 1 is not possible, at least one reportedly non-viable candidate only *just* misses threshold.
+============================================
+SUMMARY
+Full recounts required for contests: 1 
+============================================

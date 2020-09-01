@@ -1,0 +1,100 @@
+Threshold (contest 1): 33088 ballots
+GENERATING AUDIT FOR CONTEST 1
+========================================
+1 delegates awarded to candidate 0
+1 delegates awarded to candidate 1
+1 delegates awarded to candidate 2
+1 delegates awarded to candidate 3
+========================================
+Delegate unit: 47530 votes.
+1 delegates awarded to candidate 0.
+1 delegates awarded to candidate 1.
+1 delegates awarded to candidate 2.
+1 delegates awarded to candidate 3.
+Added audit: CDIFF,0,1,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.0512342
+Added audit: CDIFF,0,2,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.0213314
+Added audit: CDIFF,0,3,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.010838
+Added audit: CDIFF,1,0,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.523367
+Added audit: CDIFF,1,2,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.257398
+Added audit: CDIFF,1,3,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.246904
+Added audit: CDIFF,2,0,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.55327
+Added audit: CDIFF,2,1,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.317203
+Added audit: CDIFF,2,3,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.276807
+Added audit: CDIFF,3,0,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.563763
+Added audit: CDIFF,3,1,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.327697
+Added audit: CDIFF,3,2,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.297794
+========================================
+3 delegates awarded to candidate 0
+1 delegates awarded to candidate 1
+1 delegates awarded to candidate 2
+1 delegates awarded to candidate 3
+========================================
+Delegate unit: 31686.7 votes.
+3 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.333333,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.22243
+1 delegates awarded to candidate 1.
+1 delegates awarded to candidate 2.
+1 delegates awarded to candidate 3.
+Added audit: CDIFF,0,1,0.5,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.507802
+Added audit: CDIFF,0,2,0.5,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.462948
+Added audit: CDIFF,0,3,0.5,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.447208
+Added audit: CDIFF,1,0,-0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.0286282
+Added audit: CDIFF,1,2,0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.145468
+Added audit: CDIFF,1,3,0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.136024
+Added audit: CDIFF,2,0,-0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.0478513
+Added audit: CDIFF,2,1,0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.199293
+Added audit: CDIFF,2,3,0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.162936
+Added audit: CDIFF,3,0,-0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.0545971
+Added audit: CDIFF,3,1,0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.208737
+Added audit: CDIFF,3,2,0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.181824
+=========================================
+AUDITS REQUIRED
+CDIFF,0,3,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.010838
+CDIFF,0,2,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.0213314
+V,3,Eliminated,MARGIN,0.0273126
+CDIFF,1,0,-0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.0286282
+CDIFF,2,0,-0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.0478513
+CDIFF,0,1,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.0512342
+CDIFF,3,0,-0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.0545971
+NV,4,Eliminated,MARGIN,0.0765531
+V,2,Eliminated,MARGIN,0.0797799
+CDIFF,1,3,0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.136024
+NV,5,Eliminated,MARGIN,0.13592
+CDIFF,1,2,0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.145468
+CDIFF,2,3,0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.162936
+NV,6,Eliminated,MARGIN,0.167382
+NV,7,Eliminated,MARGIN,0.171404
+NV,8,Eliminated,MARGIN,0.172721
+NV,14,Eliminated,MARGIN,0.176177
+NV,13,Eliminated,MARGIN,0.176103
+NV,12,Eliminated,MARGIN,0.175793
+NV,11,Eliminated,MARGIN,0.175735
+NV,10,Eliminated,MARGIN,0.175623
+NV,9,Eliminated,MARGIN,0.175297
+CDIFF,3,2,0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.181824
+CDIFF,2,1,0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.199293
+CDIFF,3,1,0.166667,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.208737
+QSMAJ,0,0.333333,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.22243
+V,1,Eliminated,MARGIN,0.229293
+CDIFF,1,3,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.246904
+CDIFF,1,2,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.257398
+CDIFF,2,3,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.276807
+CDIFF,3,2,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.297794
+CDIFF,2,1,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.317203
+CDIFF,3,1,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.327697
+CDIFF,0,2,0.5,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.462948
+CDIFF,0,3,0.5,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.447208
+CDIFF,0,1,0.5,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.507802
+CDIFF,1,0,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.523367
+CDIFF,3,0,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.563763
+CDIFF,2,0,0.25,Eliminated,4,5,6,7,8,9,10,11,12,13,14,MARGIN,0.55327
+V,0,Eliminated,MARGIN,1.40963
+40 assertions
+MAX ASN(%) 0.299662, with 0.002 error,0.354063
+=========================================
+TIME,0.00664687,Nodes Expanded,0,MAX ASN(%),0.299662, with 0.002 error,0.354063
+============================================
+SUMMARY
+Audit found for contests: 1 
+EST,661,781
+============================================

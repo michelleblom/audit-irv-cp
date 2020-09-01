@@ -1,0 +1,40 @@
+Threshold (contest 1): 92807 ballots
+GENERATING AUDIT FOR CONTEST 1
+========================================
+5 delegates awarded to candidate 0
+2 delegates awarded to candidate 1
+========================================
+Delegate unit: 76522.9 votes.
+5 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.571429,Eliminated,2,3,4,MARGIN,0.289135
+2 delegates awarded to candidate 1.
+Added audit: QSMAJ,1,0.142857,Eliminated,2,3,4,MARGIN,0.574994
+========================================
+10 delegates awarded to candidate 0
+3 delegates awarded to candidate 1
+========================================
+Delegate unit: 41204.6 votes.
+10 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.692308,Eliminated,2,3,4,MARGIN,0.0874856
+3 delegates awarded to candidate 1.
+Added audit: QSMAJ,1,0.153846,Eliminated,2,3,4,MARGIN,0.472082
+=========================================
+AUDITS REQUIRED
+NV,2,Eliminated,MARGIN,0.0636079
+QSMAJ,0,0.692308,Eliminated,2,3,4,MARGIN,0.0874856
+NV,3,Eliminated,MARGIN,0.151791
+NV,4,Eliminated,MARGIN,0.156092
+QSMAJ,0,0.571429,Eliminated,2,3,4,MARGIN,0.289135
+V,1,Eliminated,MARGIN,0.372154
+QSMAJ,1,0.153846,Eliminated,2,3,4,MARGIN,0.472082
+QSMAJ,1,0.142857,Eliminated,2,3,4,MARGIN,0.574994
+V,0,Eliminated,MARGIN,3.39963
+9 assertions
+MAX ASN(%) 0.0179405, with 0.002 error,0.0179405
+=========================================
+TIME,0.024214,Nodes Expanded,0,MAX ASN(%),0.0179405, with 0.002 error,0.0179405
+============================================
+SUMMARY
+Audit found for contests: 1 
+EST,111,111
+============================================

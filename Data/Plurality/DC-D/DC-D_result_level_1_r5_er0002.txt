@@ -1,0 +1,32 @@
+Threshold (contest 1): 16604 ballots
+GENERATING AUDIT FOR CONTEST 1
+========================================
+2 delegates awarded to candidate 0
+========================================
+Delegate unit: 42046.5 votes.
+2 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.5,Eliminated,1,2,3,4,MARGIN,0.75973
+========================================
+5 delegates awarded to candidate 0
+========================================
+Delegate unit: 16818.6 votes.
+5 delegates awarded to candidate 0.
+Added audit: QSMAJ,0,0.8,Eliminated,1,2,3,4,MARGIN,0.189933
+=========================================
+AUDITS REQUIRED
+NV,1,Eliminated,MARGIN,0.0252453
+NV,2,Eliminated,MARGIN,0.0583219
+NV,3,Eliminated,MARGIN,0.167872
+NV,4,Eliminated,MARGIN,0.171773
+QSMAJ,0,0.8,Eliminated,1,2,3,4,MARGIN,0.189933
+QSMAJ,0,0.5,Eliminated,1,2,3,4,MARGIN,0.75973
+V,0,Eliminated,MARGIN,4.06487
+7 assertions
+MAX ASN(%) 0.255674, with 0.002 error,0.301749
+=========================================
+TIME,0.00208092,Nodes Expanded,0,MAX ASN(%),0.255674, with 0.002 error,0.301749
+============================================
+SUMMARY
+Audit found for contests: 1 
+EST,283,334
+============================================
