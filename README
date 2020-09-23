@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------------
 !!NOTE!! If you are looking for RAIRE, you want to check out the branch: raire-branch
-!!NOTE!! If you are looking for our work on auditing primaries, you want to check out the branch: primaries
+!!NOTE!! If you are looking for our work on auditing primaries, you want to check out the branch: primary_viability
 --------------------------------------------------------------------------------------
 
 Find audit specification with the following command (taking NSW 2015 election as an example) to generate an audit specification given a 5% risk limit and a 1% chance of an error being injected into each ballot. You can find some data files for use with this code in NSW2015.tar.gz (also available on github). 
