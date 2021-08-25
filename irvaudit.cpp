@@ -110,7 +110,7 @@ bool SameSet(const Ints &l1, const Ints &l2){
 }
 
 bool Subsumes(const AuditSpec &a1, const AuditSpec &a2){
-    if(!a1.wonly || a2.wonly)
+    if(a2.wonly)
         return false;
 
     if(a1.wonly && (a1.winner == a2.winner && a1.loser == a2.loser))
@@ -120,7 +120,7 @@ bool Subsumes(const AuditSpec &a1, const AuditSpec &a2){
         return true;
     }
 
-    if(!a1.wonly && !a2.wonly && a1.winner == a2.winner && 
+    if(!a1.wonly && a1.winner == a2.winner && 
         SameSet(a1.rules_out, a2.rules_out)){
         return true;
     } 
@@ -797,7 +797,7 @@ int main(int argc, const char * argv[])
 			    cout << "============================================" << endl;
 		    }
 
-		    while(true && !auditfailed){
+		    while(!auditfailed){
 			    if(lowerbound > 0 && allowed_gap > 0){
 				    double max_on_frontier = -1;
 				    for(Frontier::const_iterator it = front.begin(); 
