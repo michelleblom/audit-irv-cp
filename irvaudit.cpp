@@ -601,6 +601,7 @@ int main(int argc, const char * argv[])
 		params.lambda = 0; // DEPRECIATED
 		params.risk_limit = 0.05;
 		params.tot_auditable_ballots = 0;
+        params.ballot_polling = false;
 
 		bool diving = true;
 
@@ -638,6 +639,9 @@ int main(int argc, const char * argv[])
 			else if(strcmp(argv[i], "-agap") == 0 && i < argc-1){
 				allowed_gap = atof(argv[i+1]);
 				++i;
+			}
+			else if(strcmp(argv[i], "-bp") == 0){
+				params.ballot_polling = true;
 			}
 			else if(strcmp(argv[i], "-r") == 0 && i < argc-1){
 				params.risk_limit = atof(argv[i+1]);

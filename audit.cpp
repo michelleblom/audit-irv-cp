@@ -61,8 +61,12 @@ double EstimateASN_WONLY(const Ballots &rep_ballots,
     // contest (ie. tot_auditable_ballots >= rep_ballots.size()
 	const double total_votes_present=params.tot_auditable_ballots; 
     // margin is the 'diluted margin'
-	const double margin=V/total_votes_present;
+	double margin=V/total_votes_present;
 	
+    if(params.ballot_polling){
+        margin = margin*margin;
+    }
+
     //const double od2g=1.0/(2.0 * params.gamma);
 	//const double row=-log(params.risk_limit)/(od2g+params.lambda*log(1-od2g));
 
@@ -114,7 +118,11 @@ double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand,
 		if(V <= 0) continue;
 
         // Note this is the diluted margin
-		const double margin = V/total_votes_present;
+		double margin = V/total_votes_present;
+    
+        if(params.ballot_polling){
+            margin = margin*margin;
+        }
 
 		//const double od2g = 1.0/(2 * params.gamma);
 		//const double row = -log(params.risk_limit)/
