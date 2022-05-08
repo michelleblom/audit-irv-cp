@@ -64,7 +64,14 @@ double EstimateASN_WONLY(const Ballots &rep_ballots,
 	double margin=V/total_votes_present;
 	
     if(params.ballot_polling){
-        margin = margin*margin;
+        // compute 'diluted margin' in context of ballot polling
+        double p = (total_votes_winner + total_votes_loser)/
+            total_votes_present;
+
+        double q = (total_votes_winner - total_votes_loser)/
+            (total_votes_winner + total_votes_loser);
+
+        margin = (p * q) * (p * q);
     }
 
     //const double od2g=1.0/(2.0 * params.gamma);
@@ -107,7 +114,7 @@ double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand,
     // Estimatation has been reworked to take into account
     // that we could sample ballots that do not involve this
     // contest (ie. tot_auditable_ballots >= rep_ballots.size()
-	double total_votes_present = params.tot_auditable_ballots; 
+	const double total_votes_present = params.tot_auditable_ballots; 
 	for(int i = 1; i < tsize; ++i){
 		// loser is the "winner" and tail[i] is the "loser"
 		const int taili = tail[i];
@@ -121,7 +128,14 @@ double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand,
 		double margin = V/total_votes_present;
     
         if(params.ballot_polling){
-            margin = margin*margin;
+            // compute 'diluted margin' in context of ballot polling
+            double p = (total_votes_winner + total_votes_loser)/
+                total_votes_present;
+
+            double q = (total_votes_winner - total_votes_loser)/
+                (total_votes_winner + total_votes_loser);
+
+            margin = (p * q) * (p * q);
         }
 
 		//const double od2g = 1.0/(2 * params.gamma);
