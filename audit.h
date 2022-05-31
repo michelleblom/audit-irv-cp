@@ -40,6 +40,8 @@ struct Parameters{
     double gamma;
     double risk_limit;
 
+    bool ballot_polling;
+
     int tot_auditable_ballots;
 };
 
