@@ -71,7 +71,7 @@ double EstimateASN_WONLY(const Ballots &rep_ballots,
         double q = (total_votes_winner - total_votes_loser)/
             (total_votes_winner + total_votes_loser);
 
-        margin = (p * q) * (p * q);
+        margin = p * (q*q);
     }
 
     //const double od2g=1.0/(2.0 * params.gamma);
@@ -135,7 +135,7 @@ double EstimateSampleSize(const Ballots &rep_ballots, const Candidates &cand,
             double q = (total_votes_winner - total_votes_loser)/
                 (total_votes_winner + total_votes_loser);
 
-            margin = (p * q) * (p * q);
+            margin = p * (q*q);
         }
 
 		//const double od2g = 1.0/(2 * params.gamma);
