@@ -115,8 +115,15 @@ bool Subsumes(const AuditSpec &a1, const AuditSpec &a2){
 
     if(a1.wonly && (a1.winner == a2.winner && a1.loser == a2.loser))
         return true;
+   
+    if(a1.wonly && (a1.winner == a2.winner && find(a2.eliminated.begin(),
+        a2.eliminated.end(), a1.loser) == a2.eliminated.end())){
+        return true;
+    }
 
-    if(a1.wonly && AppearsBefore(a1.winner, a1.loser, a2.rules_out)){
+    if(a1.wonly && find(a2.eliminated.begin(), a2.eliminated.end(), 
+        a1.winner) != a2.eliminated.end() && find(a2.eliminated.begin(),
+        a2.eliminated.end(), a1.loser) == a2.eliminated.end()){
         return true;
     }
 

@@ -6,9 +6,10 @@ OBJDIR = obj
 BASEDIRS = -I. 
 
 
-INCLUDEDIRS = $(BASEDIRS)
 
-CXX = g++
+INCLUDEDIRS = $(BASEDIRS) -I$(GUROBI)/include -I/opt/homebrew/include
+
+CXX = /opt/homebrew/opt/llvm/bin/clang++
 LD =
 SUFFIX = o
 
@@ -17,7 +18,7 @@ CXXFLAGS = -Wall -std=c++11 -pedantic -g $(INCLUDEDIRS) -m64 -fPIC \
 	-Wno-attributes  -fpermissive -Wno-sign-compare
 
 
-LDFLAGS =  -lboost_system  -lboost_filesystem -lrt 
+LDFLAGS = -L/opt/homebrew/lib   -lboost_system  -lboost_filesystem 
 
 RENAME = -o
 
